@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7a00280e0117dd079b674e5bdc32a83d",
+    "hash": "27abbc44dc9675a79c183e3dfcff83d1",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1949,65 +1949,13 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-09-23 05:25:11"
-        },
-        {
-            "name": "twitter/bootstrap",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "121b204b146a799f65c412b7d2cbddb9fe79dc10"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/121b204b146a799f65c412b7d2cbddb9fe79dc10",
-                "reference": "121b204b146a799f65c412b7d2cbddb9fe79dc10",
-                "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jacob Thornton",
-                    "email": "jacobthornton@gmail.com"
-                },
-                {
-                    "name": "Mark Otto",
-                    "email": "markdotto@gmail.com"
-                }
-            ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
-            "homepage": "http://getbootstrap.com",
-            "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "less",
-                "mobile-first",
-                "responsive",
-                "web"
-            ],
-            "time": "2014-09-26 20:48:31"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "barryvdh/laravel-ide-helper": 20,
-        "twitter/bootstrap": 20
+        "barryvdh/laravel-ide-helper": 20
     },
     "prefer-stable": false,
     "platform": [],
