@@ -20,7 +20,6 @@
         }
     ],
     "require": {
-        "laravel/installer": "~1.1",
-        "barryvdh/laravel-ide-helper": "dev-master"
+        "laravel/installer": "~1.1"
     }
 }
