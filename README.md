@@ -1,2 +1,2 @@
-Comenius-University-online-GeoGebra-magazine
+Comenius University online GeoGebra magazine
 ============================================
