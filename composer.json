@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "laravel/laravel": "dev-master",
+        "laravel/installer": "~1.1",
         "barryvdh/laravel-ide-helper": "dev-master",
         "twitter/bootstrap": "dev-master"
     }
