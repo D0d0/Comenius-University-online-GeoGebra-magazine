@@ -6,6 +6,17 @@
         {{HTML::style('css/bootstrap.min.css')}}
         {{HTML::script('js/jquery-2.1.1.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        {{HTML::script('js/summernote.min.js')}}
+        {{HTML::style('css/summernote.css')}}
+        <script>
+            $(document).ready(function(){
+                $('.summernote').summernote({
+                    height : 300,
+                    minHeight : 300
+                });
+            })
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation">
@@ -58,5 +69,10 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="summernote">
+
+            </div>
+        </div>
     </body>
 </html>
