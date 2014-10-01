@@ -1,0 +1,1 @@
+po clone projektu spustiť composer install z priečinku vendor/bin/magazine/app
