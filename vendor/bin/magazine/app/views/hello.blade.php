@@ -10,10 +10,10 @@
         {{HTML::script('js/summernote.min.js')}}
         {{HTML::style('css/summernote.css')}}
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
                 $('.summernote').summernote({
-                    height : 300,
-                    minHeight : 300
+                    height: 300,
+                    minHeight: 300
                 });
             })
         </script>
