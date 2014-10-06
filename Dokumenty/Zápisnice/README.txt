@@ -1,1 +1,0 @@
-do tohoto foldera by sa mohli nahrávať všetky zápisnice
