@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <title>Laravel PHP Framework</title>
         {{HTML::style('css/bootstrap.min.css')}}
+        {{HTML::style('css/font-awesome.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         {{HTML::script('js/summernote.min.js')}}
         {{HTML::style('css/summernote.css')}}
         <script>
