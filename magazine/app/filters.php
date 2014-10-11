@@ -91,10 +91,9 @@ Route::filter('csrf', function()
 	}
 });
 
-/*App::error(function(PDOException $exception)
+App::error(function(PDOException $exception)
 {
     Log::error("Error connecting to database: ".$exception->getMessage());
 
     return "Error connecting to database aka erroris treba nakonfigurovat db";
 });
- */

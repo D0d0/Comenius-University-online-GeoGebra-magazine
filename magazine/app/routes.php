@@ -12,10 +12,10 @@
  */
 
 Route::get('/', function() {
-   /* if (DB::connection()->getDatabaseName()) {
+   if (DB::connection()->getDatabaseName()) {
         echo "ak sa zobrazilo toto, tak je db správne pripojena " . DB::connection()->getDatabaseName();
     } else {
         echo "ak sa zobrazilo toto, tak db nie je správne pripojena alebo nakonfigurovana";
-    }*/
+    }
     return View::make('hello');
 });
