@@ -4,75 +4,279 @@
         <meta charset="UTF-8">
         <title>Laravel PHP Framework</title>
         {{HTML::style('css/bootstrap.min.css')}}
-        {{HTML::style('css/font-awesome.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
-        {{HTML::script('js/summernote.min.js')}}
-        {{HTML::style('css/summernote.css')}}
+        <style>
+            #menu{
+                text-align: center;
+            }
+
+            .fixed-top{
+                position: fixed;
+                top: 0;
+            }
+
+            .navbar{
+                background-color: white;
+            }
+            img{
+                margin-right: 4px !important;
+            }
+
+            h3{
+                margin: 0;
+            }
+
+            .no-padding{
+                padding: 0 !important;
+                background: none;
+            }
+        </style>
         <script>
-            $(document).ready(function () {
-                $('.summernote').summernote({
-                    height: 300,
-                    minHeight: 300,
-                    focus: true
-                });
-            })
+            $(window).scroll(function () {
+                $('#hladanie').val(($(window).scrollTop() + $(window).height() >= $(document).height() - 100) ? 'spodok' : 'vrch');
+                if ($(window).scrollTop() >= $("#menu").height())
+                {
+                    $('body').css({'padding-top': ($('#menu').outerHeight(true) + $('.navbar').outerHeight(true))});
+                    $('#menu').hide();
+                    $(".navbar").addClass("navbar-fixed-top");
+                }
+
+                if ($(window).scrollTop() < $("#menu").height())
+                {
+                    $('body').css({'padding-top': 0});
+                    $('#menu').show();
+                    $(".navbar").removeClass("navbar-fixed-top");
+                }
+            });
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Brand</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="navbar-form navbar-left" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+        <div class="container-fluid">
+            <div class="row" id="menu">
+                <div class="col-md-12">
+                    <h1>Prvý online Geogebra časopis Univerzity Komenského</h1>
                 </div>
             </div>
-        </nav>
-        <div class="container">
-            <div class="summernote">
-
+            <nav class="navbar">
+                <ul class="nav nav-tabs" style="border-bottom: none;">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Profil <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Článok</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Upraviť profil</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Registrácia</a></li>
+                    <li class="pull-right">
+                        <form class="navbar-form navbar-right" role="search">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Hľadaj" id="hladanie">
+                            </div>
+                            <span id="extended_search"><a><span class="glyphicon glyphicon-plus"></span>Rozšírené vyhľadávanie</a></span>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="thumbnail">
+                                <img src="img/apache_pb.png" alt="..." class="img-thumbnail pull-left">
+                                <div class="caption">
+                                    <h3>Thumbnail label</h3>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
+                                    <p class="text-muted"><span class="glyphicon glyphicon-time"></span> Ut. 1. apríl 2014</p>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
+                                    <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

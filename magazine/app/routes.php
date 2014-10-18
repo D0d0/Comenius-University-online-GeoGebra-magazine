@@ -12,10 +12,13 @@
  */
 
 Route::get('/', function() {
-   if (DB::connection()->getDatabaseName()) {
-        echo "ak sa zobrazilo toto, tak je db správne pripojena " . DB::connection()->getDatabaseName();
-    } else {
-        echo "ak sa zobrazilo toto, tak db nie je správne pripojena alebo nakonfigurovana";
-    }
+    /*
+      if (DB::connection()->getDatabaseName()) {
+      echo "ak sa zobrazilo toto, tak je db správne pripojena " . DB::connection()->getDatabaseName();
+      } else {
+      echo "ak sa zobrazilo toto, tak db nie je správne pripojena alebo nakonfigurovana";
+      }
+      $cau = "lalalal";
+      $lalala= '<span>multimedia</span>'; */
     return View::make('hello');
 });
