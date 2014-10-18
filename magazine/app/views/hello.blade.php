@@ -11,25 +11,16 @@
                 text-align: center;
             }
 
-            .fixed-top{
-                position: fixed;
-                top: 0;
-            }
-
             .navbar{
                 background-color: white;
             }
+            
             img{
                 margin-right: 4px !important;
             }
 
             h3{
                 margin: 0;
-            }
-
-            .no-padding{
-                padding: 0 !important;
-                background: none;
             }
         </style>
         <script>
@@ -40,9 +31,7 @@
                     $('body').css({'padding-top': ($('#menu').outerHeight(true) + $('.navbar').outerHeight(true))});
                     $('#menu').hide();
                     $(".navbar").addClass("navbar-fixed-top");
-                }
-
-                if ($(window).scrollTop() < $("#menu").height())
+                }else
                 {
                     $('body').css({'padding-top': 0});
                     $('#menu').show();
@@ -60,7 +49,7 @@
             </div>
             <nav class="navbar">
                 <ul class="nav nav-tabs" style="border-bottom: none;">
-                    <li><a href="#">About</a></li>
+                    <li><a href="#">O nás</a></li>
                     <li><a href="#">Kontakt</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
