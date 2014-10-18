@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Laravel PHP Framework</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         {{HTML::style('css/bootstrap.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
@@ -48,7 +51,7 @@
             <nav class="navbar">
                 <ul class="nav nav-tabs" style="border-bottom: none;">
                     <li>{{ HTML::link('/onas', 'O nás')}}</li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li>{{ HTML::link('/kontakt', 'Kontakt')}}</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Profil <span class="caret"></span>
