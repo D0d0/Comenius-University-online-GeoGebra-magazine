@@ -19,7 +19,7 @@ Route::get('/', function() {
       echo "ak sa zobrazilo toto, tak db nie je správne pripojena alebo nakonfigurovana";
       }
      */
-    return View::make('index');
+    return View::make('index', array('max' => 3));
 });
 
 Route::get('/onas', function() {
@@ -28,4 +28,13 @@ Route::get('/onas', function() {
 
 Route::get('/kontakt', function() {
     return View::make('kontakt');
+});
+
+Route::get('/user/{id}', function($id) {
+    $user = User::find($id);
+    return View::make('user', array('user' => $user));
+});
+
+Route::get('/user', function() {
+    return View::make('user');
 });
