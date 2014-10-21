@@ -10,20 +10,47 @@
 
 @section('ready_js')
 $('.summernote').summernote({
-height: 300
+height: 300,
+toolbar: [
+['style', ['bold', 'italic', 'underline', 'clear']],
+['font', ['strikethrough']],
+['fontsize', ['fontsize']],
+['color', ['color']],
+['para', ['ul', 'ol', 'paragraph']],
+['height', ['height']],],
+onChange: function(contents) {
+console.log(contents);
+}
 });
 @stop
 
 @section('left')
 <form class="form-horizontal clearfix" role="form">
     <div class="form-group">
-        <label for="nadpis" class="col-md-2 control-label">Nadpis</label>
-        <div class="col-md-10">
-            <input type="text" id="nadpis" class="form-control" data-role="tagsinput">
+        <label for="nadpis" class="col-md-1 control-label">Nadpis</label>
+        <div class="col-md-11">
+            <input type="text" id="nadpis" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tagy" class="col-md-1 control-label">Kľúčové slová</label>
+        <div class="col-md-11">
+            <input type="text" id="tagy" class="form-control" data-role="tagsinput">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="abstrakt" class="col-md-1 control-label">Abstrakt</label>
+        <div class="col-md-11">
+            <input type="text" id="abstrakt" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-1 control-label">Text</label>
+        <div class="col-md-11">
+            <div class="summernote">
+
+            </div>
         </div>
     </div>
 </form>
-<div class="summernote">
-
-</div>
 @stop
