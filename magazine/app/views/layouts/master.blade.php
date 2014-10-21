@@ -9,6 +9,7 @@
         {{HTML::style('css/bootstrap.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
+        @yield('js')
         <style>
             #menu{
                 text-align: center;
@@ -39,6 +40,10 @@
                     $(".navbar").removeClass("navbar-fixed-top");
                 }
             });
+            
+            $(document).ready(function(){
+               @yield('ready_js') 
+            });
         </script>
     </head>
     <body>
@@ -57,7 +62,7 @@
                             Profil <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Článok</a></li>
+                            <li>{{ HTML::link('/article/new', 'Článok')}}</li>
                             <li class="divider"></li>
                             <li><a href="#">Upraviť profil</a></li>
                         </ul>

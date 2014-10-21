@@ -1,4 +1,4 @@
-@extends('two_one_layout')
+@extends('layouts.two_one_layout')
 
 @section('left')
 <div class="row">

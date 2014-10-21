@@ -38,3 +38,22 @@ Route::get('/user/{id}', function($id) {
 Route::get('/user', function() {
     return View::make('user');
 });
+
+Route::get('/article/new', function() {
+    return View::make('article.article_new');
+});
+
+Route::get('/article/koncept', function() {
+    return View::make('article.article_koncept');
+});
+
+Route::get('/article/accepted', function() {
+    return View::make('article.article_accepted');
+});
+
+Route::get('/article/unapproved', function() {
+    return View::make('article.article_unapproved');
+});
+Route::get('/article/detail', function() {
+    return View::make('article.article_detail');
+});
