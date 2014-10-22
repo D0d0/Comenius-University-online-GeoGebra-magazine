@@ -33,16 +33,16 @@
                 if ($(window).scrollTop() >= $("#menu").height()) {
                     $('body').css({'padding-top': ($('#menu').outerHeight(true) + $('.navbar').outerHeight(true))});
                     $('#menu').hide();
-                    $(".navbar").addClass("navbar-fixed-top");
+                    $('.navbar').addClass('navbar-fixed-top');
                 } else {
                     $('body').css({'padding-top': 0});
                     $('#menu').show();
-                    $(".navbar").removeClass("navbar-fixed-top");
+                    $('.navbar').removeClass('navbar-fixed-top');
                 }
             });
-            
-            $(document).ready(function(){
-               @yield('ready_js') 
+
+            $(document).ready(function () {
+                @yield('ready_js')
             });
         </script>
     </head>
@@ -54,27 +54,29 @@
                 </div>
             </div>
             <nav class="navbar">
-                <ul class="nav nav-tabs" style="border-bottom: none;">
-                    <li>{{ HTML::link('/onas', 'O nás')}}</li>
-                    <li>{{ HTML::link('/kontakt', 'Kontakt')}}</li>
+                <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
+                    <li>{{ HTML::link('/onas', Lang::get('menu.about_us'))}}</li>
+                    <li>{{ HTML::link('/kontakt', Lang::get('menu.contact'))}}</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Profil <span class="caret"></span>
+                            {{ Lang::get('menu.profil') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>{{ HTML::link('/article/new', 'Článok')}}</li>
+                            <li>{{ HTML::link('/article/new', Lang::get('menu.article'))}}</li>
                             <li class="divider"></li>
-                            <li><a href="#">Upraviť profil</a></li>
+                            <li><a href="#">{{ Lang::get('menu.edit_profile') }}</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Registrácia</a></li>
+                    <li><a href="#">{{ Lang::get('menu.registration') }}</a></li>
                     <li class="pull-right">
-                        <form class="navbar-form navbar-right" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Hľadaj" id="hladanie">
-                            </div>
-                            <span id="extended_search"><a><span class="glyphicon glyphicon-plus"></span>Rozšírené vyhľadávanie</a></span>
-                        </form>
+                        {{ Form::open(array('url' => '/', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="{{ Lang::get('menu.search') }}" id="hladanie" name="hladanie">
+                        </div>
+                        <span id="extended_search">
+                            <a><span class="glyphicon glyphicon-plus"></span>{{ Lang::get('menu.extended_search') }}</a>
+                        </span>
+                        {{ Form::close() }}
                     </li>
                 </ul>
             </nav>

@@ -5,10 +5,8 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
-                <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                <div class="thumbnail">
                     <h3>Thumbnail label</h3>
-                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> Ut. 1. apríl 2014</p>
                     <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
                     <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
@@ -24,10 +22,8 @@
     <div class="col-md-6">
         <div class="row">
             <div class="col-md-12">
-                <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                <div class="thumbnail">
                     <h3>Thumbnail label</h3>
-                    <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> Ut. 1. apríl 2014</p>
                     <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
                     <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>

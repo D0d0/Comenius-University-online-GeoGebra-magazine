@@ -52,8 +52,8 @@ return array(
 	|
 	*/
 
-	'locale' => 'en',
-
+	'locale' => 'sk',
+    
 	/*
 	|--------------------------------------------------------------------------
 	| Application Fallback Locale

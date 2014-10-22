@@ -12,9 +12,9 @@ return array(
       |
      */
 
-    "password" => "Passwords must be at least six characters and match the confirmation.",
-    "user" => "We can't find a user with that e-mail address.",
-    "token" => "This password reset token is invalid.",
-    "sent" => "Password reminder sent!",
-    "reset" => "Password has been reset!",
+    "password" => "Heslo musí mať aspoň 6 znakov a heslá sa musia zhodovať.",
+    "user" => "Pre e-mailovú adresu neexistuje používateľ.",
+    "token" => "Chybná adresa.",
+    "sent" => "Pripomienka hesla bola poslaná!",
+    "reset" => "Heslo bolo resetované!",
 );

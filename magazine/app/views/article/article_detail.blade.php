@@ -33,7 +33,7 @@
                 <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail">
             </div>
             <h3>Meno priezvisko</h3>
-            <h4>Ostatné články autora</h4>
+            <h4>{{ Lang::get('article.other_articles') }}</h4>
             <p>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
@@ -42,7 +42,7 @@
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
             </p>
-            <h4>Súvisiace články</h4>
+            <h4>{{ Lang::get('article.related_articles') }}</h4>
             <p>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
