@@ -6,9 +6,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{{ csrf_token() }}">
         {{HTML::style('css/bootstrap.min.css')}}
+        {{HTML::style('css/datepicker.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
+        {{HTML::script('js/moment.min.js')}}
+        {{HTML::script('js/locales.min.js')}}
+        {{HTML::script('js/datepicker.min.js')}}
         @yield('js')
         <style>
             #menu{
@@ -26,22 +31,41 @@
             h3{
                 margin-top: 0;
             }
+
+            #extended_search{
+                cursor: pointer;
+            }
+
+            @yield('style')
         </style>
         <script>
             $(window).scroll(function () {
                 $('#hladanie').val(($(window).scrollTop() + $(window).height() >= $(document).height() - 100) ? 'spodok' : 'vrch');
-                if ($(window).scrollTop() >= $("#menu").height()) {
-                    $('body').css({'padding-top': ($('#menu').outerHeight(true) + $('.navbar').outerHeight(true))});
-                    $('#menu').hide();
-                    $('.navbar').addClass('navbar-fixed-top');
-                } else {
-                    $('body').css({'padding-top': 0});
-                    $('#menu').show();
-                    $('.navbar').removeClass('navbar-fixed-top');
-                }
             });
 
             $(document).ready(function () {
+                $('#datetimepicker').datetimepicker({
+                    language: "{{ Lang::get('common.lang')}}",
+                    pickTime: false
+                });
+                
+                $('#datetimepicker').on('dp.hide', function(e){
+                    console.log(e);
+                });
+
+                $.ajaxSetup({
+                    headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
+                });
+
+                $.ajax({
+                    dataType: 'json',
+                    url: "{{ url('/') }}",
+                    type: 'post',
+                    data: {'test': 'ahoj'},
+                    success: function (result) {
+                        console.log(result);
+                    }
+                });
                 @yield('ready_js')
             });
         </script>
@@ -50,32 +74,39 @@
         <div class="container-fluid">
             <div class="row" id="menu">
                 <div class="col-md-12">
-                    <h1>{{ HTML::link('/', 'Prvý online Geogebra časopis Univerzity Komenského')}}</h1>
+                    <h1>{{ HTML::link('/', 'Prvý online Geogebra časopis Univerzity Komenského') }}</h1>
                 </div>
             </div>
             <nav class="navbar">
                 <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
-                    <li>{{ HTML::link('/onas', Lang::get('menu.about_us'))}}</li>
-                    <li>{{ HTML::link('/kontakt', Lang::get('menu.contact'))}}</li>
+                    <li>{{ HTML::link('/onas', Lang::get('menu.about_us')) }}</li>
+                    <li>{{ HTML::link('/kontakt', Lang::get('menu.contact')) }}</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             {{ Lang::get('menu.profil') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>{{ HTML::link('/article/new', Lang::get('menu.article'))}}</li>
+                            <li>{{ HTML::link('/article/new', Lang::get('menu.article')) }}</li>
                             <li class="divider"></li>
-                            <li><a href="#">{{ Lang::get('menu.edit_profile') }}</a></li>
+                            <li>{{ HTML::link(('/profile'), Lang::get('menu.edit_profile')) }}</li>
                         </ul>
                     </li>
                     <li><a href="#">{{ Lang::get('menu.registration') }}</a></li>
                     <li class="pull-right">
-                        {{ Form::open(array('url' => '/', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
+                        {{ Form::open(array('url' => url('/'), 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="{{ Lang::get('menu.search') }}" id="hladanie" name="hladanie">
+                            <div class="input-group date" id="datetimepicker">
+                                {{ Form::text( 'hladanie', '', array(
+                                    'id' => 'hladanie',
+                                    'class' => 'form-control',
+                                    'placeholder' => Lang::get('menu.search'),
+                                    'maxlength' => 30
+                                ) ) }}
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
                         </div>
-                        <span id="extended_search">
-                            <a><span class="glyphicon glyphicon-plus"></span>{{ Lang::get('menu.extended_search') }}</a>
-                        </span>
                         {{ Form::close() }}
                     </li>
                 </ul>

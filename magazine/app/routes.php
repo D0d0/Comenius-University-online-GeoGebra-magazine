@@ -12,6 +12,7 @@
  */
 Route::get('/', 'HomeController@showWelcome');
 Route::post('/', 'HomeController@showWelcome');
+
 Route::get('/onas', function() {
     return View::make('onas');
 });
@@ -46,4 +47,12 @@ Route::get('/article/unapproved', function() {
 });
 Route::get('/article/detail', function() {
     return View::make('article.article_detail');
+});
+
+Route::get('/article/article_management', function(){
+   return View::make('article.article_management'); 
+});
+
+Route::get('/profile', function(){
+   return View::make('profile.profile'); 
 });

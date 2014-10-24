@@ -15,6 +15,9 @@ class HomeController extends BaseController {
      */
 
     public function showWelcome() {
+        if (Request::ajax()) {
+            return Response::json(array('res' => 'ok'));
+        }
         return View::make('index', array('max' => 3));
     }
 

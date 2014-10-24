@@ -12,4 +12,5 @@ return array(
     'text' => 'Text',
     'other_articles' => 'Author´s another articles',
     'related_articles' => 'Related articles',
+    'article_management' => 'Article management',
 );

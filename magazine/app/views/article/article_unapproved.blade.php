@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> Ut. 1. apríl 2014</p>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span> Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> Ut. 1. apríl 2014</p>

@@ -1,13 +1,23 @@
 @extends('layouts.master')
 
+@section('style')
+[type=clanok]{
+    padding: 9px;
+}
+
+img{
+    margin-right: 9px !important;
+}
+@stop
+
 @section('content')
 @for($i = 0; $i < $max; $i++)
 <div class="row">
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                <div class="thumbnail clearfix" type="clanok">
+                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>
@@ -30,8 +40,8 @@
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                <div class="thumbnail clearfix" type="clanok">
+                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>
@@ -54,8 +64,8 @@
     <div class="col-md-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-thumbnail pull-left">
+                <div class="thumbnail clearfix" type="clanok">
+                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>

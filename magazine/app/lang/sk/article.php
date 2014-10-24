@@ -12,4 +12,5 @@ return array(
     'text' => 'Text',
     'other_articles' => 'Ostatné články autora',
     'related_articles' => 'Súvisiace články',
+    'article_management' => 'Správa článkov',
 );

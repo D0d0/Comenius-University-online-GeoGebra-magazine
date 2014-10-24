@@ -14,8 +14,6 @@ $('.summernote').summernote({
     toolbar: [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']],],
     onChange: function(contents) {
@@ -47,7 +45,7 @@ $('.summernote').summernote({
     <div class="form-group">
         <label class="col-md-1 control-label">{{ Lang::get('article.text') }}</label>
         <div class="col-md-11">
-            <div class="summernote">
+            <div class="summernote thumbnail">
 
             </div>
         </div>
