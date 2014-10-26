@@ -1,9 +1,5 @@
 @extends('layouts.six_three_layout')
 
-@section('js')
-<script type="text/javascript" src="http://www.geogebratube.org/scripts/deployggb.js"></script>
-@stop
-
 @section('style')
 [type=clanok]{
 padding: 9px;
