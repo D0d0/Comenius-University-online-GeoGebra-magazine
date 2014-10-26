@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUsersAndArticlessTable extends Migration {
+class UsersAndUserGroups extends Migration {
 
     /**
      * Run the migrations.
@@ -19,6 +19,7 @@ class AddUsersAndArticlessTable extends Migration {
         Schema::create('users', function($table) {
             $table->increments('id')->unsigned();
             $table->string('name');
+            $table->string('password');
             $table->string('email');
             $table->integer('rank')->unsigned();
             $table->foreign('rank')->references('id')->on('user_groups');
@@ -31,6 +32,7 @@ class AddUsersAndArticlessTable extends Migration {
             $table->string('twitter');
             $table->string('language')->default('sk');
             $table->dateTime('about');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -41,9 +43,8 @@ class AddUsersAndArticlessTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('users');
-        Schema::drop('user_groups');
-        Schema::drop('articles');
+        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_groups');
     }
 
 }
