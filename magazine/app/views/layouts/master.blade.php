@@ -48,23 +48,13 @@
                     language: "{{ Lang::get('common.lang')}}",
                     pickTime: false
                 });
-                
-                $('#datetimepicker').on('dp.hide', function(e){
+
+                $('#datetimepicker').on('dp.hide', function (e) {
                     console.log(e);
                 });
 
                 $.ajaxSetup({
                     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
-                });
-
-                $.ajax({
-                    dataType: 'json',
-                    url: "{{ url('/') }}",
-                    type: 'post',
-                    data: {'test': 'ahoj'},
-                    success: function (result) {
-                        console.log(result);
-                    }
                 });
                 @yield('ready_js')
             });
@@ -81,6 +71,7 @@
                 <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
                     <li>{{ HTML::link('/onas', Lang::get('menu.about_us')) }}</li>
                     <li>{{ HTML::link('/kontakt', Lang::get('menu.contact')) }}</li>
+                    @if(Auth::check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             {{ Lang::get('menu.profil') }} <span class="caret"></span>
@@ -88,10 +79,20 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>{{ HTML::link('/article/new', Lang::get('menu.article')) }}</li>
                             <li class="divider"></li>
-                            <li>{{ HTML::link(('/profile'), Lang::get('menu.edit_profile')) }}</li>
+                            <li>{{ HTML::link('/profile', Lang::get('menu.edit_profile')) }}</li>
                         </ul>
                     </li>
-                    <li><a href="#">{{ Lang::get('menu.registration') }}</a></li>
+                    <li>
+                        {{ HTML::link('/logout', Lang::get('menu.logout')) }}
+                    </li>
+                    @else
+                    <li>
+                        {{ HTML::link('/register', Lang::get('menu.registration')) }}
+                    </li>
+                    <li>
+                        {{ HTML::link('/login', Lang::get('menu.login')) }}
+                    </li>
+                    @endif
                     <li class="pull-right">
                         {{ Form::open(array('url' => url('/'), 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
                         <div class="form-group">
@@ -111,6 +112,15 @@
                     </li>
                 </ul>
             </nav>
+            @if(Session::has('error'))
+            <div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
+            @endif
+            @if(Session::has('warning'))
+            <div class="alert alert-warning" role="alert">{{Session::get('warning')}}</div>
+            @endif
+            @if(Session::has('message'))
+            <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
+            @endif
             @yield('content')
         </div>
     </body>

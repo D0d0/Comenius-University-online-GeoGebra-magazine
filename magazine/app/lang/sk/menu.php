@@ -9,4 +9,6 @@ return array(
     'edit_profile' => 'Upraviť profil',
     'search' => 'Hľadaj',
     'extended_search' => 'Rozšírené vyhľadávanie',
+    'login' => 'Prihlásenie',
+    'logout' => 'Odhlásenie',
 );

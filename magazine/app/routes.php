@@ -13,6 +13,14 @@
 Route::get('/', 'HomeController@showWelcome');
 Route::post('/', 'HomeController@showWelcome');
 
+Route::get('/register', 'RegistrationController@getRegister');
+Route::post('/register', 'RegistrationController@postRegister');
+Route::get('/verify/{confirmationCode}','RegistrationController@confirm');
+
+Route::get('/login', 'LoginController@getLogin');
+Route::post('/login', 'LoginController@postLogin');
+Route::get('/logout', 'LoginController@getLogout');
+
 Route::get('/remind', 'RemindersController@getRemind');
 Route::post('/remind', 'RemindersController@postRemind');
 Route::get('/reset/{token}', 'RemindersController@getReset');

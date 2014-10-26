@@ -20,7 +20,7 @@ class UsersAndUserGroups extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('password');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->integer('rank')->unsigned();
             $table->foreign('rank')->references('id')->on('user_groups');
             $table->binary('image');
@@ -32,6 +32,8 @@ class UsersAndUserGroups extends Migration {
             $table->string('twitter');
             $table->string('language')->default('sk');
             $table->dateTime('about');
+            $table->boolean('confirmed')->default(0);
+            $table->string('confirmation_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

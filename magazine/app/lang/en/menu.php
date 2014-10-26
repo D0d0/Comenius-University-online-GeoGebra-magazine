@@ -9,4 +9,6 @@ return array(
     'edit_profile' => 'Edit profile',
     'search' => 'Search',
     'extended_search' => 'Extended search',
+    'login' => 'Log in',
+    'logout' => 'Log out',
 );

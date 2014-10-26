@@ -80,9 +80,3 @@ Route::filter('csrf', function() {
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
-
-App::error(function(PDOException $exception) {
-    Log::error("Error connecting to database: " . $exception->getMessage());
-
-    return "Error connecting to database aka erroris treba nakonfigurovat db";
-});
