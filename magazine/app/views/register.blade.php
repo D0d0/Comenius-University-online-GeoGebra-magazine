@@ -12,34 +12,34 @@ padding: 9px;
     <div class="form-group thumbnail" type="clanok">
         <div class="form-group">
             <div class="col-md-3">
-                {{ Form::label('name', 'Meno') }}
+                {{ Form::label('name', Lang::get('common.name')) }}
             </div>
             <div class="col-md-9">
-                {{Form::text('name', '',array('class'=>'form-control', 'placeholder' =>'Enter name'))}}
+                {{Form::text('name', '',array('class'=>'form-control', 'placeholder' => Lang::get('common.enter_name')))}}
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-3">
-                {{ Form::label('email', 'Email') }}
+                {{ Form::label('email', Lang::get('common.email')) }}
             </div>
             <div class="col-md-9">
-                {{Form::email('email', '',array('class'=>'form-control', 'placeholder' =>'Enter mail'))}}
+                {{Form::email('email', '',array('class'=>'form-control', 'placeholder' => Lang::get('common.enter_email')))}}
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-3">
-                {{ Form::label('password', 'Password') }}
+                {{ Form::label('password', Lang::get('common.password')) }}
             </div>
             <div class="col-md-9">
-                {{ Form::password('password', array('class'=>'form-control', 'placeholder' =>'Enter password')) }}
+                {{ Form::password('password', array('class'=>'form-control', 'placeholder' => Lang::get('common.enter_password'))) }}
             </div>
         </div>
         <div class="form-group">
             <div class="col-md-3">
-                {{ Form::label('password_confirmation', 'Confirm password') }}
+                {{ Form::label('password_confirmation', Lang::get('common.confirm_password')) }}
             </div>
             <div class="col-md-9">
-                {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder' =>'Confirm password')) }}
+                {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder' => Lang::get('common.again_password'))) }}
             </div>
         </div>
         {{Form::submit('Submit',array('class'=>'btn btn-default'))}}
