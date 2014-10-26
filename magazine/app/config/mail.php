@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'geogebraMag@no-reply.com', 'name' => 'Online Geogebra magazine'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'postmaster@sandboxe343130729c149e98f6d5c32fc63043d.mailgun.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => 'cb4bd3591a79812806ce5c9cb0a81868',
 
 	/*
 	|--------------------------------------------------------------------------

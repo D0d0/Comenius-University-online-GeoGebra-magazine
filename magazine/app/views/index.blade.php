@@ -2,11 +2,11 @@
 
 @section('style')
 [type=clanok]{
-    padding: 9px;
+padding: 9px;
 }
 
 img{
-    margin-right: 9px !important;
+margin-right: 9px !important;
 }
 @stop
 

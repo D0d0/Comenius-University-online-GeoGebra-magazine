@@ -13,6 +13,11 @@
 Route::get('/', 'HomeController@showWelcome');
 Route::post('/', 'HomeController@showWelcome');
 
+Route::get('/remind', 'RemindersController@getRemind');
+Route::post('/remind', 'RemindersController@postRemind');
+Route::get('/reset/{token}', 'RemindersController@getReset');
+Route::post('/reset/{token}', 'RemindersController@postReset');
+
 Route::get('/onas', function() {
     return View::make('onas');
 });
@@ -49,10 +54,10 @@ Route::get('/article/detail', function() {
     return View::make('article.article_detail');
 });
 
-Route::get('/article/article_management', function(){
-   return View::make('article.article_management'); 
+Route::get('/article/article_management', function() {
+    return View::make('article.article_management');
 });
 
-Route::get('/profile', function(){
-   return View::make('profile.profile'); 
+Route::get('/profile', function() {
+    return View::make('profile.profile');
 });
