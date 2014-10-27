@@ -15,10 +15,9 @@ class RegistrationController extends Controller {
             return Redirect::to('/')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $input['name'] = Input::get('name');
-        $input['password'] = Input::get('password');
-        $input['password_confirmation'] = Input::get('password_confirmation');
-        $input['email'] = Input::get('email');
+        $input = Input::only(
+                        'name', 'password', 'password_confirmation', 'email'
+        );
         $rules = array(
             'name' => 'required',
             'password' => 'required|confirmed|min:6|',

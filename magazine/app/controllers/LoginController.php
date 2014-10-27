@@ -25,8 +25,9 @@ class LoginController extends Controller {
             return Redirect::to('/')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $input['email'] = Input::get('email');
-        $input['password'] = Input::get('password');
+        $input = Input::only(
+                        'email', 'password'
+        );
         $rules = array(
             'email' => 'required|email|exists:users,email',
             'password' => 'required|min:6|'
