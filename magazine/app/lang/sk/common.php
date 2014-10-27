@@ -9,6 +9,7 @@ return array(
     'enter_email' => 'Zadajte e-mail',
     'enter_password' => 'Zadajte heslo',
     'enter_name' => 'Zadajte meno',
+    'email_verified' => 'E-mail bol overený',
     'confirm_password' => 'Potvrdenie hesla',
     'again_password' => 'Zadajte znovu heslo',
     'reset_password' => 'Resetni heslo',

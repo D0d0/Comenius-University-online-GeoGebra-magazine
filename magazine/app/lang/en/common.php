@@ -9,6 +9,7 @@ return array(
     'enter_email' => 'Enter e-mail',
     'enter_password' => 'Enter password',
     'enter_name' => 'Enter name',
+    'email_verified' => 'E-mail was verified',
     'confirm_password' => 'Confirm password',
     'again_password' => 'Enter password again',
     'reset_password' => 'Password reset',

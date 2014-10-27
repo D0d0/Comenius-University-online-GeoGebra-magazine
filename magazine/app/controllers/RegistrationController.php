@@ -68,7 +68,7 @@ class RegistrationController extends Controller {
         $user->save();
 
         return Redirect::to('/')
-                        ->with('warning', Lang::get('common.acces_denied'));
+                        ->with('message', Lang::get('common.email_verified'));
     }
 
 }
