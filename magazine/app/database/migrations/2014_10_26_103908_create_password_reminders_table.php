@@ -24,7 +24,7 @@ class CreatePasswordRemindersTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('password_reminders');
+        Schema::dropIfExists('password_reminders');
     }
 
 }

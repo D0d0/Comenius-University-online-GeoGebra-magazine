@@ -15,7 +15,7 @@ Route::post('/', 'HomeController@showWelcome');
 
 Route::get('/register', 'RegistrationController@getRegister');
 Route::post('/register', 'RegistrationController@postRegister');
-Route::get('/verify/{confirmationCode}','RegistrationController@confirm');
+Route::get('/verify/{confirmationCode}', 'RegistrationController@confirm');
 
 Route::get('/login', 'LoginController@getLogin');
 Route::post('/login', 'LoginController@postLogin');
@@ -26,37 +26,31 @@ Route::post('/remind', 'RemindersController@postRemind');
 Route::get('/reset/{token}', 'RemindersController@getReset');
 Route::post('/reset/{token}', 'RemindersController@postReset');
 
-Route::get('/onas', function() {
-    return View::make('onas');
-});
+Route::get('/onas', 'MenuController@getOnas');
+Route::get('/kontakt', 'MenuController@getKontakt');
+Route::get('/profile', 'MenuController@getProfile');
 
-Route::get('/kontakt', function() {
-    return View::make('kontakt');
-});
+Route::group(array('prefix' => 'article'), function() {
+    Route::get('/new', function() {
+        return View::make('article.article_new');
+    });
 
-Route::get('/article/new', function() {
-    return View::make('article.article_new');
-});
+    Route::get('/draft', function() {
+        return View::make('article.article_draft');
+    });
 
-Route::get('/article/draft', function() {
-    return View::make('article.article_draft');
-});
+    Route::get('/accepted', function() {
+        return View::make('article.article_accepted');
+    });
 
-Route::get('/article/accepted', function() {
-    return View::make('article.article_accepted');
-});
+    Route::get('/unapproved', function() {
+        return View::make('article.article_unapproved');
+    });
+    Route::get('/detail', function() {
+        return View::make('article.article_detail');
+    });
 
-Route::get('/article/unapproved', function() {
-    return View::make('article.article_unapproved');
-});
-Route::get('/article/detail', function() {
-    return View::make('article.article_detail');
-});
-
-Route::get('/article/article_management', function() {
-    return View::make('article.article_management');
-});
-
-Route::get('/profile', function() {
-    return View::make('profile.profile');
+    Route::get('/article_management', function() {
+        return View::make('article.article_management');
+    });
 });

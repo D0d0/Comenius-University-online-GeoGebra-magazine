@@ -4,12 +4,12 @@ class UserTableSeeder extends Seeder {
 
     public function run() {
         $faker = Faker\Factory::create();
-        $rank = User_group::create(array('description' => 'admin'));
-        $rank = User_group::create(array('description' => 'redakcna rada'));
-        $rank = User_group::create(array('description' => 'recenzent'));
-        $rank = User_group::create(array('description' => 'uzivatel'));
+        User_group::create(array('description' => 'admin'));
+        User_group::create(array('description' => 'redakcna rada'));
+        User_group::create(array('description' => 'recenzent'));
+        User_group::create(array('description' => 'uzivatel'));
         for ($i = 0; $i < 100; $i++) {
-            $user = User::create(array(
+            User::create(array(
                 'name' => $faker->lastName . ' ' . $faker->firstName,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->word),
