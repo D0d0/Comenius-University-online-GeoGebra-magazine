@@ -17,7 +17,7 @@ margin-right: 9px !important;
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix" type="clanok">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>
@@ -41,7 +41,7 @@ margin-right: 9px !important;
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix" type="clanok">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>
@@ -65,7 +65,7 @@ margin-right: 9px !important;
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix" type="clanok">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
                     <h3>Thumbnail label</h3>
                     <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;Meno Priezvisko</p>
                     <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Ut. 1. apríl 2014</p>

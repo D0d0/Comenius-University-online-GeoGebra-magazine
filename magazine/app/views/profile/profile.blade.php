@@ -30,7 +30,7 @@ $('.glyphicon-pencil', this).remove();
         <div class="thumbnail" type="clanok">
             <div class="row">
                 <div class="col-md-3">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded img-responsive">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded img-responsive')) }}
                 </div>
                 <div class="col-md-9">
                     <p><span style="width: 14px"></span><h3>Meno priezvisko</h3></p>

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
                     <h3>Meno priezvisko</h3>
                     <p><span class="glyphicon glyphicon-envelope"></span> jozef.d13@gmail.com</p>
                     <p><span class="glyphicon glyphicon-map-marker"></span> FMFI UK, Bratislava</p>    
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="thumbnail clearfix">
-                    <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded pull-left">
+                    {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
                     <h3>Meno priezvisko</h3>
                     <p><span class="glyphicon glyphicon-envelope"></span> jozef.d13@gmail.com</p>
                     <p><span class="glyphicon glyphicon-map-marker"></span> FMFI UK, Bratislava</p>    

@@ -34,15 +34,6 @@ Route::get('/kontakt', function() {
     return View::make('kontakt');
 });
 
-Route::get('/user/{id}', function($id) {
-    $user = User::find($id);
-    return View::make('user', array('user' => $user));
-});
-
-Route::get('/user', function() {
-    return View::make('user');
-});
-
 Route::get('/article/new', function() {
     return View::make('article.article_new');
 });

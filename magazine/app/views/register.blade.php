@@ -42,7 +42,7 @@ padding: 9px;
                 {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder' => Lang::get('common.again_password'))) }}
             </div>
         </div>
-        {{Form::submit('Submit',array('class'=>'btn btn-default'))}}
+        {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
     </div>
     {{ Form::close() }}
 </div>

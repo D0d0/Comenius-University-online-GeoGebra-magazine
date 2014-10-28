@@ -48,7 +48,8 @@ class RemindersController extends Controller {
         if (is_null($token)) {
             App::abort(404);
         }
-        return View::make('password.reset')->with('token', $token);
+        return View::make('password.reset')
+                ->with('token', $token);
     }
 
     /**
@@ -67,7 +68,6 @@ class RemindersController extends Controller {
 
         $response = Password::reset($credentials, function($user, $password) {
                     $user->password = Hash::make($password);
-
                     $user->save();
                 });
 
@@ -77,7 +77,6 @@ class RemindersController extends Controller {
             case Password::INVALID_USER:
                 return Redirect::back()
                                 ->with('error', Lang::get($response));
-
             case Password::PASSWORD_RESET:
                 return Redirect::to('/');
         }
