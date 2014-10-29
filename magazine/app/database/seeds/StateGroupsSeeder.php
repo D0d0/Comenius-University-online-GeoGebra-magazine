@@ -1,6 +1,6 @@
 <?php
 
-class StateGoupsSeeder extends Seeder {
+class StateGroupsSeeder extends Seeder {
 
     public function run() {
         State_group::create(array('description' => 'koncept'));
