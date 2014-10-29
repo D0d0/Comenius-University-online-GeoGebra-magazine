@@ -5,16 +5,16 @@ class LoginController extends Controller {
     public function getLogout() {
         if (Auth::check()) {
             Auth::logout();
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('message', Lang::get('common.logout_successful'));
         }
-        return Redirect::to('/')
+        return Redirect::action('HomeController@showWelcome')
                         ->with('warning', Lang::get('common.acces_denied'));
     }
 
     public function getLogin() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         return View::make('login');
@@ -22,7 +22,7 @@ class LoginController extends Controller {
 
     public function postLogin() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         $input = Input::only(
@@ -42,7 +42,7 @@ class LoginController extends Controller {
                     'email' => Input::get('email'),
                     'password' => Input::get('password'),
                     'confirmed' => 1), Input::get('remember'))) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('message', Lang::get('common.login_successful'));
         }
         return Redirect::back()

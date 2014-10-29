@@ -9,7 +9,7 @@ class RemindersController extends Controller {
      */
     public function getRemind() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         return View::make('password.remind');
@@ -22,15 +22,17 @@ class RemindersController extends Controller {
      */
     public function postRemind() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         switch ($response = Password::remind(Input::only('email'))) {
             case Password::INVALID_USER:
-                return Redirect::back()->with('error', Lang::get($response));
+                return Redirect::back()
+                                ->with('error', Lang::get($response));
 
             case Password::REMINDER_SENT:
-                return Redirect::back()->with('status', Lang::get($response));
+                return Redirect::back()
+                                ->with('message', Lang::get($response));
         }
     }
 
@@ -42,14 +44,14 @@ class RemindersController extends Controller {
      */
     public function getReset($token = null) {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         if (is_null($token)) {
             App::abort(404);
         }
         return View::make('password.reset')
-                ->with('token', $token);
+                        ->with('token', $token);
     }
 
     /**
@@ -59,7 +61,7 @@ class RemindersController extends Controller {
      */
     public function postReset() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         $credentials = Input::only(
@@ -77,8 +79,9 @@ class RemindersController extends Controller {
             case Password::INVALID_USER:
                 return Redirect::back()
                                 ->with('error', Lang::get($response));
+
             case Password::PASSWORD_RESET:
-                return Redirect::to('/');
+                return Redirect::action('HomeController@showWelcome');
         }
     }
 

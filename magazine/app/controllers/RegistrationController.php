@@ -4,7 +4,7 @@ class RegistrationController extends Controller {
 
     public function getRegister() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         return View::make('register');
@@ -12,7 +12,7 @@ class RegistrationController extends Controller {
 
     public function postRegister() {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         $input = Input::only(
@@ -43,13 +43,13 @@ class RegistrationController extends Controller {
             $message->to(Input::get('email'), Input::get('name'))
                     ->subject(Lang::get('emails.verify_email'));
         });
-        return Redirect::to('/')
+        return Redirect::action('HomeController@showWelcome')
                         ->with('message', Lang::get('common.thank_for_sign'));
     }
 
     public function confirm($confirmation_code) {
         if (Auth::check()) {
-            return Redirect::to('/')
+            return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         if (!$confirmation_code) {
@@ -66,7 +66,7 @@ class RegistrationController extends Controller {
         $user->confirmation_code = null;
         $user->save();
 
-        return Redirect::to('/')
+        return Redirect::action('HomeController@showWelcome')
                         ->with('message', Lang::get('common.email_verified'));
     }
 
