@@ -28,8 +28,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function rank() {
         return $this->hasOne('User_group', 'id', 'rank');
     }
-    
-    public function articles(){
+
+    public function articles() {
         return $this->hasMany('Article');
     }
 

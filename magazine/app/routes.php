@@ -31,26 +31,15 @@ Route::get('/kontakt', 'MenuController@getKontakt');
 Route::get('/profile', 'MenuController@getProfile');
 
 Route::group(array('prefix' => 'article'), function() {
-    Route::get('/new', function() {
-        return View::make('article.article_new');
-    });
+    Route::get('/new', 'ArticleController@newArticle');
 
-    Route::get('/draft', function() {
-        return View::make('article.article_draft');
-    });
+    Route::get('/draft', 'ArticleController@draft');
 
-    Route::get('/accepted', function() {
-        return View::make('article.article_accepted');
-    });
+    Route::get('/accepted', 'ArticleController@accepted');
 
-    Route::get('/unapproved', function() {
-        return View::make('article.article_unapproved');
-    });
-    Route::get('/detail', function() {
-        return View::make('article.article_detail');
-    });
-
-    Route::get('/article_management', function() {
-        return View::make('article.article_management');
-    });
+    Route::get('/unapproved', 'ArticleController@unapproved');
+    
+    Route::get('/article_management', 'ArticleController@articleManagement');
+    
+    Route::get('/detail', 'ArticleController@detail');
 });

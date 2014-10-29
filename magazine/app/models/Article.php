@@ -13,4 +13,8 @@ class Article extends Eloquent {
         return $this->hasOne('User', 'id', 'user_id');
     }
 
+    public function tags() {
+        return $this->hasMany('Tags', 'id_article', 'id');
+    }
+
 }

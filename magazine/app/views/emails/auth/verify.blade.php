@@ -9,7 +9,7 @@
         <div>
             Thanks for creating an account.
             Please follow the link below to verify your email address
-            {{ URL::to('/verify/' . $confirmation_code) }}.<br/>
+            {{{{ action('RegistrationController@confirm') . '/' . $confirmation_code) }}.<br/>
         </div>
 
     </body>

@@ -64,37 +64,37 @@
         <div class="container-fluid">
             <div class="row" id="menu">
                 <div class="col-md-12">
-                    <h1>{{ HTML::link('/', 'Prvý online Geogebra časopis Univerzity Komenského') }}</h1>
+                    <h1>{{ HTML::linkAction('HomeController@showWelcome', 'Prvý online Geogebra časopis Univerzity Komenského') }}</h1>
                 </div>
             </div>
             <nav class="navbar">
                 <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
-                    <li>{{ HTML::link('/onas', Lang::get('menu.about_us')) }}</li>
-                    <li>{{ HTML::link('/kontakt', Lang::get('menu.contact')) }}</li>
+                    <li>{{ HTML::linkAction('MenuController@getOnas', Lang::get('menu.about_us')) }}</li>
+                    <li>{{ HTML::linkAction('MenuController@getKontakt', Lang::get('menu.contact')) }}</li>
                     @if(Auth::check())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             {{ Lang::get('menu.profil') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>{{ HTML::link('/article/new', Lang::get('menu.article')) }}</li>
+                            <li>{{ HTML::linkAction('ArticleController@newArticle', Lang::get('menu.article')) }}</li>
                             <li class="divider"></li>
-                            <li>{{ HTML::link('/profile', Lang::get('menu.edit_profile')) }}</li>
+                            <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile')) }}</li>
                         </ul>
                     </li>
                     <li>
-                        {{ HTML::link('/logout', Lang::get('menu.logout')) }}
+                        {{ HTML::linkAction('LoginController@getLogout', Lang::get('menu.logout')) }}
                     </li>
                     @else
                     <li>
-                        {{ HTML::link('/register', Lang::get('menu.registration')) }}
+                        {{ HTML::linkAction('RegistrationController@getRegister', Lang::get('menu.registration')) }}
                     </li>
                     <li>
-                        {{ HTML::link('/login', Lang::get('menu.login')) }}
+                        {{ HTML::linkAction('LoginController@getLogin', Lang::get('menu.login')) }}
                     </li>
                     @endif
                     <li class="pull-right">
-                        {{ Form::open(array('url' => url('/'), 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
+                        {{ Form::open(array('action' => 'HomeController@showWelcome', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
                                 {{ Form::text( 'hladanie', '', array(

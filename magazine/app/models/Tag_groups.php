@@ -6,7 +6,7 @@ class Tag_groups extends Eloquent {
     protected $fillable = array('name', 'count');
 
     public function tag() {
-        return $this->belongsTo('Tags');
+        return $this->belongsTo('Tags', 'id', 'id_tag');
     }
 
 }

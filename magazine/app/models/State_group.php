@@ -6,7 +6,7 @@ class State_group extends Eloquent {
     protected $fillable = array('description');
 
     public function user() {
-        return $this->belongsTo('Article');
+        return $this->belongsTo('Article', 'id', 'state');
     }
 
 }

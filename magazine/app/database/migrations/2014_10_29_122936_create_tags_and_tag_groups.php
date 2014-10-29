@@ -8,7 +8,7 @@ class CreateTagsAndTagGroups extends Migration {
     public function up() {
         Schema::create('tag_groups', function($table) {
             $table->increments('id')->unsigned();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('count')->unsigned();
         });
         Schema::create('tags', function($table) {
