@@ -28,7 +28,7 @@ Route::post('/reset/{token}', 'RemindersController@postReset');
 
 Route::get('/onas', 'MenuController@getOnas');
 Route::get('/kontakt', 'MenuController@getKontakt');
-Route::get('/profile', 'MenuController@getProfile');
+Route::get('/profile/{id}', 'MenuController@getProfile');
 
 Route::group(array('prefix' => 'article'), function() {
     Route::get('/new', 'ArticleController@newArticle');

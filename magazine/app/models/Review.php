@@ -1,6 +1,6 @@
 <?php
 
-class Reviews extends Eloquent {
+class Review extends Eloquent {
 
     protected $table = 'reviews';
     protected $fillable = array('id_article', 'reviewer_id', 'text', 'created_at', 'updated_at');

@@ -31,7 +31,7 @@ class UsersAndUserGroups extends Migration {
             $table->string('facebook');
             $table->string('twitter');
             $table->string('language')->default('sk');
-            $table->dateTime('about');
+            $table->string('about');
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
             $table->rememberToken();

@@ -1,12 +1,12 @@
 <?php
 
-class Tag_groups extends Eloquent {
+class Tag_group extends Eloquent {
 
     protected $table = 'tag_groups';
     protected $fillable = array('name', 'count');
 
     public function tag() {
-        return $this->belongsTo('Tags', 'id', 'id_tag');
+        return $this->belongsTo('Tag', 'id', 'id_tag');
     }
 
 }

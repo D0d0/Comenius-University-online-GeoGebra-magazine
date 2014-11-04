@@ -24,10 +24,6 @@
                 background-color: white;
             }
 
-            img{
-                margin-right: 4px !important;
-            }
-
             h3{
                 margin-top: 0;
             }
@@ -79,7 +75,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>{{ HTML::linkAction('ArticleController@newArticle', Lang::get('menu.article')) }}</li>
                             <li class="divider"></li>
-                            <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile')) }}</li>
+                            <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile'), [Auth::id()]) }}</li>
                         </ul>
                     </li>
                     <li>
@@ -98,7 +94,7 @@
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
                                 {{ Form::text( 'hladanie', '', array(
-                                    'id' => 'hladanie',
+                                    'id' => 'hladanie',//potom moze ist prec
                                     'class' => 'form-control',
                                     'placeholder' => Lang::get('menu.search'),
                                     'maxlength' => 30

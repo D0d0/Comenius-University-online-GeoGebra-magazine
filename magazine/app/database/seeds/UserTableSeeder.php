@@ -13,6 +13,11 @@ class UserTableSeeder extends Seeder {
                 'name' => $faker->lastName . ' ' . $faker->firstName,
                 'email' => $faker->email,
                 'password' => Hash::make($faker->word),
+                'city' => $faker->city,
+                'rank' => $faker->numberBetween(1, 4),
+                'facebook' => $faker->lastName . ' ' . $faker->firstName,
+                'school' => $faker->address,
+                'birth' => $faker->dateTimeThisCentury,
                 'rank' => 1
             ));
         }

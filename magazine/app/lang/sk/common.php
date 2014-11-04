@@ -18,4 +18,5 @@ return array(
     'acces_denied' => 'Nemáte prístup na túto stránku.',
     'logout_successful' => 'Odhlásenie prebehlo úspešne.',
     'login_successful' => 'Prihlásenie prebehlo úspešne.',
+    'user_does_not_exist' => 'Zadaný užívateľ neexistuje.',
 );

@@ -17,23 +17,24 @@ class ArticleController extends BaseController {
     public function newArticle() {
         return View::make('article.article_new');
     }
-    
+
     public function draft() {
         return View::make('article.article_draft');
     }
-    
+
     public function accepted() {
-        return View::make('article.article_accepted');
+        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 3)->get();
+        return View::make('article.article_accepted', array('articles' => $articles));
     }
-    
+
     public function unapproved() {
         return View::make('article.article_unapproved');
     }
-    
+
     public function articleManagement() {
         return View::make('article.article_management');
     }
-    
+
     public function detail() {
         return View::make('article.article_detail');
     }
