@@ -14,7 +14,7 @@ margin-right: 9px !important;
 }
 @stop
 
-@if($canEdit):
+@if($canEdit)
 @section('ready_js')
 $('#profile .fa, #profile .glyphicon').parent().mouseenter(function(){
 $(this).append(' <span class="glyphicon glyphicon-pencil text-muted"></span>');
@@ -43,23 +43,31 @@ $('.glyphicon-pencil', this).remove();
                     <div class="col-md-6">
                         <p><span class="glyphicon glyphicon-envelope"></span> {{{ $user->email }}}</p>
                     </div>
+                    @if($user->google)
                     <div class="col-md-6">
                         <p style="color: #DD4B39"><i class="fa fa-google-plus" style="width: 14px"></i> {{{ $user->google }}}</p>
                     </div>
+                    @endif
+                    @if($user->facebook)
                     <div class="col-md-6">
-                        <p style="color: #3B5998"><i class="fa fa-facebook" style="width: 14px"></i> <a href="https://www.facebook.com/jozef.duc1">Jozef Dúc</a></p>
+                        <p style="color: #3B5998"><i class="fa fa-facebook" style="width: 14px"></i> <a href="https://www.facebook.com/jozef.duc1">{{{ $user->facebook }}}</a></p>
                     </div>
+                    @endif
+                    @if($user->twitter)
                     <div class="col-md-6">
                         <p style="color: #55ACEE"><i class="fa fa-twitter" style="width: 14px"></i><i class="fa fa-at"></i>{{{ $user->twitter }}}</p>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
+        @if($user->about)
         <div class="row">
             <div class="col-md-12">
                 <p class="text-justify"><span class="glyphicon glyphicon-search"></span> {{{ $user->about }}}</p>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @stop
