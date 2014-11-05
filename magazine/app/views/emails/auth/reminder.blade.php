@@ -8,7 +8,7 @@
 
         <div>
             <!-- TODO -->
-            {{ action('RemindersController@getReset') . '/' . $token }}.<br/>
+            {{ action('RemindersController@getReset', [$token]) }}.<br/>
         </div>
 
     </body>
