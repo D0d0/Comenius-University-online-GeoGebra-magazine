@@ -16,7 +16,8 @@ class MenuController extends Controller {
                             ->with('warning', Lang::get('common.user_does_not_exist'));
         }
         $canEdit = Auth::id() == $user->id;
-        return View::make('profile.profile', array('user' => $user, 'canEdit' => $canEdit));
+        $articles = Article::where('user_id', '=', $user->id)->where('state', '=', 5)->get();
+        return View::make('profile.profile', array('user' => $user, 'canEdit' => $canEdit, 'articles' => $articles));
     }
 
 }
