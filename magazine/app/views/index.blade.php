@@ -14,7 +14,7 @@ margin-right: 9px !important;
 <?php $i = 0 ?>
 @foreach($articles as $article)
 @if($i % 3 == 0)
-<div class="row">
+<div class="row container-md-height">
     @endif
     {{HTML::article($article->id)}}
     @if($i % 3 == 2)

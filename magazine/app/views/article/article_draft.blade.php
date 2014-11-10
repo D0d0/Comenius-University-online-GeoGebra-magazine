@@ -14,7 +14,7 @@ margin-right: 9px !important;
 <?php $i = 0 ?>
 @forelse($articles as $article)
 @if($i % 2 == 0)
-<div class="row">
+<div class="row container-md-height">
     @endif
     {{HTML::article($article->id, 6, true)}}
     @if($i % 2 == 1)
