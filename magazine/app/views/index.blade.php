@@ -11,11 +11,11 @@ margin-right: 9px !important;
 @stop
 
 @section('content')
+@for($i = 0; $i < $max; $i++)
 <div class="row">
-    @for($i = 0; $i < $max; $i++)
     {{HTML::article(rand(1,100))}}
     {{HTML::article(rand(1,100))}}
     {{HTML::article(rand(1,100))}}
-    @endfor
 </div>
+@endfor
 @stop

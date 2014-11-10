@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}">
         {{HTML::style('css/bootstrap.min.css')}}
+        {{HTML::style('css/bootstrap-minimit.min.css')}}
         {{HTML::style('css/datepicker.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
