@@ -19,7 +19,8 @@ class ArticleController extends BaseController {
     }
 
     public function draft() {
-        return View::make('article.article_draft');
+        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 1)->get();
+        return View::make('article.article_draft', array('articles' => $articles));
     }
 
     public function accepted() {
@@ -28,7 +29,8 @@ class ArticleController extends BaseController {
     }
 
     public function unapproved() {
-        return View::make('article.article_unapproved');
+        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 4)->get();
+        return View::make('article.article_unapproved', array('articles' => $articles));
     }
 
     public function articleManagement() {
