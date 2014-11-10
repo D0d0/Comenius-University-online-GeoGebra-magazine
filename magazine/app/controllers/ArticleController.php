@@ -1,21 +1,33 @@
 <?php
 
 class ArticleController extends BaseController {
-    /*
-      |--------------------------------------------------------------------------
-      | Default Home Controller
-      |--------------------------------------------------------------------------
-      |
-      | You may wish to use controllers instead of, or in addition to, Closure
-      | based routes. That's great! Here is an example controller method to
-      | get you started. To route to this controller, just add the route:
-      |
-      |	Route::get('/', 'HomeController@showWelcome');
-      |
-     */
 
-    public function newArticle() {
+    public function newArticle($id = null) {
+        //WTF
+        if ($id) {
+            $article = Article::find($id);
+            if ($article->user_id == Auth::id() && $article->state == 1) {
+                return View::make('article.article_new', array('article' => $article));
+            }
+        }
         return View::make('article.article_new');
+    }
+
+    public function postNewArticle() {
+        if (Request::ajax()) {
+            $input = Input::all();
+            if (!$article = Article::find($input['id'])) {
+                $article = new Article;
+            }
+            $article->title = trim($input['title']);
+            $article->text = trim($input['text']);
+            $article->abstract = trim($input['abstract']);
+            $article->state = 1;
+            $article->user_id = Auth::id();
+            $article->save();
+            $result['id'] = $article->id;
+            return Response::json($result);
+        }
     }
 
     public function draft() {
@@ -42,7 +54,7 @@ class ArticleController extends BaseController {
         return View::make('article.article_management');
     }
 
-    public function detail($id) {
+    public function detail($id = null) {
         //TODO LEN PUBLIKOVANE
         //ALEBO LEN JEHO S RECENZIOU
         if ($id == null || !$article = Article::find($id)) {

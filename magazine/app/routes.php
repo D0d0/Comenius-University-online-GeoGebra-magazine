@@ -31,7 +31,8 @@ Route::get('/kontakt', 'MenuController@getKontakt');
 Route::get('/profile/{id}', 'MenuController@getProfile');
 
 Route::group(array('prefix' => 'article'), function() {
-    Route::get('/new', 'ArticleController@newArticle');
+    Route::get('/new/{id?}', 'ArticleController@newArticle');
+    Route::post('/new', 'ArticleController@postNewArticle');
 
     Route::get('/draft', 'ArticleController@draft');
 
@@ -43,5 +44,5 @@ Route::group(array('prefix' => 'article'), function() {
     
     Route::get('/article_management', 'ArticleController@articleManagement');
     
-    Route::get('/detail/{id}', 'ArticleController@detail');
+    Route::get('/detail/{id?}', 'ArticleController@detail');
 });
