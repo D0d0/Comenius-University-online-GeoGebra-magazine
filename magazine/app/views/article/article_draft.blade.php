@@ -1,5 +1,15 @@
 @extends('article.article')
 
+@section('style')
+[type=clanok]{
+padding: 9px;
+}
+
+img{
+margin-right: 9px !important;
+}
+@stop
+
 @section('left')
 <?php $i = 0 ?>
 @forelse($articles as $article)
