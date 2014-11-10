@@ -35,11 +35,13 @@ Route::group(array('prefix' => 'article'), function() {
 
     Route::get('/draft', 'ArticleController@draft');
 
+    Route::get('/sent', 'ArticleController@sent');
+
     Route::get('/accepted', 'ArticleController@accepted');
 
     Route::get('/unapproved', 'ArticleController@unapproved');
     
     Route::get('/article_management', 'ArticleController@articleManagement');
     
-    Route::get('/detail', 'ArticleController@detail');
+    Route::get('/detail/{id}', 'ArticleController@detail');
 });

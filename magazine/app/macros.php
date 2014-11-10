@@ -2,11 +2,12 @@
 
 HTML::macro('article', function($id = null, $size = 4) {
     $article = Article::find($id);
+    $user = User::find($article->user_id);
     //{{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) }}
     return '
         <div class="col-md-' . $size . ' col-md-height col-middle">
-            <div class="thumbnail clearfix" type="clanok"><h3>' . $article->title . '</h3>
-                <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . User::find($article->user_id)->name . '</p>
+            <div class="thumbnail clearfix" type="clanok"><h3>' . link_to_action('ArticleController@detail', $article->title, [$id]) . '</h3>
+                <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) . '</p>
                 <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->created_at . '</p>
                 <p class="text-muted">
                     <span class="glyphicon glyphicon-tags"></span>

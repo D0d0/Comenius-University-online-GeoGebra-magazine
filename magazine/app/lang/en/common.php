@@ -19,4 +19,5 @@ return array(
     'logout_successful' => 'You have been logged out.',
     'login_successful' => 'You are now logged in.',
     'user_does_not_exist' => 'User does not exist.',
+    'article_does_not_exist' => 'Article does not exist.',
 );

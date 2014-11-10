@@ -15,7 +15,8 @@ class HomeController extends BaseController {
      */
 
     public function showWelcome() {
-        return View::make('index', array('max' => 3));
+        $articles = Article::where('state', '=', 5)->simplePaginate(9);
+        return View::make('index', array('articles' => $articles));
     }
 
 }

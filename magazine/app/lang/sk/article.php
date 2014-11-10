@@ -3,6 +3,7 @@
 return array(
     'new_article' => 'Nový článok',
     'draft' => '[0,1]Koncept|[2,4]Koncepty|[5,Inf]Konceptov',
+    'sent' => 'Odoslané',
     'accepted' => 'Schválené',
     'unapproved' => 'Neschválené',
     'article_management' => 'Správa článkov',

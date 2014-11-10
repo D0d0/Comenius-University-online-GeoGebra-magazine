@@ -3,6 +3,7 @@
 return array(
     'new_article' => 'New article',
     'draft' => '[0,1]Draft|[2,Inf]Drafts',
+    'sent' => 'Sent',
     'accepted' => 'Accepted',
     'unapproved' => 'Unapproved',
     'article_management' => 'Article management',

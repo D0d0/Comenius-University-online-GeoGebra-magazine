@@ -19,4 +19,5 @@ return array(
     'logout_successful' => 'Odhlásenie prebehlo úspešne.',
     'login_successful' => 'Prihlásenie prebehlo úspešne.',
     'user_does_not_exist' => 'Zadaný užívateľ neexistuje.',
+    'article_does_not_exist' => 'Zadaný článok neexistuje.',
 );

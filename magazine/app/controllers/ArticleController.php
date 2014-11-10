@@ -23,6 +23,11 @@ class ArticleController extends BaseController {
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
+    public function sent() {
+        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 2)->get();
+        return View::make('article.article_sent', array('articles' => $articles));
+    }
+
     public function accepted() {
         $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 3)->get();
         return View::make('article.article_accepted', array('articles' => $articles));
@@ -37,8 +42,14 @@ class ArticleController extends BaseController {
         return View::make('article.article_management');
     }
 
-    public function detail() {
-        return View::make('article.article_detail');
+    public function detail($id) {
+        //TODO LEN PUBLIKOVANE
+        //ALEBO LEN JEHO S RECENZIOU
+        if ($id == null || !$article = Article::find($id)) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_does_not_exist'));
+        }
+        return View::make('article.article_detail', array('article' => $article));
     }
 
 }

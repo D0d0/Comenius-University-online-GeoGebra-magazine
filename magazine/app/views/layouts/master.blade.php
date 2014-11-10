@@ -36,9 +36,9 @@
             @yield('style')
         </style>
         <script>
-            $(window).scroll(function () {
+            /*$(window).scroll(function () {
                 $('#hladanie').val(($(window).scrollTop() + $(window).height() >= $(document).height() - 100) ? 'spodok' : 'vrch');
-            });
+            });*/
 
             $(document).ready(function () {
                 $('#datetimepicker').datetimepicker({

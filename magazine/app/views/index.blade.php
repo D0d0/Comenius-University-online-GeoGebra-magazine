@@ -11,11 +11,16 @@ margin-right: 9px !important;
 @stop
 
 @section('content')
-@for($i = 0; $i < $max; $i++)
+<?php $i = 0 ?>
+@foreach($articles as $article)
+@if($i % 3 == 0)
 <div class="row">
-    {{HTML::article(rand(1,100))}}
-    {{HTML::article(rand(1,100))}}
-    {{HTML::article(rand(1,100))}}
+    @endif
+    {{HTML::article($article->id)}}
+    @if($i % 3 == 2)
 </div>
-@endfor
+@endif
+<?php $i++ ?>
+@endforeach
+{{ $articles->links() }}
 @stop
