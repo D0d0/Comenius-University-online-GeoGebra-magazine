@@ -11,32 +11,37 @@
 @section('ready_js')
 var timer;
 
+var changeButton = function(){
+    if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
+        $('#save').removeAttr('disabled');
+    }else{
+        $('#save').attr('disabled', 'disabled');
+    }
+}
+
 var saveArticle = function(){
     timer && clearTimeout(timer);
-    /*console.log($('#title').val());
-    console.log($('#abstract').val());    
-    console.log($('#tagy').tagsinput('items'));
-    console.log($('.summernote').code());*/
-    if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items') && $('.summernote').code()){
+    if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
+        $('#save').attr('disabled', 'disabled').html('{{ Lang::get('article.saving') }}');
         $.ajax({
             type: 'POST',
             dataType: 'json',
             url: '{{ action('ArticleController@postNewArticle') }}',
             data: {
-                    'title' : $('#title').val(),
-                    'abstract' : $('#abstract').val(),
-                    'tagy' : $('#tagy').tagsinput('items'),
-                    'text' : $('.summernote').code(),
-                    'id' : $('#id').val(),
-                },
+                'title' : $('#title').val(),
+                'abstract' : $('#abstract').val(),
+                'tagy' : $('#tagy').tagsinput('items'),
+                'text' : $('.summernote').code(),
+                'id' : $('#id').val(),
+            },
             success: function(answer){
-                console.log(answer['id']);
                 if(answer['id']){
                     $('#id').val(answer['id']);
                 }
+                $('#save').removeAttr('disabled').html('{{ Lang::get('article.save') }}');
             },
             error: function(){
-                console.log('erroris');
+                $('#save').removeAttr('disabled').html('{{ Lang::get('article.save') }}');
             }
         });
     }
@@ -53,23 +58,33 @@ $('.summernote').summernote({
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough']],
         ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],],
+    ],
     onChange: function(e){
-            startTimer();
-        }
+        changeButton();
+        startTimer();
+    }
 }).code('{{ $article->text or '' }}');
 
 $('#tagy').on('itemAdded', function(event) {
     startTimer();
+    changeButton();
 });
 
 $('#tagy').on('itemRemoved', function(event) {
     startTimer();
+    changeButton();
 });
 
 $('#title, #abstract').on('input', function(){
     startTimer();
+    changeButton();
 });
+
+$('#save').on('click', function(){
+    saveArticle();
+});
+
+changeButton();
 @stop
 
 @section('left')
@@ -96,9 +111,19 @@ $('#title, #abstract').on('input', function(){
     <div class="form-group">
         <label class="col-md-1 control-label">{{ Lang::get('article.text') }}</label>
         <div class="col-md-11">
-            <div class="summernote thumbnail">
+            <div class="summernote">
 
             </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-1 col-md-offset-10">
+            <button type="button" class="btn btn-default" id="save">{{ Lang::get('article.save') }}</button>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-default" id="trash">
+                <span class="glyphicon glyphicon-trash"></span>
+            </button>
         </div>
     </div>
 </form>

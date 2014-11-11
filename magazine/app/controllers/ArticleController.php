@@ -31,22 +31,22 @@ class ArticleController extends BaseController {
     }
 
     public function draft() {
-        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 1)->get();
+        $articles = Article::draft()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
     public function sent() {
-        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 2)->get();
+        $articles = Article::sent()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
     public function accepted() {
-        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 3)->get();
+        $articles = Article::accepted()->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_accepted', array('articles' => $articles));
     }
 
     public function unapproved() {
-        $articles = Article::where('user_id', '=', Auth::id())->where('state', '=', 4)->get();
+        $articles = Article::unaproved()->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
 

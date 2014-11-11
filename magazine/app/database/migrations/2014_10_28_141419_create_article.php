@@ -24,8 +24,8 @@ class CreateArticle extends Migration {
             $table->foreign('state')->references('id')->on('state_groups');
             $table->string('title');
             $table->binary('image');
-            $table->string('abstract');
-            $table->string('text');
+            $table->longText('abstract');
+            $table->longText('text');
             $table->timestamps();
         });
     }

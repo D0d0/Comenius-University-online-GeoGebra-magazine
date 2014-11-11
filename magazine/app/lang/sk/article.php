@@ -14,4 +14,7 @@ return array(
     'other_articles' => 'Ostatné články autora',
     'related_articles' => 'Súvisiace články',
     'article_management' => 'Správa článkov',
+    'save' => 'Ulož',
+    'saving' => 'Ukladanie',
+    'saved' => 'Uložené',
 );

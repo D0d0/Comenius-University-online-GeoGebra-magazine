@@ -12,7 +12,7 @@ class CreateReviews extends Migration {
             $table->foreign('id_article')->references('id')->on('article');
             $table->integer('reviewer_id')->unsigned();
             $table->foreign('reviewer_id')->references('id')->on('users');
-            $table->string('text');
+            $table->longText('text');
             $table->timestamps();
         });
     }

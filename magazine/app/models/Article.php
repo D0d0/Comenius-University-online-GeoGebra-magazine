@@ -17,4 +17,32 @@ class Article extends Eloquent {
         return $this->hasMany('Tags', 'id_article', 'id');
     }
 
+    public function scopeDraft($query) {
+        return $query->where('state', '=', 1);
+    }
+
+    public function scopeSent($query) {
+        return $query->where('state', '=', 2);
+    }
+
+    public function scopeAccepted($query) {
+        return $query->where('state', '=', 3);
+    }
+
+    public function scopeUnaproved($query) {
+        return $query->where('state', '=', 4);
+    }
+
+    public function scopePublished($query) {
+        return $query->where('state', '=', 5);
+    }
+
+    public function getFormattedCreatedAt() {
+        return date('j.n.Y', strtotime($this->getAttributes()['created_at']));
+    }
+
+    public function getFormattedUdatedAt() {
+        return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
+    }
+
 }

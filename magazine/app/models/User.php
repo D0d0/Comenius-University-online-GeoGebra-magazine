@@ -32,5 +32,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function articles() {
         return $this->belongsTo('Article');
     }
+    
+    public function getFormattedBirth() {
+        return date('j.n.Y', strtotime($this->getAttributes()['birth']));
+    }
+    
+    public function getFormattedCreatedAt() {
+        return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
+    }
+    
+    public function getFormattedUdatedAt() {
+        return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
+    }
+    
 
 }

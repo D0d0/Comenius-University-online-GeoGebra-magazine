@@ -7,9 +7,11 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false) {
     $link = link_to_action($draft ? 'ArticleController@newArticle' : 'ArticleController@detail', $article->title, [$id]);
     return '
         <div class="col-md-' . $size . ' col-md-height col-middle">
-            <div class="thumbnail clearfix" type="clanok"><h3>' . $link . '</h3>
+            <div class="thumbnail clearfix" type="clanok">
+                ' . HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) . '
+                <h3>' . $link . '</h3>
                 <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) . '</p>
-                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->created_at . '</p>
+                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedCreatedAt() . '</p>
                 <p class="text-muted">
                     <span class="glyphicon glyphicon-tags"></span>
                     &nbsp;<a class="label label-primary">kosinus</a>
@@ -24,4 +26,9 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false) {
                 <p>' . $article->abstract . '</p>
             </div>
         </div>';
+});
+
+
+HTML::macro('formatDate', function($date){
+    
 });

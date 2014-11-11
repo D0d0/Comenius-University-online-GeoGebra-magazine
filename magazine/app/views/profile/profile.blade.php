@@ -36,7 +36,7 @@ $('.glyphicon-pencil', this).remove();
             <div class="col-md-9">
                 <p><span style="width: 14px"></span><h3>{{{ $user->name }}}</h3></p>
                 <p><span class="glyphicon glyphicon-briefcase"></span> {{{ User_group::find($user->rank)->description }}}</p>
-                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> {{{ $user->birth }}}</p>
+                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> {{{ $user->getFormattedBirth() }}}</p>
                 <p><i class="fa fa-home" style="width: 14px"></i> {{{ $user->city }}}</p>
                 <p><i class="fa fa-graduation-cap" style="width: 14px"></i> {{{ $user->school }}}</p>
                 <div class="row">

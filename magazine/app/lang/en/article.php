@@ -14,4 +14,7 @@ return array(
     'other_articles' => 'Author´s another articles',
     'related_articles' => 'Related articles',
     'article_management' => 'Article management',
+    'save' => 'Save',
+    'saving' => 'Saving',
+    'saved' => 'Saved',
 );
