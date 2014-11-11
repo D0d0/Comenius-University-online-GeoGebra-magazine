@@ -51,7 +51,8 @@ class ArticleController extends BaseController {
     }
 
     public function articleManagement() {
-        return View::make('article.article_management');
+        $articles = Article::sent()->orderBy('id', 'DESC')->get();
+        return View::make('article.article_management', array('articles' => $articles));
     }
 
     public function detail($id = null) {
