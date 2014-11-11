@@ -12,6 +12,7 @@
 var timer;
 
 var changeButton = function(){
+    $('#save').html('{{ Lang::get('article.save') }}');
     if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
         $('#save').removeAttr('disabled');
     }else{
@@ -38,10 +39,10 @@ var saveArticle = function(){
                 if(answer['id']){
                     $('#id').val(answer['id']);
                 }
-                $('#save').removeAttr('disabled').html('{{ Lang::get('article.save') }}');
+                $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
             },
             error: function(){
-                $('#save').removeAttr('disabled').html('{{ Lang::get('article.save') }}');
+                $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
             }
         });
     }
