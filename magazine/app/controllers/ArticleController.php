@@ -31,13 +31,13 @@ class ArticleController extends BaseController {
                 if (!$tagGroup = Tag_group::where('name', '=', $value)->first()) {
                     $tagGroup = new Tag_group;
                 }
-                $tagGroup->name = $value;
+                $tagGroup->name = trim($value);
                 $tagGroup->count = 0;
                 $tagGroup->save();
                 Tag::create(array(
                     'id_tag' => $tagGroup->id,
-                    'id_article' => $article->id)
-                );
+                    'id_article' => $article->id
+                ));
             }
             return Response::json($result);
         }
