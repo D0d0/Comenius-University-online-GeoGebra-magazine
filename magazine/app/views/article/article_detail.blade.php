@@ -21,7 +21,7 @@ $('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/wi
         <div class="thumbnail clearfix" type="clanok">
             <h1>{{{ $article->title }}}</h1>
             <p class="text-muted">
-                <span class="glyphicon glyphicon-calendar"></span> {{ $article->updated_at }}
+                <span class="glyphicon glyphicon-calendar"></span> {{ $article->getFormattedUdatedAt() }}
             </p>
             <p class="text-muted">
                 {{ HTML::tags($article->id) }}
