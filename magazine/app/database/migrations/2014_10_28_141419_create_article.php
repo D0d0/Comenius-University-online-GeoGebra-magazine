@@ -16,7 +16,7 @@ class CreateArticle extends Migration {
             $table->string('description');
             $table->timestamps();
         });
-        Schema::create('article', function(Blueprint $table) {
+        Schema::create('articles', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
@@ -36,7 +36,7 @@ class CreateArticle extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('article');
+        Schema::dropIfExists('articles');
         Schema::dropIfExists('state_groups');
     }
 

@@ -26,6 +26,19 @@ class ArticleController extends BaseController {
             $article->user_id = Auth::id();
             $article->save();
             $result['id'] = $article->id;
+            Tag::where('id_article', '=', $article->id)->delete();
+            foreach ($input['tagy'] as $key => $value) {
+                if (!$tagGroup = Tag_group::where('name', '=', $value)->first()) {
+                    $tagGroup = new Tag_group;
+                }
+                $tagGroup->name = $value;
+                $tagGroup->count = 0;
+                $tagGroup->save();
+                Tag::create(array(
+                    'id_tag' => $tagGroup->id,
+                    'id_article' => $article->id)
+                );
+            }
             return Response::json($result);
         }
     }

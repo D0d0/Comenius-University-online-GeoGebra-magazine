@@ -36,6 +36,7 @@ var saveArticle = function(){
                 'id' : $('#id').val(),
             },
             success: function(answer){
+                console.log(answer);
                 if(answer['id']){
                     $('#id').val(answer['id']);
                 }
@@ -50,7 +51,7 @@ var saveArticle = function(){
 
 function startTimer(){
     timer && clearTimeout(timer);
-    timer = setTimeout(saveArticle, 3000);
+    timer = setTimeout(saveArticle, 2000);
 }
 
 $('.summernote').summernote({

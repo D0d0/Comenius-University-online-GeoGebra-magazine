@@ -16,7 +16,7 @@ margin-right: 9px !important;
 @if($i % 2 == 0)
 <div class="row container-md-height">
     @endif
-    {{HTML::articleWithReview($article->id, 6, true)}}
+    {{HTML::articleWithReview($article->id, 6)}}
     @if($i % 2 == 1)
 </div>
 @endif

@@ -2,7 +2,7 @@
 
 class Article extends Eloquent {
 
-    protected $table = 'article';
+    protected $table = 'articles';
     protected $fillable = array('user_id', 'state', 'title', 'image', 'abstract', 'text', 'updated_at', 'created_at');
 
     public function state() {
@@ -14,7 +14,7 @@ class Article extends Eloquent {
     }
 
     public function tags() {
-        return $this->hasMany('Tags', 'id_article', 'id');
+        return $this->hasMany('Tag', 'id_article', 'id');
     }
 
     public function scopeDraft($query) {

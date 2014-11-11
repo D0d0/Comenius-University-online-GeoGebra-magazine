@@ -9,7 +9,7 @@ class CreateReviews extends Migration {
         Schema::create('reviews', function(Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('id_article')->unsigned();
-            $table->foreign('id_article')->references('id')->on('article');
+            $table->foreign('id_article')->references('id')->on('articles');
             $table->integer('reviewer_id')->unsigned();
             $table->foreign('reviewer_id')->references('id')->on('users');
             $table->longText('text');

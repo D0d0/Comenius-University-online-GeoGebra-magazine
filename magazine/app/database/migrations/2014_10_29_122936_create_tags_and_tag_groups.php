@@ -15,7 +15,7 @@ class CreateTagsAndTagGroups extends Migration {
             $table->integer('id_tag')->unsigned();
             $table->foreign('id_tag')->references('id')->on('tag_groups');
             $table->integer('id_article')->unsigned();
-            $table->foreign('id_article')->references('id')->on('article');
+            $table->foreign('id_article')->references('id')->on('articles');
         });
     }
 

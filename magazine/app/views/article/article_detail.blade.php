@@ -24,15 +24,7 @@ $('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/wi
                 <span class="glyphicon glyphicon-calendar"></span> {{ $article->updated_at }}
             </p>
             <p class="text-muted">
-                <span class="glyphicon glyphicon-tags"></span>
-                &nbsp;<a class="label label-primary">kosinus</a>
-                <a class="label label-primary">kosinus</a>
-                <a class="label label-primary">kosinus</a>
-                <a class="label label-primary">sinus</a>
-                <a class="label label-primary">Tag3</a>
-                <a class="label label-primary">Tag4</a>
-                <a class="label label-primary">Pytagorova veta</a>
-                <a class="label label-primary">Tag5</a>
+                {{ HTML::tags($article->id) }}
             </p>
             <!-- abstrakt -->
             <p><em>{{{ $article->abstract }}}</em></p>
@@ -61,7 +53,7 @@ $('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/wi
             <div>
                 <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded">
             </div>
-            <h3>{{ link_to_action('MenuController@getProfile', User::find($article->user_id)->name, [$article->user_id]) }}</h3>
+            <h3>{{ link_to_action('MenuController@getProfile', $article->user->name  , [$article->user_id]) }}</h3>
             <h4>{{ Lang::get('article.other_articles') }}</h4>
             <p>
                 <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
