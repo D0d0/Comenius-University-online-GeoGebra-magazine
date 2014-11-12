@@ -30,6 +30,9 @@ $('.onepage').infinitescroll({
     dataType: 'html',
     maxPage: {{ $maxPages }} 
 });
+if($(window).height() >= $(document).height()){
+    $('.onepage').infinitescroll('retrieve');
+};
 @stop
 
 @section('content')
