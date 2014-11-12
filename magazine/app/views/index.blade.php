@@ -28,7 +28,11 @@ $('.onepage').infinitescroll({
     nextSelector: ".pagination a:last",
     itemSelector: ".onepage",
     dataType: 'html',
-    maxPage: {{ $maxPages }} 
+    maxPage: {{ $maxPages }} ,
+    path: function(index) {
+        //môžu sa použiť vlastné parametre, ak bude žiadané vo vyhľádávaní
+        return "?page=" + index;
+    }
 });
 if($(window).height() >= $(document).height()){
     $('.onepage').infinitescroll('retrieve');
