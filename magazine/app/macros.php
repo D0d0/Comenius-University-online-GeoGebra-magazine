@@ -22,15 +22,15 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false) {
                 <p>' . $article->abstract . '</p>
             </div>
         </div>';
-    });
+});
 
-    HTML::macro('articleGrid', function($articles, $width = 3, $size = 4, $draft = false) {
+HTML::macro('articleGrid', function($articles, $width = 3, $size = 4, $draft = false) {
     $_articles = [];
-    foreach ($articles as $article){
-    $_articles[] = HTML::article($article->id, $size, $draft);
+    foreach ($articles as $article) {
+        $_articles[] = HTML::article($article->id, $size, $draft);
     }
-    $result = "<div class='row container-md-height'>";
-    $result .= implode("</div><div class='row container-md-height'>", array_map(function($i) {
+    $result = "<div class=\"row container-md-height col-md-12\">";
+    $result .= implode("</div><div class=\"row container-md-height col-md-12\">", array_map(function($i) {
                 return implode("", $i);
             }, array_chunk($_articles, $width)));
     return $result . "</div>";
