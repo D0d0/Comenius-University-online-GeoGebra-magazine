@@ -15,6 +15,7 @@
         {{HTML::script('js/moment.min.js')}}
         {{HTML::script('js/locales.min.js')}}
         {{HTML::script('js/datepicker.min.js')}}
+        {{HTML::script('js/jquery.infinitescroll.js')}}
         @yield('js')
         <style>
             #menu{
@@ -36,20 +37,32 @@
             @yield('style')
         </style>
         <script>
-            /*$(window).scroll(function () {
-                $('#hladanie').val(($(window).scrollTop() + $(window).height() >= $(document).height() - 100) ? 'spodok' : 'vrch');
-            });*/
+            $(function () {
+                $('.onepage').infinitescroll({
+                    navSelector: ".pagination",
+                    nextSelector: ".pagination a:last",
+                    itemSelector: ".onepage",
+                    debug: false,
+                    dataType: 'html',
+                    path: function (index) {
+                        return "?page=" + index;
+                    }
+                }, function (newElements, data, url) {
 
+                    var $newElems = $(newElements);
+                    $('#boxes').masonry('appended', $newElems, true);
+
+                });
+            });
+           
             $(document).ready(function () {
                 $('#datetimepicker').datetimepicker({
                     language: "{{ Lang::get('common.lang')}}",
                     pickTime: false
                 });
-
                 $('#datetimepicker').on('dp.hide', function (e) {
                     console.log(e);
                 });
-
                 $.ajaxSetup({
                     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
                 });
