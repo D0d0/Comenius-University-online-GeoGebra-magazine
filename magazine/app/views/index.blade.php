@@ -11,16 +11,6 @@ margin-right: 9px !important;
 @stop
 
 @section('content')
-<?php $i = 0 ?>
-@foreach($articles as $article)
-@if($i % 3 == 0)
-<div class="row container-md-height">
-    @endif
-    {{HTML::article($article->id)}}
-    @if($i % 3 == 2)
-</div>
-@endif
-<?php $i++ ?>
-@endforeach
+{{ HTML::articleGrid($articles, 3) }}
 {{ $articles->links() }}
 @stop

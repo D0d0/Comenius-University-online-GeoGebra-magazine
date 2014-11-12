@@ -11,22 +11,14 @@ margin-right: 9px !important;
 @stop
 
 @section('left')
-<?php $i = 0 ?>
-@forelse($articles as $article)
-@if($i % 2 == 0)
-<div class="row container-md-height">
-    @endif
-    {{HTML::article($article->id, 6, true)}}
-    @if($i % 2 == 1)
-</div>
-@endif
-<?php $i++ ?>
-@empty
+@if(!$articles->isEmpty())
+{{HTML::articleGrid($articles, 2, 6, true)}}
+@else
 <div class="row">
     <div class="jumbotron">
         TODO
         Ziadny clanok na zobrazenie
     </div>
 </div>
-@endforelse
+@endif
 @stop
