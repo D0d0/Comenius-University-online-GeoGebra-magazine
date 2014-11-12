@@ -15,7 +15,6 @@
         {{HTML::script('js/moment.min.js')}}
         {{HTML::script('js/locales.min.js')}}
         {{HTML::script('js/datepicker.min.js')}}
-        {{HTML::script('js/jquery.infinitescroll.js')}}
         @yield('js')
         <style>
             #menu{
@@ -37,24 +36,6 @@
             @yield('style')
         </style>
         <script>
-            $(function () {
-                $('.onepage').infinitescroll({
-                    navSelector: ".pagination",
-                    nextSelector: ".pagination a:last",
-                    itemSelector: ".onepage",
-                    debug: false,
-                    dataType: 'html',
-                    path: function (index) {
-                        return "?page=" + index;
-                    }
-                }, function (newElements, data, url) {
-
-                    var $newElems = $(newElements);
-                    $('#boxes').masonry('appended', $newElems, true);
-
-                });
-            });
-           
             $(document).ready(function () {
                 $('#datetimepicker').datetimepicker({
                     language: "{{ Lang::get('common.lang')}}",
