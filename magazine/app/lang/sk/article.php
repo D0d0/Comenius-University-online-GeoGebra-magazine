@@ -12,6 +12,7 @@ return array(
     'abstract' => 'Abstrakt',
     'text' => 'Text',
     'other_articles' => 'Ostatné články autora',
+    'author_articles' => 'Autorove články',
     'related_articles' => 'Súvisiace články',
     'article_management' => 'Správa článkov',
     'save' => 'Ulož',

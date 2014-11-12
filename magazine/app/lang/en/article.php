@@ -12,6 +12,7 @@ return array(
     'abstract' => 'Abstract',
     'text' => 'Text',
     'other_articles' => 'Author´s another articles',
+    'author_articles' => 'Author´s articles',
     'related_articles' => 'Related articles',
     'article_management' => 'Article management',
     'save' => 'Save',
