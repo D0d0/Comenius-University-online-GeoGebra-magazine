@@ -27,15 +27,9 @@ $('.onepage').infinitescroll({
     navSelector: ".pagination",
     nextSelector: ".pagination a:last",
     itemSelector: ".onepage",
-    debug: false,
+    debug: true,
     dataType: 'html',
-    path: function (index) {
-        return "?page=" + index;
-    },
-    maxPage: {{ $maxPages }}
-}, function (newElements, data, url) {
-    var $newElems = $(newElements);
-    $('#boxes').masonry('appended', $newElems, true);
+    maxPage: {{ $maxPages }} 
 });
 @stop
 
