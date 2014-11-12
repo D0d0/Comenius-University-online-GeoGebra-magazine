@@ -16,7 +16,8 @@ class HomeController extends BaseController {
 
     public function showWelcome() {
         $articles = Article::published()->simplePaginate(9);
-        return View::make('index', array('articles' => $articles));
+        $maxPages = ceil(Article::published()->count() / 9);
+        return View::make('index', array('articles' => $articles, 'maxPages' => $maxPages));
     }
 
 }

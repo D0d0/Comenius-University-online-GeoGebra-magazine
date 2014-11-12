@@ -12,6 +12,14 @@ padding: 9px;
 img{
 margin-right: 9px !important;
 }
+
+.pagination{
+    display: none;
+}
+
+#infscr-loading{
+    display: none!important;
+}
 @stop
 
 @section('ready_js')
@@ -23,12 +31,11 @@ $('.onepage').infinitescroll({
     dataType: 'html',
     path: function (index) {
         return "?page=" + index;
-    }
+    },
+    maxPage: {{ $maxPages }}
 }, function (newElements, data, url) {
-
     var $newElems = $(newElements);
     $('#boxes').masonry('appended', $newElems, true);
-
 });
 @stop
 
