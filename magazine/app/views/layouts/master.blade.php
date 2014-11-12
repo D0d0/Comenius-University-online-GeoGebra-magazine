@@ -21,11 +21,7 @@
                 text-align: center;
             }
 
-            .navbar{
-                background-color: white;
-            }
-
-            h3{
+            [type=clanok] h3{
                 margin-top: 0;
             }
 

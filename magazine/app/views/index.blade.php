@@ -27,7 +27,6 @@ $('.onepage').infinitescroll({
     navSelector: ".pagination",
     nextSelector: ".pagination a:last",
     itemSelector: ".onepage",
-    debug: false,
     dataType: 'html',
     maxPage: {{ $maxPages }} 
 });
