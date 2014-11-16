@@ -33,6 +33,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsTo('Article');
     }
     
+    public function scopeAdmin($query) {
+        return $query->where('rank', '=', 1);
+    }
+
+    public function scopeRedaction($query) {
+        return $query->where('rank', '=', 2);
+    }
+
+    public function scopeReviewer($query) {
+        return $query->where('rank', '=', 3);
+    }
+
+    public function scopeUser($query) {
+        return $query->where('rank', '=', 4);
+    }
+    
     public function getFormattedBirth() {
         return date('j.n.Y', strtotime($this->getAttributes()['birth']));
     }
