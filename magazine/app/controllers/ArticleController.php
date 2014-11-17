@@ -44,26 +44,46 @@ class ArticleController extends BaseController {
     }
 
     public function draft() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_no_access'));
+        }
         $articles = Article::draft()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
     public function sent() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_no_access'));
+        }
         $articles = Article::sent()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
     public function accepted() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_no_access'));
+        }
         $articles = Article::accepted()->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_accepted', array('articles' => $articles));
     }
 
     public function unapproved() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_no_access'));
+        }
         $articles = Article::unaproved()->where('user_id', '=', Auth::id())->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
 
     public function articleManagement() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.article_no_access'));
+        }
         $articles = Article::sent()->orderBy('id', 'DESC')->get();
         return View::make('article.article_management', array('articles' => $articles));
     }
@@ -74,10 +94,10 @@ class ArticleController extends BaseController {
                             ->with('warning', Lang::get('common.article_does_not_exist'));
         }
         $user = User::find(Auth::id());
-        if (Auth::check() && $user->rank == 1){                                                              // admin vidi vsetko
+        if (Auth::check() && $user->rank == 1) {                                                              // admin vidi vsetko
             return View::make('article.article_detail', array('article' => $article));
         }
-        if (Auth::check() && $user->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())){      // red. rada vidi vsetko okrem konceptov pokial niesu ich
+        if (Auth::check() && $user->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())) {      // red. rada vidi vsetko okrem konceptov pokial niesu ich
             return View::make('article.article_detail', array('article' => $article));
         }
         $review = Review::where('id_article', '=', $id)->first();
