@@ -73,10 +73,10 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.article_does_not_exist'));
         }
-        if ($user->rank == 1){                                                              // admin vidi vsetko
+        if (Auth::check() && $user->rank == 1){                                                              // admin vidi vsetko
             return View::make('article.article_detail', array('article' => $article));
         }
-        if ($user->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())){      // red. rada vidi vsetko okrem konceptov pokial niesu ich
+        if (Auth::check() && $user->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())){      // red. rada vidi vsetko okrem konceptov pokial niesu ich
             return View::make('article.article_detail', array('article' => $article));
         }
         $review = Review::where('id_article', '=', $id)->first();
