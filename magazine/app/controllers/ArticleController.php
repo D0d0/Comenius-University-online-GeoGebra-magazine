@@ -73,6 +73,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.article_does_not_exist'));
         }
+        $user = User::find(Auth::id());
         if (Auth::check() && $user->rank == 1){                                                              // admin vidi vsetko
             return View::make('article.article_detail', array('article' => $article));
         }
