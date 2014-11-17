@@ -76,7 +76,7 @@ class ArticleController extends BaseController {
         if ($user->rank == 1){                                                              // admin vidi vsetko
             return View::make('article.article_detail', array('article' => $article));
         }
-        if ($user->rank == 2 && $article->state != 1 && $article->user_id <> Auth::id()){      // red. rada vidi vsetko okrem konceptov pokial niesu ich
+        if ($user->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())){      // red. rada vidi vsetko okrem konceptov pokial niesu ich
             return View::make('article.article_detail', array('article' => $article));
         }
         $review = Review::where('id_article', '=', $id)->first();
