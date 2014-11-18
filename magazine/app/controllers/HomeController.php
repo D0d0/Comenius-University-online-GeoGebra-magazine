@@ -19,17 +19,17 @@ class HomeController extends BaseController {
         $maxPages = ceil(Article::published()->count() / 9);
         return View::make('index', array('articles' => $articles, 'maxPages' => $maxPages));
     }
-    
+
     public function findTag($id = null) {
         $idArticles = [];
-        foreach (Tag::tagsById(12)->get() as $value){
-            $idArticles[] = $value->id_article;
+        foreach (Tag::where('id_tag', '=', $id)->get() as $tag) {
+            $idArticles[] = $tag->id_article;
         }
-        if(!$count = Article::whereIn('id', $idArticles)->published()->simplePaginate(9)->count()){
+        if (!count($idArticles)) {
             return Redirect::action('HomeController@showWelcome');
         }
         $articles = Article::whereIn('id', $idArticles)->published()->simplePaginate(9);
-        $maxPages = ceil($count / 9);
+        $maxPages = ceil(Article::whereIn('id', $idArticles)->published()->count() / 9);
         return View::make('index', array('articles' => $articles, 'maxPages' => $maxPages));
     }
 

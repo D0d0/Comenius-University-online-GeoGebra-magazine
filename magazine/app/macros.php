@@ -3,7 +3,7 @@
 HTML::macro('tags', function($id) {
     $tagsResult = '<span class="glyphicon glyphicon-tags"></span>&nbsp; ';
     foreach (Article::find($id)->tags as $value) {
-        $tagsResult .='<a class="label label-primary" href="'. action('HomeController@findTag', [$value->id]).'">' . $value->tagDescription->name . '</a> ';
+        $tagsResult .='<a class="label label-primary" href="'. action('HomeController@findTag', [$value->id_tag]).'">' . $value->tagDescription->name . '</a> ';
     }
     return $tagsResult;
 });

@@ -14,8 +14,4 @@ class Tag extends Eloquent {
         return $this->hasOne('Article', 'id', 'id_article');
     }
 
-    public function scopeTagsById($query, $id) {
-        return $query->where('id_tag', '=', $id);
-    }
-
 }
