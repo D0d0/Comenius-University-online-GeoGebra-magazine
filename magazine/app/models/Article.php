@@ -2,6 +2,12 @@
 
 class Article extends Eloquent {
 
+    const DRAFT = 1;
+    const SENT = 2;
+    const ACCEPTED = 3;
+    const UNAPROVED = 4;
+    const PUBLISHED = 5;
+
     protected $table = 'articles';
     protected $fillable = array('user_id', 'state', 'title', 'image', 'abstract', 'text', 'updated_at', 'created_at');
 
@@ -18,23 +24,23 @@ class Article extends Eloquent {
     }
 
     public function scopeDraft($query) {
-        return $query->where('state', '=', 1);
+        return $query->where('state', '=', self::DRAFT);
     }
 
     public function scopeSent($query) {
-        return $query->where('state', '=', 2);
+        return $query->where('state', '=', self::SENT);
     }
 
     public function scopeAccepted($query) {
-        return $query->where('state', '=', 3);
+        return $query->where('state', '=', self::ACCEPTED);
     }
 
     public function scopeUnaproved($query) {
-        return $query->where('state', '=', 4);
+        return $query->where('state', '=', self::UNAPROVED);
     }
 
     public function scopePublished($query) {
-        return $query->where('state', '=', 5);
+        return $query->where('state', '=', self::PUBLISHED);
     }
 
     public function getFormattedCreatedAt() {

@@ -22,7 +22,7 @@ class ArticleController extends BaseController {
             $article->title = trim($input['title']);
             $article->text = trim($input['text']);
             $article->abstract = trim($input['abstract']);
-            $article->state = 1;
+            $article->state = Article::DRAFT;
             $article->user_id = Auth::id();
             $article->save();
             $result['id'] = $article->id;
@@ -93,14 +93,14 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.article_does_not_exist'));
         }
-        if (Auth::check() && Auth::user()->rank == 1) {                                                              // admin vidi vsetko
+        if (Auth::check() && Auth::user()->hasRank(User::ADMIN)) {                                                              // admin vidi vsetko
             return View::make('article.article_detail', array('article' => $article));
         }
-        if (Auth::check() && Auth::user()->rank == 2 && ($article->state != 1 || $article->user_id == Auth::id())) {      // red. rada vidi vsetko okrem konceptov pokial niesu ich
+        if (Auth::check() && Auth::user()->hasRank(User::REDACTION) && ($article->state != Article::DRAFT || $article->user_id == Auth::id())) {      // red. rada vidi vsetko okrem konceptov pokial niesu ich
             return View::make('article.article_detail', array('article' => $article));
         }
         $review = Review::where('id_article', '=', $id)->first();
-        if ($article->state <> 5 && Auth::check() && $article->user_id <> Auth::id()) {   // prihlaseny vidi iba svoje aj nepublikovane
+        if ($article->state <> Article::PUBLISHED && Auth::check() && $article->user_id <> Auth::id()) {   // prihlaseny vidi iba svoje aj nepublikovane
             if ($review && (Auth::id() != $review->reviewer_id)) {                          // ak je recenzent toho clanku tak vidi tiez
                 return Redirect::action('HomeController@showWelcome')
                                 ->with('warning', Lang::get('common.acces_denied'));
@@ -110,7 +110,7 @@ class ArticleController extends BaseController {
                                 ->with('warning', Lang::get('common.acces_denied'));
             }
         }
-        if ($article->state <> 5 && !Auth::check()) {   // neprihlaseny vidi iba publikovane
+        if ($article->state <> Article::PUBLISHED && !Auth::check()) {   // neprihlaseny vidi iba publikovane
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }

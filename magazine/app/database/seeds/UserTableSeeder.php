@@ -14,11 +14,13 @@ class UserTableSeeder extends Seeder {
                 'email' => $faker->email,
                 'password' => Hash::make($faker->word),
                 'city' => $faker->city,
-                'rank' => $faker->numberBetween(1, 4),
                 'facebook' => $faker->lastName . ' ' . $faker->firstName,
                 'school' => $faker->address,
                 'birth' => $faker->dateTimeThisCentury,
-                'rank' => 1
+            ));
+            UserRole::create(array(
+               'user_id' => ($i+1),
+                'rank_id' => $faker->numberBetween(1, 4),
             ));
         }
     }

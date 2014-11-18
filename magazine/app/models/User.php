@@ -9,6 +9,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     use UserTrait,
         RemindableTrait;
+    const ADMIN = 1;
+    const REDACTION = 2;
+    const REVIEWER = 3;
+    const USER = 4;
 
     /**
      * The database table used by the model.
@@ -23,43 +27,35 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * @var array
      */
     protected $hidden = array('remember_token');
-    protected $fillable = array('name', 'password', 'email', 'rank', 'image', 'birth', 'city', 'school', 'google', 'facebook', 'twitter', 'language', 'updated_at', 'created_at', 'about', 'confirmed', 'confirmation_code');
-
-    public function rank() {
-        return $this->hasOne('User_group', 'id', 'rank');
-    }
+    protected $fillable = array('name', 'password', 'email', 'image', 'birth', 'city', 'school', 'google', 'facebook', 'twitter', 'language', 'updated_at', 'created_at', 'about', 'confirmed', 'confirmation_code');
 
     public function articles() {
-        return $this->belongsTo('Article');
+        return $this->belongsTo('Article', 'user_id', 'id');
+    }
+
+    public function roles() {
+        return $this->hasMany('UserRole', 'user_id', 'id');
     }
     
-    public function scopeAdmin($query) {
-        return $query->where('rank', '=', 1);
+    public function hasRank($id){
+        foreach ($this->roles()->get() as $rank){
+            if($rank->rank_id == $id){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public function scopeRedaction($query) {
-        return $query->where('rank', '=', 2);
-    }
-
-    public function scopeReviewer($query) {
-        return $query->where('rank', '=', 3);
-    }
-
-    public function scopeUser($query) {
-        return $query->where('rank', '=', 4);
-    }
-    
     public function getFormattedBirth() {
         return date('j.n.Y', strtotime($this->getAttributes()['birth']));
     }
-    
+
     public function getFormattedCreatedAt() {
         return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
     }
-    
+
     public function getFormattedUdatedAt() {
         return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
     }
-    
 
 }

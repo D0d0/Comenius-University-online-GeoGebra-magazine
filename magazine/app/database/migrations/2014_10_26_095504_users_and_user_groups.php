@@ -21,8 +21,6 @@ class UsersAndUserGroups extends Migration {
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->integer('rank')->unsigned();
-            $table->foreign('rank')->references('id')->on('user_groups');
             $table->binary('image');
             $table->date('birth');
             $table->string('city');
@@ -37,6 +35,15 @@ class UsersAndUserGroups extends Migration {
             $table->rememberToken();
             $table->timestamps();
         });
+        Schema::create('user_roles', function($table){
+           $table->increments('id')->unsigned();
+           $table->integer('user_id')->unsigned();
+           $table->foreign('user_id')->references('id')->on('users');
+           $table->integer('rank_id')->unsigned();
+           $table->foreign('rank_id')->references('id')->on('user_groups');
+           $table->timestamps(false);
+        });
+        
     }
 
     /**
@@ -45,8 +52,9 @@ class UsersAndUserGroups extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_roles');
         Schema::dropIfExists('user_groups');
+        Schema::dropIfExists('users');
     }
 
 }

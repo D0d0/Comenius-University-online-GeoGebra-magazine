@@ -35,7 +35,7 @@ class RegistrationController extends Controller {
             'name' => Input::get('name'),
             'email' => Input::get('email'),
             'password' => Hash::make(Input::get('password')),
-            'rank' => 4,
+            'rank' => User::USER,
             'confirmation_code' => $confirmation_code
         ));
 
