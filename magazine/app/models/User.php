@@ -9,6 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     use UserTrait,
         RemindableTrait;
+
     const ADMIN = 1;
     const REDACTION = 2;
     const REVIEWER = 3;
@@ -36,10 +37,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function roles() {
         return $this->hasMany('UserRole', 'user_id', 'id');
     }
-    
-    public function hasRank($id){
-        foreach ($this->roles()->get() as $rank){
-            if($rank->rank_id == $id){
+
+    public function hasRank($id) {
+        foreach ($this->roles()->get() as $rank) {
+            if ($rank->rank_id == $id) {
                 return true;
             }
         }

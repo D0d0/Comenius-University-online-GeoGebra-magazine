@@ -60,6 +60,8 @@ $('.summernote').summernote({
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough']],
         ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'video']],
+        ['misc', ['undo', 'redo', 'help']],
     ],
     onChange: function(e){
         changeButton();
@@ -101,7 +103,7 @@ changeButton();
     <div class="form-group">
         <label for="tagy" class="col-md-1 control-label">{{ Lang::get('article.key_words') }}</label>
         <div class="col-md-11">
-            <input type="text" id="tagy" class="form-control" data-role="tagsinput">
+            <input type="text" id="tagy" class="form-control" data-role="tagsinput" value="{{{ $tags or ''}}}">
         </div>
     </div>
     <div class="form-group">

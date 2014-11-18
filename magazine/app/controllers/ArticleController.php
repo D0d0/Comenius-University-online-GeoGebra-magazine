@@ -4,13 +4,21 @@ class ArticleController extends BaseController {
 
     public function newArticle($id = null) {
         //WTF
-        if ($id) {
-            $article = Article::find($id);
-            if ($article->user_id == Auth::id() && $article->state == 1) {
-                return View::make('article.article_new', array('article' => $article));
+        if (Auth::check()) {
+            if ($id) {
+                $article = Article::find($id);
+                if ($article->user_id == Auth::id() && $article->state == Article::DRAFT) {
+                    $tags = '';
+                    foreach ($article->tags as $value) {
+                        $tags.=$value->tagDescription->name . ',';
+                    }
+                    return View::make('article.article_new', array('article' => $article, 'tags' => rtrim($tags, ',')));
+                }
             }
+            return View::make('article.article_new');
         }
-        return View::make('article.article_new');
+        return Redirect::action('HomeController@showWelcome')
+                        ->with('warning', Lang::get('common.acces_denied'));
     }
 
     public function postNewArticle() {
@@ -32,7 +40,6 @@ class ArticleController extends BaseController {
                     $tagGroup = new Tag_group;
                 }
                 $tagGroup->name = trim($value);
-                $tagGroup->count = 0;
                 $tagGroup->save();
                 Tag::create(array(
                     'id_tag' => $tagGroup->id,
