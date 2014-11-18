@@ -47,13 +47,10 @@ class RegistrationController extends Controller {
                         ->with('message', Lang::get('common.thank_for_sign'));
     }
 
-    public function confirm($confirmation_code) {
-        if (Auth::check()) {
+    public function confirm($confirmation_code = null) {
+        if (Auth::check() || !$confirmation_code) {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
-        }
-        if (!$confirmation_code) {
-            throw new InvalidConfirmationCodeException;
         }
 
         $user = User::whereConfirmationCode($confirmation_code)->first();
