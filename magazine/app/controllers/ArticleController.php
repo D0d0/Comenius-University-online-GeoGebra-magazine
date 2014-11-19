@@ -1,9 +1,16 @@
 <?php
 
+/**
+ * Trieda pre prácu s článkami
+ */
 class ArticleController extends BaseController {
 
+    /**
+     * Slúži na zobrazenie editora
+     * @param type $id
+     * @return type
+     */
     public function newArticle($id = null) {
-        //WTF
         if (Auth::check()) {
             if ($id) {
                 $article = Article::find($id);
@@ -21,6 +28,10 @@ class ArticleController extends BaseController {
                         ->with('warning', Lang::get('common.acces_denied'));
     }
 
+    /**
+     * Slúži na vytvorenie nového článku
+     * @return type
+     */
     public function postNewArticle() {
         if (Request::ajax()) {
             $input = Input::all();
@@ -50,6 +61,10 @@ class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * Slúži na zobrazenie všetkých konceptov od užívateľa
+     * @return type
+     */
     public function draft() {
         if (!Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -59,6 +74,10 @@ class ArticleController extends BaseController {
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
+    /**
+     * Slúži na zobrazenie článkov, ktoré sú odoslané na recenzovanie
+     * @return type
+     */
     public function sent() {
         if (!Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -68,6 +87,10 @@ class ArticleController extends BaseController {
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
+    /**
+     * Slúži na zobrazenie akceptovaných článkov
+     * @return type
+     */
     public function accepted() {
         if (!Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -77,6 +100,10 @@ class ArticleController extends BaseController {
         return View::make('article.article_accepted', array('articles' => $articles));
     }
 
+    /**
+     * Slúži na zobrazenie neakceptovaných článkov
+     * @return type
+     */
     public function unapproved() {
         if (!Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -86,6 +113,10 @@ class ArticleController extends BaseController {
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
 
+    /**
+     * Slúží na zobrazenie správy článkov
+     * @return type
+     */
     public function articleManagement() {
         if (!Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -95,6 +126,11 @@ class ArticleController extends BaseController {
         return View::make('article.article_management', array('articles' => $articles));
     }
 
+    /**
+     * Zobrazenie článku
+     * @param type $id
+     * @return type
+     */
     public function detail($id = null) {
         if ($id == null || !$article = Article::find($id)) {
             return Redirect::action('HomeController@showWelcome')

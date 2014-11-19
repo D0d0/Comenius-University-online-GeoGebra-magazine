@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * Controller, ktorý obsluhuje užívateľa
+ */
 class LoginController extends Controller {
 
+    /**
+     * Odhlási užívateľa
+     * @return type
+     */
     public function getLogout() {
         if (Auth::check()) {
             Auth::logout();
@@ -12,6 +19,10 @@ class LoginController extends Controller {
                         ->with('warning', Lang::get('common.acces_denied'));
     }
 
+    /**
+     * Zobrazí prihasovaciu obrazovku
+     * @return type
+     */
     public function getLogin() {
         if (Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -20,6 +31,10 @@ class LoginController extends Controller {
         return View::make('login');
     }
 
+    /**
+     * Pokúsi sa prihlásiť užívateľa
+     * @return type
+     */
     public function postLogin() {
         if (Auth::check()) {
             return Redirect::action('HomeController@showWelcome')

@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * Controller na registráciu užívateľa
+ */
 class RegistrationController extends Controller {
 
+    /**
+     * Zobrazí registračný formulár
+     * @return type
+     */
     public function getRegister() {
         if (Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -10,6 +17,10 @@ class RegistrationController extends Controller {
         return View::make('register');
     }
 
+    /**
+     * Pokúsi sa zaregistrovať užívateľa
+     * @return type
+     */
     public function postRegister() {
         if (Auth::check()) {
             return Redirect::action('HomeController@showWelcome')
@@ -47,6 +58,12 @@ class RegistrationController extends Controller {
                         ->with('message', Lang::get('common.thank_for_sign'));
     }
 
+    /**
+     * Potvrdí registráciu užívateľa
+     * @param type $confirmation_code
+     * @return type
+     * @throws InvalidConfirmationCodeException
+     */
     public function confirm($confirmation_code = null) {
         if (Auth::check() || !$confirmation_code) {
             return Redirect::action('HomeController@showWelcome')

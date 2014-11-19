@@ -5,6 +5,9 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
+/**
+ * Model pre tabuľku users
+ */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
     use UserTrait,
@@ -30,14 +33,27 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     protected $hidden = array('remember_token');
     protected $fillable = array('name', 'password', 'email', 'image', 'birth', 'city', 'school', 'google', 'facebook', 'twitter', 'language', 'updated_at', 'created_at', 'about', 'confirmed', 'confirmation_code');
 
+    /**
+     * Vráti všetky modely článku, ktoré patria užívateľovi
+     * @return type
+     */
     public function articles() {
         return $this->belongsTo('Article', 'user_id', 'id');
     }
 
+    /**
+     * Vráti všetky modely používateľský rolý, ktoré má užívateľ
+     * @return type
+     */
     public function roles() {
         return $this->hasMany('UserRole', 'user_id', 'id');
     }
 
+    /**
+     * Zistí, či užívateľ má zadanú užívateľskú rolu
+     * @param type $id
+     * @return boolean
+     */
     public function hasRank($id) {
         foreach ($this->roles()->get() as $rank) {
             if ($rank->rank_id == $id) {
@@ -47,14 +63,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return false;
     }
 
+    /**
+     * Vráti formátovaný čas narodenia užívateľa
+     * @return type
+     */
     public function getFormattedBirth() {
         return date('j.n.Y', strtotime($this->getAttributes()['birth']));
     }
 
+    /**
+     * Vráti formátovaný čas vytvorenia užívateľa
+     * @return type
+     */
     public function getFormattedCreatedAt() {
-        return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
+        return date('j.n.Y', strtotime($this->getAttributes()['created_at']));
     }
 
+    /**
+     * Vráti formátovaný čas poslednej úpravy užívateľa
+     * @return type
+     */
     public function getFormattedUdatedAt() {
         return date('j.n.Y', strtotime($this->getAttributes()['updated_at']));
     }
