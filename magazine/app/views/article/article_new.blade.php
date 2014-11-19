@@ -10,8 +10,12 @@
 
 @section('ready_js')
 var timer;
+var saving = false;
 
 var changeButton = function(){
+    if (saving){
+        return;
+    }
     $('#save').html('{{ Lang::get('article.save') }}');
     if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
         $('#save').removeAttr('disabled');
@@ -21,6 +25,10 @@ var changeButton = function(){
 }
 
 var saveArticle = function(){
+    if(saving){
+        return;
+    }
+    saving = true;
     timer && clearTimeout(timer);
     if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
         $('#save').attr('disabled', 'disabled').html('{{ Lang::get('article.saving') }}');
@@ -37,13 +45,15 @@ var saveArticle = function(){
             },
             success: function(answer){
                 console.log(answer);
+                saving = false;
                 if(answer['id']){
                     $('#id').val(answer['id']);
                 }
                 $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
             },
             error: function(){
-                $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
+                saving = false;
+                $('#save').removeAttr('disabled').html('{{ Lang::get('article.error_saving') }}');
             }
         });
     }

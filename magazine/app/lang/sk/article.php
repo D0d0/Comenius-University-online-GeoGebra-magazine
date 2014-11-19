@@ -18,4 +18,5 @@ return array(
     'save' => 'Ulož',
     'saving' => 'Ukladanie',
     'saved' => 'Uložené',
+    'error_saving' => 'Chyba pri ukladaní článku!',
 );

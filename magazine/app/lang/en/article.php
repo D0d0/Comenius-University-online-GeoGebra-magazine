@@ -18,4 +18,5 @@ return array(
     'save' => 'Save',
     'saving' => 'Saving',
     'saved' => 'Saved',
+    'error_saving' => 'Error occured while saving article!',
 );
