@@ -3153,6 +3153,11 @@
 
       afterCommand($editable);
     };
+    
+    this.insertDom = function ($editable, dom) {
+        range.create().insertNode(dom);
+        afterCommand($editable);
+    };
   };
 
   /**
@@ -4082,6 +4087,11 @@
           editor[eventName]($editable, value, $target);
         } else if (commands[eventName]) {
           commands[eventName].call(this, layoutInfo);
+        }else if ($.summernote.plugins[eventName]) {
+          var plugin = $.summernote.plugins[eventName];
+          if ($.isFunction(plugin.event)) {
+            plugin.event(event, editor, layoutInfo);
+          }
         }
 
         // after command
@@ -4267,6 +4277,11 @@
             editor[eventName]($editable, $editor.data('options'));
           } else if (commands[eventName]) {
             commands[eventName].call(this, layoutInfo);
+          }else if ($.summernote.plugins[eventName]) {
+              var plugin = $.summernote.plugins[eventName];
+              if ($.isFunction(plugin.event)) {
+                  plugin.event(event, editor, layoutInfo);
+              }
           }
         } else if (key.isEdit(event.keyCode)) {
           editor.afterCommand($editable);
@@ -5096,6 +5111,29 @@
         $palette.html(paletteContents.join(''));
       });
     };
+    /**
+     * create summernote plugin button 
+     * 
+     * @param {string} plugin  plugin name 
+     * @param {Object} options  plugin's options
+     */
+    var createPluginToolbar = function (plugin, options) {
+      return function () {
+        var toolbar = {
+          title : options.title,
+          className : options.className,
+          dropdown : $.isFunction(options.dropdown) ? options.dropdown() : options.dropdown,
+          hide : options.hide,
+          event : (!options.dropdown) ? plugin : '',
+         value : (!options.dropdown) ? plugin : ''
+        };
+       if (options.icon) {
+          return tplIconButton(options.icon, toolbar);
+        } else {
+          return tplButton(options.label, toolbar);
+        }
+      };
+    };
 
     /**
      * create summernote layout (air mode)
@@ -5185,9 +5223,13 @@
 
         toolbarHTML += '<div class="note-' + groupName + ' btn-group">';
         for (var i = 0, btnLength = groupButtons.length; i < btnLength; i++) {
+            var buttonInfo = tplButtonInfo[groupButtons[i]];
+            if (!buttonInfo && !!$.summernote.plugins[groupButtons[i]]) {
+                buttonInfo = createPluginToolbar(groupButtons[i], $.summernote.plugins[groupButtons[i]]);
+            }
           // continue creating toolbar even if a button doesn't exist
-          if (!$.isFunction(tplButtonInfo[groupButtons[i]])) { continue; }
-          toolbarHTML += tplButtonInfo[groupButtons[i]](langInfo, options);
+          if (!$.isFunction(buttonInfo)) { continue; }
+          toolbarHTML += buttonInfo(langInfo, options);
         }
         toolbarHTML += '</div>';
       }

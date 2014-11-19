@@ -508,6 +508,11 @@ define([
 
       afterCommand($editable);
     };
+    
+    this.insertDom = function ($editable, dom) {
+      range.create().insertNode(dom);
+      afterCommand($editable);
+    };
   };
 
   return Editor;

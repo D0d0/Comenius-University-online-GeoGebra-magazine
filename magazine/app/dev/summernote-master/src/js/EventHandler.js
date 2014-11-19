@@ -389,6 +389,11 @@ define([
           editor[eventName]($editable, value, $target);
         } else if (commands[eventName]) {
           commands[eventName].call(this, layoutInfo);
+        }else if ($.summernote.plugins[eventName]) {
+            var plugin = $.summernote.plugins[eventName];
+            if ($.isFunction(plugin.event)) {
+                plugin.event(event, editor, layoutInfo);
+            }
         }
 
         // after command
@@ -574,6 +579,11 @@ define([
             editor[eventName]($editable, $editor.data('options'));
           } else if (commands[eventName]) {
             commands[eventName].call(this, layoutInfo);
+          }else if ($.summernote.plugins[eventName]) {
+              var plugin = $.summernote.plugins[eventName];
+              if ($.isFunction(plugin.event)) {
+                  plugin.event(event, editor, layoutInfo);
+              }
           }
         } else if (key.isEdit(event.keyCode)) {
           editor.afterCommand($editable);
