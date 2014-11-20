@@ -23,7 +23,7 @@ class CreateArticle extends Migration {
             $table->integer('state')->unsigned();
             $table->foreign('state')->references('id')->on('state_groups');
             $table->string('title');
-            $table->binary('image');
+            $table->binary('image')->nullable(true);
             $table->longText('abstract');
             $table->longText('text');
             $table->timestamps();

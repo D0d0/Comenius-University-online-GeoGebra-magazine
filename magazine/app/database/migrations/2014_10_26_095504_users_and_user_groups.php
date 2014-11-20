@@ -25,13 +25,13 @@ class UsersAndUserGroups extends Migration {
             $table->date('birth');
             $table->string('city');
             $table->string('school');
-            $table->string('google');
-            $table->string('facebook');
-            $table->string('twitter');
+            $table->string('google')->nullable(true);
+            $table->string('facebook')->nullable(true);
+            $table->string('twitter')->nullable(true);
             $table->string('language')->default('sk');
-            $table->string('about');
+            $table->string('about')->nullable(true);
             $table->boolean('confirmed')->default(0);
-            $table->string('confirmation_code')->nullable();
+            $table->string('confirmation_code')->nullable(true);
             $table->rememberToken();
             $table->timestamps();
         });
