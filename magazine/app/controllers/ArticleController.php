@@ -175,15 +175,10 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $tags = $article->tags()->get();
-        $tagIds = [];
-        foreach ($tags as $tag) {
-            $tagIds[] = $tag->id_tag;
-        }
         try {
             $articleIds = [];
             $articles = [];
-            foreach (Tag::whereIn('id_tag', $tagIds)->get() as $tag) {
+            foreach (Tag::whereIn('id_tag', $article->tags()->select('id_tag')->get()->toArray())->get() as $tag) {
                 if ($tag->articles->state == Article::PUBLISHED && !in_array($tag->id_article, $articleIds) && $tag->id_article != $id) {
                     $articleIds[] = $tag->article_id;
                     $articles[] = $tag->articles;
