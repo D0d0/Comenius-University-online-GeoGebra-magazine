@@ -21,7 +21,7 @@ class UsersAndUserGroups extends Migration {
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->binary('image');
+            $table->binary('image')->nullable(true);
             $table->date('birth');
             $table->string('city');
             $table->string('school');
