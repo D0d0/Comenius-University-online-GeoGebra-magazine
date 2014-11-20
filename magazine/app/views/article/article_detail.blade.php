@@ -1,5 +1,11 @@
 @extends('layouts.six_three_layout')
 
+@section('js')
+{{HTML::style('css/font-awesome.min.css')}}
+{{HTML::style('css/summernote.css')}}
+{{HTML::script('js/summernote.min.js')}}
+@stop
+
 @section('style')
 [type=clanok]{
 padding: 9px;
@@ -12,7 +18,22 @@ margin-bottom: 9px !important;
 
 @section('ready_js')
 //DOLEZITE NEMAZAT ZATIAL
-$('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/width/'+$('[type=clanok]').innerWidth()+'/height/640/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5');
+$('iframe').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/width/'+$('[type=clanok]').innerWidth()+'/height/640/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5');
+
+$('.summernote').summernote({
+    height: 300,
+    toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link', 'picture', 'video']],
+        ['misc', ['undo', 'redo', 'help']]
+    ],
+    onChange: function(e){
+        changeButton();
+        startTimer();
+    }
+}).code('');
 @stop
 
 @section('left')
@@ -42,6 +63,9 @@ $('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/wi
             -->
             <p>{{ $article->text }}</p>
         </div>
+        <div class="summernote">
+
+        </div>
     </div>
 </div>
 @stop
@@ -56,21 +80,20 @@ $('#frame').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/wi
             <h3>{{ link_to_action('MenuController@getProfile', $article->user->name  , [$article->user_id]) }}</h3>
             <h4>{{ Lang::get('article.other_articles') }}</h4>
             <p>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
-            </p>
+                @forelse($article->user->articles()->published()->where('id', '<>', $article->id)->get() as $oneArticle)
+                    {{ link_to_action('ArticleController@detail', $oneArticle->title, [$oneArticle->id]) }}
+                    <br>
+                @empty
+                    TODO: Ziadne podobne clanky
+                @endforelse
             <h4>{{ Lang::get('article.related_articles') }}</h4>
             <p>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> kosinus</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> sinus</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag3</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag4</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Pytagorova veta</a>
-                <a class="label label-primary"><span class="glyphicon glyphicon-tags"></span> Tag5</a>
+                @forelse($articles as $oneArticle)
+                    {{ link_to_action('ArticleController@detail', $oneArticle->title, [$oneArticle->id]) }}
+                    <br>
+                @empty
+                    TODO: Ziadne podobne clanky
+                @endforelse
             </p>
         </div>
     </div>

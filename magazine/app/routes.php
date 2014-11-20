@@ -34,6 +34,8 @@ Route::get('/profile/{id?}', 'MenuController@getProfile');
 Route::group(array('prefix' => 'article'), function() {
     Route::get('/new/{id?}', 'ArticleController@newArticle');
     Route::post('/new', 'ArticleController@postNewArticle');
+    
+    Route::post('/delete', 'ArticleController@postDeteleArticle');
 
     Route::get('/draft', 'ArticleController@draft');
 

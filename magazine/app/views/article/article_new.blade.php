@@ -44,7 +44,6 @@ var saveArticle = function(){
                 'id' : $('#id').val(),
             },
             success: function(answer){
-                console.log(answer);
                 saving = false;
                 if(answer['id']){
                     $('#id').val(answer['id']);
@@ -64,6 +63,19 @@ function startTimer(){
     timer = setTimeout(saveArticle, 2000);
 }
 
+$.summernote.plugins = {
+    "chart" : {
+        label : 'chart',
+        //dropd
+        event : function(e, editor, layout) {
+            var $editable = layout.editable();
+            $editable.trigger('focus');
+            var dom = $('<div class="embed-responsive embed-responsive-16by9"><iframe id="frame" class="embed-responsive-item" src="http://www.geogebratube.org/material/iframe/id/23587/width/500/height/300/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5"></iframe></div>')[0];
+            editor.insertDom($editable, dom);
+        }
+    }
+}
+
 $('.summernote').summernote({
     height: 300,
     toolbar: [
@@ -72,6 +84,7 @@ $('.summernote').summernote({
         ['para', ['ul', 'ol', 'paragraph']],
         ['insert', ['link', 'picture', 'video']],
         ['misc', ['undo', 'redo', 'help']],
+        ['chart', ['chart']]
     ],
     onChange: function(e){
         changeButton();
@@ -96,6 +109,36 @@ $('#title, #abstract').on('input', function(){
 
 $('#save').on('click', function(){
     saveArticle();
+});
+
+$('#trash').on('click', function(){
+    if(!saving && $('#id').val() != ''){
+        saving = true;
+        $('#save').attr('disabled', 'disabled');
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '{{ action('ArticleController@postDeteleArticle') }}',
+            data: {
+                'id' : $('#id').val(),
+            },
+            success: function(answer){
+                if(answer['result']){
+                    saving = false;
+                    $('#title').val(''),
+                    $('#abstract').val(''),
+                    $('#tagy').tagsinput('removeAll');
+                    $('.summernote').code(''),
+                    $('#id').val('');
+                    $('#save').removeAttr('disabled');
+                }
+            },
+            error: function(){
+                saving = false;
+                $('#save').removeAttr('disabled');
+            }
+        });
+    }
 });
 
 changeButton();
@@ -131,8 +174,11 @@ changeButton();
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-1 col-md-offset-10">
+        <div class="col-md-1 col-md-offset-9">
             <button type="button" class="btn btn-default" id="save">{{ Lang::get('article.save') }}</button>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-default" id="send">{{ Lang::get('article.send') }}</button>
         </div>
         <div class="col-md-1">
             <button type="button" class="btn btn-default" id="trash">
