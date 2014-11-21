@@ -180,7 +180,7 @@ class ArticleController extends BaseController {
             $articles = [];
             foreach (Tag::whereIn('id_tag', $article->tags()->select('id_tag')->get()->toArray())->get() as $tag) {
                 if ($tag->articles->state == Article::PUBLISHED && !in_array($tag->id_article, $articleIds) && $tag->id_article != $id) {
-                    $articleIds[] = $tag->article_id;
+                    $articleIds[] = $tag->id_article;
                     $articles[] = $tag->articles;
                 }
             }
