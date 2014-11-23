@@ -17,4 +17,5 @@ return array(
     "token" => "Chybná adresa.",
     "sent" => "Pripomienka hesla bola poslaná!",
     "reset" => "Heslo bolo resetované!",
+    "lost_password" => "Zabudol som heslo.",
 );

@@ -17,4 +17,5 @@ return array(
     "token" => "This password reset token is invalid.",
     "sent" => "Password reminder sent!",
     "reset" => "Password has been reset!",
+    "lost_password" => "I forgot my paswword.", 
 );

@@ -28,9 +28,14 @@ padding: 9px;
         </div>
         <div class="form-group">
             {{ Form::label('remember', Lang::get('common.remember_login'), array('class'=>'col-md-3')) }}
-            <div class="col-md-9">
+            <div class="col-md-3">
                 {{ Form::checkbox('remember', 'true', array('class'=>'form-control')) }}
             </div>
+            <div class="col-md-9 text-right">
+                {{ HTML::linkAction('RemindersController@getRemind', Lang::get('reminders.lost_password')) }}
+            </div>
+        </div>
+        <div class="form-group">
         </div>
         {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
     </div>
