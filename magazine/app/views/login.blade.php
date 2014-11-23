@@ -31,11 +31,9 @@ padding: 9px;
             <div class="col-md-3">
                 {{ Form::checkbox('remember', 'true', array('class'=>'form-control')) }}
             </div>
-            <div class="col-md-9 text-right">
+            <div class="col-md-6 text-right">
                 {{ HTML::linkAction('RemindersController@getRemind', Lang::get('reminders.lost_password')) }}
             </div>
-        </div>
-        <div class="form-group">
         </div>
         {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
     </div>
