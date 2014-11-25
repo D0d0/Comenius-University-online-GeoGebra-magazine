@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder {
         $this->call('UserTableSeeder');
         $this->call('StateGroupsSeeder');
         $this->call('ArticleTableSeeder');
+        $this->call('TagGroupSeeder');
+        $this->call('TagSeeder');
     }
 
 }

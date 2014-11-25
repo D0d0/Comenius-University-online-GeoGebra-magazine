@@ -81,10 +81,10 @@
                     </li>
                     @endif
                     <li class="pull-right">
-                        {{ Form::open(array('action' => 'HomeController@showWelcome', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
+                        {{ Form::open(array('action' => 'HomeController@search', 'method' => 'get', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
-                                {{ Form::text( 'hladanie', '', array(
+                                {{ Form::text( 'hladanie', isset($query) ? $query : "", array(
                                     'id' => 'hladanie',//potom moze ist prec
                                     'class' => 'form-control',
                                     'placeholder' => Lang::get('menu.search'),

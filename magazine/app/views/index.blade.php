@@ -31,7 +31,7 @@ $('.onepage').infinitescroll({
     maxPage: {{ $maxPages }} ,
     path: function(index) {
         //môžu sa použiť vlastné parametre, ak bude žiadané vo vyhľádávaní
-        return "?page=" + index;
+        return "?page=" + index + "&hladanie=" + "{{ $query or '' }}";
     }
 });
 if($(window).height() >= $(document).height()){
