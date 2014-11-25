@@ -8,14 +8,25 @@ class ReviewController extends BaseController {
             if (!$article = Article::find($input['id'])) {
                 return Response::json(array('result' => true));
             }
-            Review::where('id_article', '=', $article->id)->delete();
-            $review = new Review;
-            $review->article = $article->id;
-            $review->reviewer_id = Auth::id();
+            $review = $article->review;
             $review->text = str_replace('\'', '', trim($input['text']));
             $review->save();
             $article->state = $input['state'];
             $article->save();
+            return Response::json(array('result' => true));
+        }
+    }
+
+    function postCreateReview() {
+        if (Request::ajax()) {
+            $input = Input::all();
+            if (!$article = Article::find($input['id'])) {
+                return Response::json(array('result' => true));
+            }
+            $review = new Review;
+            $review->id_article = $input['id'];
+            $review->reviewer_id = $input['reviewer_id'];
+            $review->save();
             return Response::json(array('result' => true));
         }
     }

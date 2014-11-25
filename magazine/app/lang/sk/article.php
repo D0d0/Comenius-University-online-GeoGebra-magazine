@@ -26,4 +26,5 @@ return array(
     'recommendation' => 'Hodnotenie recenzenta',
     'reviewer_name' => 'Meno recenzenta',
     'choose_reviewer' => 'Vyber recenzenta',
+    'y_recommendation' => 'Odporúčanie',
 );

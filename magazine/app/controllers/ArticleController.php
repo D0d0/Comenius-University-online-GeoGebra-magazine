@@ -88,7 +88,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Auth::User()->articles()->draft()->orderBy('id', 'DESC')->get();
+        $articles = Auth::User()->articles()->draft()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
@@ -101,7 +101,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Auth::User()->articles()->sent()->orderBy('id', 'DESC')->get();
+        $articles = Auth::User()->articles()->sent()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
@@ -114,7 +114,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Auth::User()->articles()->accepted()->orderBy('id', 'DESC')->get();
+        $articles = Auth::User()->articles()->accepted()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_accepted', array('articles' => $articles));
     }
 
@@ -127,7 +127,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Auth::User()->articles()->unaproved()->orderBy('id', 'DESC')->get();
+        $articles = Auth::User()->articles()->unaproved()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
 
@@ -140,7 +140,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::where('state', '<>', Article::PUBLISHED)->where('state', '<>', Article::DRAFT)->orderBy('id', 'DESC')->get();
+        $articles = Article::where('state', '<>', Article::PUBLISHED)->where('state', '<>', Article::DRAFT)->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_management', array('articles' => $articles));
     }
 
@@ -163,6 +163,10 @@ class ArticleController extends BaseController {
         $review = Review::where('id_article', '=', $id)->first();
         if ($article->state <> Article::PUBLISHED && Auth::check() && $article->user_id <> Auth::id()) {   // prihlaseny vidi iba svoje aj nepublikovane
             if ($review && (Auth::id() != $review->reviewer_id)) {                          // ak je recenzent toho clanku tak vidi tiez
+                return Redirect::action('HomeController@showWelcome')
+                                ->with('warning', Lang::get('common.acces_denied'));
+            }
+            if ($review && Auth::id() == $review->reviewer_id && ($article->state == Article::ACCEPTED || $article->state == Article::UNAPROVED)) {
                 return Redirect::action('HomeController@showWelcome')
                                 ->with('warning', Lang::get('common.acces_denied'));
             }
@@ -190,8 +194,17 @@ class ArticleController extends BaseController {
         return View::make('article.article_detail', array('article' => $article, 'articles' => $articles));
     }
 
-    function sendArticle($id = null) {
-        
+    function changeState() { {
+            if (Request::ajax()) {
+                $input = Input::all();
+                if (!$article = Article::find($input['id'])) {
+                    return Response::json(array('result' => true));
+                }
+                $article->state = $input['state'];
+                $article->save();
+                return Response::json(array('result' => true));
+            }
+        }
     }
 
 }

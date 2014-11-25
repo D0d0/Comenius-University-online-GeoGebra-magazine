@@ -37,6 +37,7 @@ Route::group(array('prefix' => 'article'), function() {
     Route::post('/new', 'ArticleController@postNewArticle');
 
     Route::post('/delete', 'ArticleController@postDeteleArticle');
+    Route::post('/changestate', 'ArticleController@changeState');
 
     Route::get('/draft', 'ArticleController@draft');
 
@@ -49,4 +50,7 @@ Route::group(array('prefix' => 'article'), function() {
     Route::get('/article_management', 'ArticleController@articleManagement');
 
     Route::get('/detail/{id?}', 'ArticleController@detail');
+    
+    Route::post('/review/create', 'ReviewController@postCreateReview');
+    Route::post('/review/add', 'ReviewController@postAddReview');
 });

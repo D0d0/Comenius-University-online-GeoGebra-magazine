@@ -10,7 +10,7 @@ class HomeController extends BaseController {
      * @return type
      */
     public function showWelcome() {
-        $articles = Article::published()->simplePaginate(9);
+        $articles = Article::published()->orderBy('updated_at', 'DESC')->simplePaginate(9);
         $maxPages = ceil(Article::published()->count() / 9);
         return View::make('index', array('articles' => $articles, 'maxPages' => $maxPages));
     }
@@ -46,7 +46,7 @@ class HomeController extends BaseController {
             });
         });
         return View::make('index', array(
-                    'articles' => $q->simplePaginate(9),
+                    'articles' => $q->orderBy('updated_at', 'DESC')->simplePaginate(9),
                     'maxPages' => ceil(count($q->get()) / 9),
                     'query' => $query
         ));
@@ -65,7 +65,7 @@ class HomeController extends BaseController {
         if (!count($idArticles)) {
             return Redirect::action('HomeController@showWelcome');
         }
-        $articles = Article::whereIn('id', $idArticles)->published()->simplePaginate(9);
+        $articles = Article::whereIn('id', $idArticles)->orderBy('updated_at', 'DESC')->published()->simplePaginate(9);
         $maxPages = ceil(Article::whereIn('id', $idArticles)->published()->count() / 9);
         return View::make('index', array('articles' => $articles, 'maxPages' => $maxPages));
     }

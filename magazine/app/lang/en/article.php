@@ -26,4 +26,5 @@ return array(
     'recommendation' => 'Recommendation from reviewer',
     'reviewer_name' => 'Reviewer´s name',
     'choose_reviewer' => 'Choose reviewer',
+    'y_recommendation' => 'Your recommendation',
 );

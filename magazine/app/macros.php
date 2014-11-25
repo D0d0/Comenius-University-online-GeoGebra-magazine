@@ -27,12 +27,12 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
                 $up = '
                     <label for="inputEmail3" class="col-md-4 control-label">' . Lang::get('article.choose_reviewer') . '</label>
                     <div class="col-md-6">
-                        <select class="form-control">
+                        <select class="form-control reviewer_id">
                             ' . $options . '
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="submit" class="btn btn-default">' . Lang::get('article.save') . '</button>
+                        <input type="button" class="btn btn-default save_reviewer" value="' . Lang::get('article.save') . '">
                     </div>';
             } else {
                 //odoslana s priradenym recenzentom
@@ -62,12 +62,12 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
             //TODO: ' . $article->review->reviewer->name . '
             $down = '
                     <div class="col-md-3 col-md-offset-3">
-                        <button type="button" class="btn btn-default btn-md">
+                        <button type="button" class="btn btn-default btn-md publish">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Lang::get('article.publish') . '
                         </button>
                     </div>
                     <div class="col-md-3">
-                        <button type="button" class="btn btn-default btn-md">
+                        <button type="button" class="btn btn-default btn-md non_publish">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Lang::get('article.not_publish') . '
                         </button>
                     </div>';
