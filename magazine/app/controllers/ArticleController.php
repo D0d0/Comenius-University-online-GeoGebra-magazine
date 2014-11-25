@@ -88,7 +88,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::draft()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
+        $articles = Auth::User()->articles()->draft()->orderBy('id', 'DESC')->get();
         return View::make('article.article_draft', array('articles' => $articles));
     }
 
@@ -101,7 +101,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::sent()->orderBy('id', 'DESC')->where('user_id', '=', Auth::id())->get();
+        $articles = Auth::User()->articles()->sent()->orderBy('id', 'DESC')->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
@@ -114,7 +114,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::accepted()->where('user_id', '=', Auth::id())->get();
+        $articles = Auth::User()->articles()->accepted()->orderBy('id', 'DESC')->get();
         return View::make('article.article_accepted', array('articles' => $articles));
     }
 
@@ -127,7 +127,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::unaproved()->where('user_id', '=', Auth::id())->get();
+        $articles = Auth::User()->articles()->unaproved()->orderBy('id', 'DESC')->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
 
@@ -136,7 +136,7 @@ class ArticleController extends BaseController {
      * @return type
      */
     public function articleManagement() {
-        if (!Auth::check()) {
+        if (!Auth::check() || (!Auth::user()->hasRank(User::ADMIN) && !Auth::user()->hasRank(User::REDACTION))) {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
