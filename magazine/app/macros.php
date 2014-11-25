@@ -126,7 +126,7 @@ HTML::macro('articleWithReview', function($id = null, $size = 4, $draft = false)
                 ' . HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) . '
                 <h3>' . $link . '</h3>
                 <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $article->user->name, [$article->user->id], array('class' => 'text-muted')) . '</p>
-                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedCreatedAt() . '</p>
+                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedUdatedAt() . '</p>
                 <p class="text-muted">' . HTML::tags($id) . '</p>
                 <p>' . $article->abstract . '</p>
                 <p>
