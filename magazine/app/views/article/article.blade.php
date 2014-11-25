@@ -8,6 +8,5 @@
     <li>{{ HTML::linkAction('ArticleController@accepted', Lang::get('article.accepted'))}}</li>
     <li>{{ HTML::linkAction('ArticleController@unapproved', Lang::get('article.unapproved'))}}</li>
     <li>{{ HTML::linkAction('ArticleController@articleManagement', Lang::get('article.article_management'))}}</li>
-    <li>{{ HTML::linkAction('ArticleController@detail', 'Článok test')}}</li>
 </ul>
 @stop

@@ -51,6 +51,7 @@ class LoginController extends Controller {
         if ($validator->fails()) {
             return Redirect::back()
                             ->withErrors($validator)
+                            //$validator->messages()->toJson();
                             ->withInput(Input::except('password'));
         }
         if (Auth::attempt(array(

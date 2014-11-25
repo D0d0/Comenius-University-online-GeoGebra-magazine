@@ -12,7 +12,7 @@ margin-right: 9px !important;
 
 @section('left')
 @if(!$articles->isEmpty())
-{{HTML::articleGrid($articles, 2, 6)}}
+{{HTML::articleGrid($articles, 2, 6, false, true)}}
 @else
 <div class="row">
     <div class="jumbotron">

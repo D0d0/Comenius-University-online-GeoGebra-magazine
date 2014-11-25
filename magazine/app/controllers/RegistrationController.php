@@ -38,6 +38,7 @@ class RegistrationController extends Controller {
         if ($validator->fails()) {
             return Redirect::back()
                             ->withErrors($validator)
+                            //$validator->messages()->toJson();        
                             ->withInput();
         }
         $confirmation_code = str_random(30);

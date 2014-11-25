@@ -140,7 +140,7 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Article::sent()->orderBy('id', 'DESC')->get();
+        $articles = Article::where('state', '<>', Article::PUBLISHED)->where('state', '<>', Article::DRAFT)->orderBy('id', 'DESC')->get();
         return View::make('article.article_management', array('articles' => $articles));
     }
 
@@ -189,8 +189,8 @@ class ArticleController extends BaseController {
         }
         return View::make('article.article_detail', array('article' => $article, 'articles' => $articles));
     }
-    
-    function sendArticle($id = null){
+
+    function sendArticle($id = null) {
         
     }
 

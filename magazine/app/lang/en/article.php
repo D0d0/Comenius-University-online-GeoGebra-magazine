@@ -20,4 +20,10 @@ return array(
     'saved' => 'Saved',
     'error_saving' => 'Error occured while saving article!',
     'send' => 'Send',
+    'publish' => 'Publish',
+    'not_publish' => 'Do not publish',
+    'reviewer' => 'Reviewer',
+    'recommendation' => 'Recommendation from reviewer',
+    'reviewer_name' => 'Reviewer´s name',
+    'choose_reviewer' => 'Choose reviewer',
 );

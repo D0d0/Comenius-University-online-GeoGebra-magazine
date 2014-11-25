@@ -3,31 +3,111 @@
 HTML::macro('tags', function($id) {
     $tagsResult = '<span class="glyphicon glyphicon-tags"></span>&nbsp; ';
     foreach (Article::find($id)->tags as $value) {
-        $tagsResult .='<a class="label label-primary" href="'. action('HomeController@findTag', [$value->id_tag]).'">' . $value->tagDescription->name . '</a> ';
+        $tagsResult .='<a class="label label-primary" href="' . action('HomeController@findTag', [$value->id_tag]) . '">' . $value->tagDescription->name . '</a> ';
     }
     return $tagsResult;
 });
 
-HTML::macro('article', function($id = null, $size = 4, $draft = false) {
+HTML::macro('article', function($id = null, $size = 4, $draft = false, $management = false) {
     $article = Article::find($id);
     $link = link_to_action($draft ? 'ArticleController@newArticle' : 'ArticleController@detail', $article->title, [$id]);
+    $append = '';
+    if ($management) {
+        $up = '';
+        $down = '';
+        //pokial to je odoslane
+        if ($article->state == Article::SENT) {
+            //odoslana bez priradeneho recenzenta
+            if (!$review = $article->review) {
+                $recenzenti = User::whereIn('id', UserRole::where('rank_id', '=', User::ADMIN)->orWhere('rank_id', User::REVIEWER)->select('user_id')->get()->toArray())->get();
+                $options = '';
+                foreach ($recenzenti as $recenzent) {
+                    $options.='<option value=' . $recenzent->id . '>' . $recenzent->name . '</option>';
+                }
+                $up = '
+                    <label for="inputEmail3" class="col-md-4 control-label">' . Lang::get('article.choose_reviewer') . '</label>
+                    <div class="col-md-6">
+                        <select class="form-control">
+                            ' . $options . '
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-default">' . Lang::get('article.save') . '</button>
+                    </div>';
+            } else {
+                //odoslana s priradenym recenzentom
+                $up = '
+                    <div class="col-md-4 col-md-offset-2 text-right">
+                        <strong>' . Lang::get('article.reviewer_name') . '</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>' . $review->reviewer->name . '</strong>
+                    </div>';
+            }
+        }
+        if ($article->state == Article::ACCEPTED || $article->state == Article::UNAPROVED) {
+            $up = '
+                    <div class="col-md-4 col-md-offset-2 text-right">
+                        <strong>' . Lang::get('article.recommendation') . '</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>' . Lang::get($article->state == Article::ACCEPTED ? 'article.accepted' : 'article.unapproved') . '</strong>
+                    </div>
+                    <div class="col-md-3 col-md-offset-3 text-right">
+                        <strong>' . Lang::get('article.reviewer') . '</strong>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Akldekjkl</strong>
+                    </div>';
+            //TODO: ' . $article->review->reviewer->name . '
+            $down = '
+                    <div class="col-md-3 col-md-offset-3">
+                        <button type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' . Lang::get('article.publish') . '
+                        </button>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-default btn-md">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Lang::get('article.not_publish') . '
+                        </button>
+                    </div>';
+        }
+        $append = '
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal" role="form" id="' . $id . '">
+                                <div class="form-group">
+                                    ' . $up . '
+                                </div>
+                                <div class="form-group">
+                                    ' . $down . '
+                                </div>
+                            </form>
+                        </div>
+                    </div>';
+    }
     return '
         <div class="col-md-' . $size . ' col-md-height col-middle">
             <div class="thumbnail clearfix" type="clanok">
-                ' . HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) . '
-                <h3>' . $link . '</h3>
-                <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $article->user->name, [$article->user->id], array('class' => 'text-muted')) . '</p>
-                <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedCreatedAt() . '</p>
-                <p class="text-muted">' . HTML::tags($id) . '</p>
-                <p>' . $article->abstract . '</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        ' . HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) . '
+                        <h3>' . $link . '</h3>
+                        <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $article->user->name, [$article->user->id], array('class' => 'text-muted')) . '</p>
+                        <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedCreatedAt() . '</p>
+                        <p class="text-muted">' . HTML::tags($id) . '</p>
+                        <p>' . $article->abstract . '</p>
+                    </div>
+                </div>
+                ' . $append . '
             </div>
         </div>';
 });
 
-HTML::macro('articleGrid', function($articles, $width = 3, $size = 4, $draft = false) {
+HTML::macro('articleGrid', function($articles, $width = 3, $size = 4, $draft = false, $management = false) {
     $_articles = [];
     foreach ($articles as $article) {
-        $_articles[] = HTML::article($article->id, $size, $draft);
+        $_articles[] = HTML::article($article->id, $size, $draft, $management);
     }
     $result = "<div class=\"row container-md-height col-md-12\">";
     $result .= implode("</div><div class=\"row container-md-height col-md-12\">", array_map(function($i) {

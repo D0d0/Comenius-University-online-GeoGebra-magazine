@@ -35,7 +35,7 @@ Route::get('/profile/{id?}', 'MenuController@getProfile');
 Route::group(array('prefix' => 'article'), function() {
     Route::get('/new/{id?}', 'ArticleController@newArticle');
     Route::post('/new', 'ArticleController@postNewArticle');
-    
+
     Route::post('/delete', 'ArticleController@postDeteleArticle');
 
     Route::get('/draft', 'ArticleController@draft');
@@ -45,8 +45,8 @@ Route::group(array('prefix' => 'article'), function() {
     Route::get('/accepted', 'ArticleController@accepted');
 
     Route::get('/unapproved', 'ArticleController@unapproved');
-    
+
     Route::get('/article_management', 'ArticleController@articleManagement');
-    
+
     Route::get('/detail/{id?}', 'ArticleController@detail');
 });

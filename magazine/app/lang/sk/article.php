@@ -20,4 +20,10 @@ return array(
     'saved' => 'Uložené',
     'error_saving' => 'Chyba pri ukladaní článku!',
     'send' => 'Odošli',
+    'publish' => 'Publikovať',
+    'not_publish' => 'Nepublikovať',
+    'reviewer' => 'Recenzent',
+    'recommendation' => 'Hodnotenie recenzenta',
+    'reviewer_name' => 'Meno recenzenta',
+    'choose_reviewer' => 'Vyber recenzenta',
 );
