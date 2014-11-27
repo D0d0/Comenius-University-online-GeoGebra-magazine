@@ -11,12 +11,17 @@
 @section('ready_js')
 var timer;
 var saving = false;
+var send = {{ Article::SENT }};
 
 var changeButton = function(){
-    if (saving){
-        return;
+    if($('#id').val()){
+        $('#send').removeAttr('disabled');
+    }else{
+        $('#send').attr('disabled', 'disabled');
     }
-    $('#save').html('{{ Lang::get('article.save') }}');
+    if (saving){
+        return false;
+    }
     if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
         $('#save').removeAttr('disabled');
     }else{
@@ -25,36 +30,52 @@ var changeButton = function(){
 }
 
 var saveArticle = function(){
-    if(saving){
-        return;
+    if(saving || !($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code())){
+        return false;
     }
     saving = true;
     timer && clearTimeout(timer);
-    if($('#title').val() && $('#abstract').val() && $('#tagy').tagsinput('items').length && $('.summernote').code()){
-        $('#save').attr('disabled', 'disabled').html('{{ Lang::get('article.saving') }}');
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            url: '{{ action('ArticleController@postNewArticle') }}',
-            data: {
-                'title' : $('#title').val(),
-                'abstract' : $('#abstract').val(),
-                'tagy' : $('#tagy').tagsinput('items'),
-                'text' : $('.summernote').code(),
-                'id' : $('#id').val(),
-            },
-            success: function(answer){
-                saving = false;
-                if(answer['id']){
-                    $('#id').val(answer['id']);
-                }
-                $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
-            },
-            error: function(){
-                saving = false;
-                $('#save').removeAttr('disabled').html('{{ Lang::get('article.error_saving') }}');
+    $('#save').attr('disabled', 'disabled').html('{{ Lang::get('article.saving') }}');
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '{{ action('ArticleController@postNewArticle') }}',
+        data: {
+            'title' : $('#title').val(),
+            'abstract' : $('#abstract').val(),
+            'tagy' : $('#tagy').tagsinput('items'),
+            'text' : $('.summernote').code(),
+            'id' : $('#id').val(),
+        },
+        success: function(answer){
+            saving = false;
+            if(answer['id']){
+                $('#id').val(answer['id']);
             }
-        });
+            $('#save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
+            changeButton();
+        },
+        error: function(){
+            saving = false;
+            $('#save').removeAttr('disabled').html('{{ Lang::get('article.error_saving') }}');
+            changeButton();
+        }
+    });
+}
+
+var toggleScreen = function(){
+    if($('.note-toolbar button').is(':disabled')){
+        $('.note-editable').attr('contenteditable', true);
+        $('.note-toolbar button').removeAttr('disabled');
+        $('#title').removeAttr('disabled');
+        $('.bootstrap-tagsinput [type=text]').removeAttr('disabled');
+        $('#abstract').removeAttr('disabled');
+    }else{
+        $('.note-editable').attr('contenteditable', false);
+        $('.note-toolbar button').attr('disabled', 'disabled');
+        $('#title').attr('disabled', 'disabled');
+        $('.bootstrap-tagsinput [type=text]').attr('disabled', 'disabled');
+        $('#abstract').attr('disabled', 'disabled');
     }
 }
 
@@ -109,6 +130,33 @@ $('#title, #abstract').on('input', function(){
 
 $('#save').on('click', function(){
     saveArticle();
+});
+
+$('#send').on('click', function(){
+    if(!$('#id').val()){
+        return false;
+    }
+    toggleScreen();
+    saving = true;
+    timer && clearTimeout(timer);
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '{{ action('ArticleController@changeState') }}',
+        data: {
+            'state' : send,
+            'id' : $('#id').val(),
+        },
+        success: function(answer){
+            if(answer['result']){
+                $('#send').html('{{ Lang::get('article.saved') }}');
+            }
+        },
+        error: function(){
+            toggleScreen();
+            $('#send').html('{{ Lang::get('article.error_saving') }}');
+        }
+    });
 });
 
 $('#trash').on('click', function(){
