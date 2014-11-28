@@ -18,6 +18,13 @@ padding: 9px;
                 {{Form::text('name', '',array('class'=>'form-control', 'placeholder' => Lang::get('common.enter_name')))}}
             </div>
         </div>
+        @if (isset($errors->all()[0]))
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="alert alert-danger" role="alert">{{ $errors->all()[0] }}</div>   
+                </div>
+            </div>
+        @endif
         <div class="form-group">
             <div class="col-md-3">
                 {{ Form::label('email', Lang::get('common.email')) }}
@@ -26,6 +33,13 @@ padding: 9px;
                 {{Form::email('email', '',array('class'=>'form-control', 'placeholder' => Lang::get('common.enter_email')))}}
             </div>
         </div>
+        @if (isset($errors->all()[2]))
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="alert alert-danger" role="alert">{{ $errors->all()[2] }}</div>   
+                </div>
+            </div>
+        @endif
         <div class="form-group">
             <div class="col-md-3">
                 {{ Form::label('password', Lang::get('common.password')) }}
@@ -42,6 +56,13 @@ padding: 9px;
                 {{ Form::password('password_confirmation', array('class'=>'form-control', 'placeholder' => Lang::get('common.again_password'))) }}
             </div>
         </div>
+        @if (isset($errors->all()[1]))
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <div class="alert alert-danger" role="alert">{{ $errors->all()[1] }}</div>   
+                </div>
+            </div>
+        @endif
         {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
     </div>
     {{ Form::close() }}
