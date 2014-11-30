@@ -44,15 +44,16 @@ class LoginController extends Controller {
                         'email', 'password'
         );
         $rules = array(
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
+            'email' => 'exists:users,email,confirmed,1',
             'password' => 'required|min:6|'
         );
         $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
             return Redirect::back()
                             ->withErrors($validator)
-                            //$validator->messages()->toJson();
-                            ->withInput(Input::except('password'));
+                            ->withInput(Input::except('password'))
+                            ->with('error', Lang::get('common.login_failed'));
         }
         if (Auth::attempt(array(
                     'email' => Input::get('email'),
@@ -62,6 +63,7 @@ class LoginController extends Controller {
                             ->with('message', Lang::get('common.login_successful'));
         }
         return Redirect::back()
+                        ->withErrors($validator)
                         ->withInput(Input::except('password'));
     }
 

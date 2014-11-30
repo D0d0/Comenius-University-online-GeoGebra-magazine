@@ -31,14 +31,14 @@ class RegistrationController extends Controller {
         );
         $rules = array(
             'name' => 'required',
-            'password' => 'required|confirmed|min:6|',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
             'email' => 'required|email|unique:users,email'
         );
         $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
             return Redirect::back()
                             ->withErrors($validator)
-                            //$validator->messages()->toJson();        
                             ->withInput();
         }
         $confirmation_code = str_random(30);

@@ -122,4 +122,3 @@ return array(
 	'pretend' => false,
 
 );
->>>>>>> origin/mrkvost-Search

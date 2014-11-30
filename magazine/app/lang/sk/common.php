@@ -20,4 +20,5 @@ return array(
     'login_successful' => 'Prihlásenie prebehlo úspešne.',
     'user_does_not_exist' => 'Zadaný užívateľ neexistuje.',
     'article_does_not_exist' => 'Zadaný článok neexistuje.',
+    'login_failed' => 'Nepodarilo sa prihlásiť. Skontrolujte email a heslo.',
 );
