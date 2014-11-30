@@ -40,7 +40,7 @@ class HomeController extends BaseController {
 
         if ($date_validator->passes()) {
             $myDate = DateTime::createFromFormat('d.m.Y', $query);
-            $iso8601date = $myDate->format('Y-m-d H:m.s');
+            $iso8601date = $myDate->format('Y-m-d');
             $articles = $articles
                     ->where(DB::raw('DATE(updated_at)'), '>=', "'" . $iso8601date . "'")
                     ->orderBy('updated_at', 'DESC');
