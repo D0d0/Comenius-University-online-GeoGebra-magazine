@@ -198,7 +198,7 @@ $('#trash').on('click', function(){
     }
 });
 
-$('.close').on('click', function(){
+$('.closeModal').on('click', function(){
     $('#geogebraModal').modal('hide');
 });
 
@@ -259,7 +259,7 @@ changeButton();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">{{ Lang::get('common.close') }}</span></button>
+                <button type="button" class="close closeModal"><span aria-hidden="true">&times;</span><span class="sr-only">{{ Lang::get('common.close') }}</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">{{ Lang::get('article.geoegbra_id') }}</h4>
             </div>
             <div class="modal-body">
@@ -271,7 +271,7 @@ changeButton();
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" class="close">{{ Lang::get('common.close') }}</button>
+                <button type="button" class="btn btn-default closeModal">{{ Lang::get('common.close') }}</button>
                 <button type="button" class="btn btn-primary" id="saveid">{{ Lang::get('common.insert') }}</button>
             </div>
         </div>
