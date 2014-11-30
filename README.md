@@ -11,4 +11,5 @@ php artisan migrate --package="liebig/cron"
 php db:seed
 
 Cron
+----
 php artisan cron:run
