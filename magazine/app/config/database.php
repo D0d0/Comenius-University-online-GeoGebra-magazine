@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => $_ENV['DATABASE_DEFAULT'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'geogebramag',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => $_ENV['DATABASE_NAME'],
+			'username'  => $_ENV['DATABASE_USER'],
+			'password'  => $_ENV['DATABASE_PASSWORD'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
@@ -66,9 +66,9 @@ return array(
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',
-			'database' => 'mydb',
-			'username' => 'postgres',
-			'password' => 'root',
+			'database' => $_ENV['DATABASE_NAME'],
+			'username' => $_ENV['DATABASE_USER'],
+			'password' => $_ENV['DATABASE_PASSWORD'],
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
@@ -77,9 +77,9 @@ return array(
 		'sqlsrv' => array(
 			'driver'   => 'sqlsrv',
 			'host'     => 'localhost',
-			'database' => 'database',
-			'username' => 'root',
-			'password' => '',
+			'database' => $_ENV['DATABASE_NAME'],
+			'username' => $_ENV['DATABASE_USER'],
+			'password' => $_ENV['DATABASE_PASSWORD'],
 			'prefix'   => '',
 		),
 
