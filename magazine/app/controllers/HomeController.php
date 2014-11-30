@@ -24,31 +24,49 @@ class HomeController extends BaseController {
         }
 
         $query = strtolower(trim($query));
-
         if (!$query) {
             // search for nothig => show everything
             return Redirect::action('HomeController@showWelcome');
         }
 
-        $q = DB::table('articles')
+        $date_validator = Validator::make(
+            array('datum' => $query),
+            array('datum' => 'date_format:"d.m.Y"')
+        );
+
+        $articles = Article::published();
+
+        if ($date_validator->passes()) {
+            $myDate = DateTime::createFromFormat('d.m.Y', $query);
+            $iso8601date = $myDate->format('Y-m-d');
+            $articles = $articles
+                ->where(DB::raw('DATE(created_at)'), '>=', "'" . $iso8601date . "'")
+                ->orderBy('created_at', 'asc');
+        } else {
+            $articles = $articles
+                ->leftJoin('users', 'users.id', '=', 'articles.user_id')
                 ->leftJoin('tags', 'tags.id_article', '=', 'articles.id')
                 ->leftJoin('tag_groups', 'tags.id_tag', '=', 'tag_groups.id')
                 ->select('articles.*')
                 ->distinct()
-                ->where('articles.state', '=', Article::PUBLISHED)
                 ->where(function($q2) use ($query) {
-            $q2->whereRaw("lower(articles.title) like '%" . $query . "%'")
-                ->orWhere(function($q3) use ($query) {
-                $q3->whereRaw("lower(tag_groups.name) like '%" . $query . "%'");
-            })
-            ->orWhere(function($q4) use ($query) {
-                $q4->whereRaw("lower(articles.text) like '%" . $query . "%'");
-            });
-        });
+                    $q2->whereRaw("lower(articles.title) like '%" . $query . "%'")
+                        ->orWhere(function($q3) use ($query) {
+                            $q3->whereRaw("lower(tag_groups.name) like '%" . $query . "%'");
+                        })
+                        ->orWhere(function($q4) use ($query) {
+                            $q4->whereRaw("lower(articles.text) like '%" . $query . "%'");
+                        })
+                        ->orWhere(function($q5) use ($query) {
+                            $q5->whereRaw("lower(users.name) like '%" . $query . "%'");
+                        });
+                })
+                ->orderBy('updated_at', 'desc');
+        }
         return View::make('index', array(
-                    'articles' => $q->orderBy('updated_at', 'DESC')->simplePaginate(9),
-                    'maxPages' => ceil(count($q->get()) / 9),
-                    'query' => $query
+                    'articles' => $articles->orderBy('title', 'asc')->simplePaginate(9),
+                    'maxPages' => ceil(count($articles->get()) / 9),
+                    'query' => $query,
         ));
     }
 

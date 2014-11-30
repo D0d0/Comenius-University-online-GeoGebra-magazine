@@ -37,7 +37,7 @@ class Article extends Eloquent {
     public function tags() {
         return $this->hasMany('Tag', 'id_article', 'id');
     }
-    
+
     public function review(){
         return $this->hasOne('Review', 'id_article', 'id');
     }
