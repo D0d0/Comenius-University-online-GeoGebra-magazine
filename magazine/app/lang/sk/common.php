@@ -21,4 +21,6 @@ return array(
     'user_does_not_exist' => 'Zadaný užívateľ neexistuje.',
     'article_does_not_exist' => 'Zadaný článok neexistuje.',
     'login_failed' => 'Nepodarilo sa prihlásiť. Skontrolujte email a heslo.',
+    'close' => 'Zavrieť',
+    'insert' => 'Vložiť',
 );

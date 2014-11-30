@@ -29,4 +29,5 @@ return array(
     'y_recommendation' => 'Your recommendation',
     'was_published' => 'Article was published',
     'was_not_published' => 'Article was not published',
+    'geoegbra_id' => 'GeogebraTube ID',
 );

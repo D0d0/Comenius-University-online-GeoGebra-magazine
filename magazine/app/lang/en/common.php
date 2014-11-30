@@ -21,4 +21,6 @@ return array(
     'user_does_not_exist' => 'User does not exist.',
     'article_does_not_exist' => 'Article does not exist.',
     'login_failed' => 'Login failed. Check your email and password.',
+    'close' => 'Close',
+    'insert' => 'Insert',
 );

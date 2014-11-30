@@ -84,15 +84,25 @@ function startTimer(){
     timer = setTimeout(saveArticle, 2000);
 }
 
+var editorG;
+var layoutG;
+var $editableG;
+
+var insertGeogebra = function(id){
+    $editableG.trigger('focus');
+    var dom = $('<div class="embed-responsive embed-responsive-16by9"><iframe id="frame" class="embed-responsive-item" src="http://www.geogebratube.org/material/iframe/id/' + id + '/width/500/height/300/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5"></iframe></div>')[0];
+    editorG.insertDom($editableG, dom);
+}
+
 $.summernote.plugins = {
-    "chart" : {
-        label : 'chart',
-        //dropd
+    "Geogebra" : {
+        label : 'Geogebra',
         event : function(e, editor, layout) {
-            var $editable = layout.editable();
-            $editable.trigger('focus');
-            var dom = $('<div class="embed-responsive embed-responsive-16by9"><iframe id="frame" class="embed-responsive-item" src="http://www.geogebratube.org/material/iframe/id/23587/width/500/height/300/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5"></iframe></div>')[0];
-            editor.insertDom($editable, dom);
+            editorG = editor;
+            layoutG = layout;
+            $editableG = layout.editable();
+            $('#geogebra_id').val('');
+            $('#geogebraModal').modal('show');
         }
     }
 }
@@ -101,11 +111,10 @@ $('.summernote').summernote({
     height: 300,
     toolbar: [
         ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['insert', ['link', 'picture', 'video']],
         ['misc', ['undo', 'redo', 'help']],
-        ['chart', ['chart']]
+        ['Geogebra', ['Geogebra']]
     ],
     onChange: function(e){
         changeButton();
@@ -189,6 +198,17 @@ $('#trash').on('click', function(){
     }
 });
 
+$('.close').on('click', function(){
+    $('#geogebraModal').modal('hide');
+});
+
+$('#saveid').on('click', function(){
+    if($('#geogebra_id').val()){
+        $('#geogebraModal').modal('hide');
+        insertGeogebra($('#geogebra_id').val());
+    }
+});
+
 changeButton();
 @stop
 
@@ -235,4 +255,26 @@ changeButton();
         </div>
     </div>
 </form>
+<div class="modal fade" id="geogebraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">{{ Lang::get('common.close') }}</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">{{ Lang::get('article.geoegbra_id') }}</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">{{ Lang::get('article.geoegbra_id') }}:</label>
+                        <input type="text" class="form-control" id="geogebra_id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" class="close">{{ Lang::get('common.close') }}</button>
+                <button type="button" class="btn btn-primary" id="saveid">{{ Lang::get('common.insert') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
 @stop
