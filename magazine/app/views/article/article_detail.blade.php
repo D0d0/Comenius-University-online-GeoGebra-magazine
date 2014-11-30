@@ -18,7 +18,7 @@ margin-bottom: 9px !important;
 
 @section('ready_js')
 //DOLEZITE NEMAZAT ZATIAL
-$('iframe').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/width/'+$('[type=clanok]').innerWidth()+'/height/640/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5');
+//$('iframe').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/width/'+$('[type=clanok]').innerWidth()+'/height/640/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5');
 
 @if($article->review && $article->state == Article::SENT && $article->review->reviewer->id == Auth::id())
     var accepted = {{ Article::ACCEPTED }};

@@ -90,7 +90,7 @@ var $editableG;
 
 var insertGeogebra = function(id){
     $editableG.trigger('focus');
-    var dom = $('<div class="embed-responsive embed-responsive-16by9"><iframe id="frame" class="embed-responsive-item" src="http://www.geogebratube.org/material/iframe/id/' + id + '/width/500/height/300/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5"></iframe></div>')[0];
+    var dom = $('<div><iframe id="frame" class="note-editable" src="http://www.geogebratube.org/material/iframe/id/' + id + '/width/500/height/300/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5"></iframe></div>')[0];
     editorG.insertDom($editableG, dom);
 }
 
