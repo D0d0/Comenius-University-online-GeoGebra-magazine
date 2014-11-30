@@ -76,3 +76,14 @@ App::down(function() {
 
 require app_path() . '/filters.php';
 require app_path() . '/macros.php';
+
+Event::listen('cron.collectJobs', function() {
+
+    Cron::add('example', '*/2 * * * *', function() {
+        Mail::send('emails.auth.verify', array('confirmation_code' => "gjkg"), function($message) {
+            $message->to('jozef.d13@gmail.com', 'test')
+                    ->subject(Lang::get('emails.verify_email'));
+        });
+        return null;
+    });
+});
