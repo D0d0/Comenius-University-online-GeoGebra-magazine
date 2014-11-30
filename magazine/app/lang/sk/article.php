@@ -27,4 +27,6 @@ return array(
     'reviewer_name' => 'Meno recenzenta',
     'choose_reviewer' => 'Vyber recenzenta',
     'y_recommendation' => 'Odporúčanie',
+    'was_published' => 'Článok bol publikovaný',
+    'was_not_published' => 'Článok nebol publikovaný a bol vrátený na prepracovanie.',
 );

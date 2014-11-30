@@ -72,16 +72,15 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
                         </button>
                     </div>';
         }
+        $down = $down ? '<div class="form-group">' . $down . '</div>' : '';
         $append = '
                     <div class="row">
                         <div class="col-md-12">
-                            <form class="form-horizontal" role="form" id="' . $id . '">
+                            <form class="form-horizontal help-block" role="form" id="' . $id . '">
                                 <div class="form-group">
                                     ' . $up . '
                                 </div>
-                                <div class="form-group">
-                                    ' . $down . '
-                                </div>
+                                ' . $down . '
                             </form>
                         </div>
                     </div>';

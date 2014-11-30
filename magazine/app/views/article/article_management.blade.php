@@ -13,6 +13,8 @@ margin-right: 9px !important;
 @section('ready_js')
     var draft = {{ Article::DRAFT }};
     var published = {{ Article::PUBLISHED }};
+    var was_published = '{{ Lang::get('article.was_published') }}';
+    var was_not_published = '{{ Lang::get('article.was_not_published') }}';
     
     var getArticleID = function(obj){
         return $(obj).closest('form').attr('id')
@@ -29,15 +31,15 @@ margin-right: 9px !important;
             },
             success: function(answer){
                 if(answer['result']){
-                    
+                    $('#' + id + ' .form-group:nth-child(2)').empty().append('<p class="text-center"><big><strong>'+ (state == draft ? was_not_published : was_published) + '</strong></big></p>');
                 }
             },
             error: function(){
-            
+                
             }
         });
     }
-    var addReviewer = function(reviewer_id, id){
+    var addReviewer = function(reviewer_id, id, reviewer_name){
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -48,7 +50,7 @@ margin-right: 9px !important;
             },
             success: function(answer){
                 if(answer['result']){
-                    
+                    $('#' + id + ' .form-group').empty().append('<div class="col-md-4 col-md-offset-2 text-right"><strong>{{Lang::get('article.reviewer_name')}}</strong></div><div class="col-md-6"><strong>' + reviewer_name + '</strong></div>');
                 }
             },
             error: function(){
@@ -60,7 +62,9 @@ margin-right: 9px !important;
     $('.save_reviewer').on('click', function(){
         var id = getArticleID(this);
         var reviewer_id = $(this).closest('form').find('.reviewer_id').val();
-        addReviewer(reviewer_id, id);
+        var reviewer_name = $(this).closest('form').find('.reviewer_id :selected').text();
+        console.log(reviewer_name);
+        addReviewer(reviewer_id, id, reviewer_name);
     });
     
     $('.non_publish').on('click', function(){

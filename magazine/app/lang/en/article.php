@@ -27,4 +27,6 @@ return array(
     'reviewer_name' => 'Reviewer´s name',
     'choose_reviewer' => 'Choose reviewer',
     'y_recommendation' => 'Your recommendation',
+    'was_published' => 'Article was published',
+    'was_not_published' => 'Article was not published',
 );
