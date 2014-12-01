@@ -37,7 +37,7 @@ padding: 9px;
                 @if ($errors->has('password')) <p class="help-block">{{ $errors->first('password') }}</p> @endif
             </div>
         </div>
-        <div class="form-group {{ $errors->all('password_confirmation') ? "has-error" : "" }}">
+        <div class="form-group {{ $errors->has('password_confirmation') ? "has-error" : "" }}">
             <div class="col-md-3">
                 {{ Form::label('password_confirmation', Lang::get('common.confirm_password')) }}
             </div>

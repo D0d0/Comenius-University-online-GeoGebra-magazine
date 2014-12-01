@@ -49,7 +49,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row" id="menu">
+            <div class="row">
                 <div class="col-md-12">
                     <h1>{{ HTML::linkAction('HomeController@showWelcome', 'Prvý online Geogebra časopis Univerzity Komenského') }}</h1>
                 </div>
