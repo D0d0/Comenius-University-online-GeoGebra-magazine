@@ -3,7 +3,7 @@
 HTML::macro('tags', function($id) {
     $tagsResult = '<span class="glyphicon glyphicon-tags"></span>&nbsp; ';
     foreach (Article::find($id)->tags as $value) {
-        $tagsResult .='<a class="label label-primary" href="' . action('HomeController@findTag', [$value->id_tag]) . '">' . $value->tagDescription->name . '</a> ';
+        $tagsResult .='<a class="label label-primary help-block" href="' . action('HomeController@findTag', [$value->id_tag]) . '">' . $value->tagDescription->name . '</a> ';
     }
     return $tagsResult;
 });
@@ -46,6 +46,11 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
             }
         }
         if ($article->state == Article::ACCEPTED || $article->state == Article::UNAPROVED) {
+            try {
+                $meno = $article->review->reviewer->name;
+            } catch (Exception $e) {
+                $meno = '';
+            }
             $up = '
                     <div class="col-md-4 col-md-offset-2 text-right">
                         <strong>' . Lang::get('article.recommendation') . '</strong>
@@ -57,9 +62,8 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
                         <strong>' . Lang::get('article.reviewer') . '</strong>
                     </div>
                     <div class="col-md-6">
-                        <strong>Akldekjkl</strong>
+                        <strong>' . $meno . '</strong>
                     </div>';
-            //TODO: ' . $article->review->reviewer->name . '
             $down = '
                     <div class="col-md-3 col-md-offset-3">
                         <button type="button" class="btn btn-default btn-md publish">

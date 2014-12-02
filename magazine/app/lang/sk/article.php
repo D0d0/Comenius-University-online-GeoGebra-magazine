@@ -30,4 +30,5 @@ return array(
     'was_published' => 'Článok bol publikovaný',
     'was_not_published' => 'Článok nebol publikovaný a bol vrátený na prepracovanie.',
     'geoegbra_id' => 'GeogebraTube ID',
+    'review' => 'Recenzia'
 );
