@@ -202,6 +202,9 @@ class ArticleController extends BaseController {
                 }
                 $article->state = $input['state'];
                 $article->save();
+                if($input['state'] == Article::SENT){
+                    $article->review->delete();
+                }
                 return Response::json(array('result' => true));
             }
         }
