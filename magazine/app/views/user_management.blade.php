@@ -89,7 +89,7 @@
 
 @section('center')
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="@if(!Auth::user()->hasRank(User::ADMIN)) col-md-6 col-md-offset-3 @else col-md-8 col-md-offset-2 @endif">
         <table class="table table-hover">
             <thead>
                 <th>{{ Lang::get('common.name') }}</th>
