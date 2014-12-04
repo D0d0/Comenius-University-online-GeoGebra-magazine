@@ -69,6 +69,11 @@
                             <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile'), [Auth::id()]) }}</li>
                         </ul>
                     </li>
+                        @if(Auth::user()->hasRank(User::ADMIN) || Auth::user()->hasRank(User::REDACTION))
+                            <li>
+                                {{ HTML::linkAction('UserController@getManagement', Lang::get('menu.user_management')) }}
+                            </li>
+                        @endif
                     <li>
                         {{ HTML::linkAction('LoginController@getLogout', Lang::get('menu.logout')) }}
                     </li>

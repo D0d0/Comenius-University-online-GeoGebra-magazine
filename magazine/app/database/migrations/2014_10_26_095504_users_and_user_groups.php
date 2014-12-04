@@ -32,6 +32,7 @@ class UsersAndUserGroups extends Migration {
             $table->string('about')->nullable(true);
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable(true);
+            $table->boolean('ban')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

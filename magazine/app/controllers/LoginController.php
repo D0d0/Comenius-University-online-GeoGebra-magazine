@@ -58,7 +58,8 @@ class LoginController extends Controller {
         if (Auth::attempt(array(
                     'email' => Input::get('email'),
                     'password' => Input::get('password'),
-                    'confirmed' => 1), Input::get('remember'))) {
+                    'confirmed' => 1,
+                    'ban' => User::NOT_BANNED), Input::get('remember'))) {
             return Redirect::action('HomeController@showWelcome')
                             ->with('message', Lang::get('common.login_successful'));
         }

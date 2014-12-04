@@ -23,4 +23,6 @@ return array(
     'login_failed' => 'Login failed. Check your email and password.',
     'close' => 'Close',
     'insert' => 'Insert',
+    'ban_user' => 'Ban user',
+    'unban_user' => 'Unab user',
 );

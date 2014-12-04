@@ -11,4 +11,5 @@ return array(
     'extended_search' => 'Rozšírené vyhľadávanie',
     'login' => 'Prihlásenie',
     'logout' => 'Odhlásenie',
+    'user_management' => 'Správa užívateľov'
 );
