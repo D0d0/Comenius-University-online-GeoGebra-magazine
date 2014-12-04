@@ -14,6 +14,7 @@ Route::get('/', 'HomeController@showWelcome');
 Route::post('/', 'HomeController@showWelcome');
 Route::get('/find/{id?}', 'HomeController@findTag');
 Route::get('/search/{query?}', 'HomeController@search');
+Route::get('/tags/{query?}', 'HomeController@tags');
 
 Route::get('/register', 'RegistrationController@getRegister');
 Route::post('/register', 'RegistrationController@postRegister');

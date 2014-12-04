@@ -15,6 +15,14 @@
         {{HTML::script('js/moment.min.js')}}
         {{HTML::script('js/locales.min.js')}}
         {{HTML::script('js/datepicker.min.js')}}
+        <!--
+            jquery-ui downloaded from:
+            http://jqueryui.com/download/#!version=1.11.2&components=1111000000100010000000000000000000000
+        -->
+        {{HTML::script('js/jquery-ui.min.js')}}
+        {{HTML::style('css/jquery-ui.structure.min.css')}}
+        {{HTML::style('css/jquery-ui.min.css')}}
+        {{HTML::style('css/jquery-ui.theme.min.css')}}
         @yield('js')
         <style>
             #menu{
@@ -32,17 +40,40 @@
             @yield('style')
         </style>
         <script>
+            // NICE TO HAVE:
+            // modularization of javascript files: http://requirejs.org/
+            $TAGS_URL = "{{ URL::action('HomeController@tags') }}";
+
             $(document).ready(function () {
                 $('#datetimepicker').datetimepicker({
                     language: "{{ Lang::get('common.lang')}}",
                     pickTime: false
                 });
                 $('#datetimepicker').on('dp.hide', function (e) {
+                    // TODO: remove console logs after release!
                     console.log(e);
                 });
                 $.ajaxSetup({
                     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
                 });
+
+                var $searchInput = $('#hladanie'),
+                    $form = $('#search-form');
+
+                $searchInput.autocomplete({
+                    delay: 250,
+                    source: function(request, add) {
+                        var url = $TAGS_URL;
+                        jQuery.getJSON(url, {query: request.term}, function(data) {
+                            add(data.result);
+                        });
+                    },
+                    select: function(event, ui) {
+                        $searchInput.val(ui.item.label);
+                        $form.submit();
+                    },
+                });
+
                 @yield('ready_js')
             });
         </script>
@@ -81,7 +112,13 @@
                     </li>
                     @endif
                     <li class="pull-right">
-                        {{ Form::open(array('action' => 'HomeController@search', 'method' => 'get', 'class'=>'navbar-form navbar-right', 'role'=>'search')) }}
+                        {{ Form::open(array(
+                            'action' => 'HomeController@search',
+                            'method' => 'get',
+                            'class' => 'navbar-form navbar-right',
+                            'role' => 'search',
+                            'id' => 'search-form',
+                        )) }}
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
                                 {{ Form::text( 'hladanie', isset($query) ? $query : "", array(
