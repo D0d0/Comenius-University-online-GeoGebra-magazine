@@ -23,4 +23,6 @@ return array(
     'login_failed' => 'Nepodarilo sa prihlásiť. Skontrolujte email a heslo.',
     'close' => 'Zavrieť',
     'insert' => 'Vložiť',
+    'ban_user' => 'Zablokovať užívateľa',
+    'unban_user' => 'Odblokovať užívateľa',
 );

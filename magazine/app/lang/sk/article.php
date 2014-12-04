@@ -23,6 +23,7 @@ return array(
     'publish' => 'Publikovať',
     'not_publish' => 'Nepublikovať',
     'reviewer' => 'Recenzent',
+    'redaction' => 'Redakčná rada',
     'recommendation' => 'Hodnotenie recenzenta',
     'reviewer_name' => 'Meno recenzenta',
     'choose_reviewer' => 'Vyber recenzenta',

@@ -11,4 +11,5 @@ return array(
     'extended_search' => 'Extended search',
     'login' => 'Log in',
     'logout' => 'Log out',
+    'user_management' => 'User management',
 );

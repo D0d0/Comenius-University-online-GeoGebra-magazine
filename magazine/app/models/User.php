@@ -17,6 +17,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     const REDACTION = 2;
     const REVIEWER = 3;
     const USER = 4;
+    
+    const NOT_BANNED = 0;
+    const BANNED = 1;
 
     /**
      * The database table used by the model.
@@ -31,7 +34,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * @var array
      */
     protected $hidden = array('remember_token');
-    protected $fillable = array('name', 'password', 'email', 'image', 'birth', 'city', 'school', 'google', 'facebook', 'twitter', 'language', 'updated_at', 'created_at', 'about', 'confirmed', 'confirmation_code');
+    protected $fillable = array('name', 'password', 'email', 'image', 'birth', 'city', 'school', 'google', 'facebook', 'twitter', 'language', 'updated_at', 'created_at', 'about', 'confirmed', 'confirmation_code', 'ban');
 
     /**
      * Vráti všetky modely článku, ktoré patria užívateľovi
@@ -61,6 +64,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
             }
         }
         return false;
+    }
+    
+    public function isBanned(){
+        return $this->ban == User::BANNED;
     }
 
     /**

@@ -72,7 +72,7 @@ class HomeController extends BaseController {
             $myDate = DateTime::createFromFormat('d.m.Y', $query);
             $iso8601date = $myDate->format('Y-m-d');
             $articles = $articles
-                    ->where(DB::raw('DATE(updated_at)'), '>=', "'" . $iso8601date . "'")
+                    ->where('updated_at', '>=', $iso8601date)
                     ->orderBy('updated_at', 'DESC');
         } else {
             $articles = $articles

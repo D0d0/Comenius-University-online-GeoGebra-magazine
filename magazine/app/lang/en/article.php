@@ -23,6 +23,7 @@ return array(
     'publish' => 'Publish',
     'not_publish' => 'Do not publish',
     'reviewer' => 'Reviewer',
+    'redaction' => 'Redaction',
     'recommendation' => 'Recommendation from reviewer',
     'reviewer_name' => 'Reviewer´s name',
     'choose_reviewer' => 'Choose reviewer',

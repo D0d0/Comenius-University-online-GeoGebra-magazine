@@ -33,6 +33,12 @@ Route::get('/onas', 'MenuController@getOnas');
 Route::get('/kontakt', 'MenuController@getKontakt');
 Route::get('/profile/{id?}', 'MenuController@getProfile');
 
+Route::group(array('prefix' => 'user'), function() {
+    Route::get('/management', 'UserController@getManagement');
+    Route::post('/changeBan', 'UserController@postChangeBan');
+    Route::post('/changeRank', 'UserController@postChangeRank');
+});
+
 Route::group(array('prefix' => 'article'), function() {
     Route::get('/new/{id?}', 'ArticleController@newArticle');
     Route::post('/new', 'ArticleController@postNewArticle');
@@ -51,7 +57,7 @@ Route::group(array('prefix' => 'article'), function() {
     Route::get('/article_management', 'ArticleController@articleManagement');
 
     Route::get('/detail/{id?}', 'ArticleController@detail');
-    
+
     Route::post('/review/create', 'ReviewController@postCreateReview');
     Route::post('/review/add', 'ReviewController@postAddReview');
 });

@@ -43,12 +43,17 @@ class RegistrationController extends Controller {
         }
         $confirmation_code = str_random(30);
 
-        User::create(array(
-            'name' => Input::get('name'),
-            'email' => Input::get('email'),
-            'password' => Hash::make(Input::get('password')),
-            'rank' => User::USER,
-            'confirmation_code' => $confirmation_code
+        $id = User::create(array(
+                    'name' => Input::get('name'),
+                    'email' => Input::get('email'),
+                    'password' => Hash::make(Input::get('password')),
+                    'rank' => User::USER,
+                    'confirmation_code' => $confirmation_code
+                ))->id;
+
+        UserRole::create(array(
+            'user_id' => $id,
+            'rank_id' => User::USER
         ));
 
         Mail::send('emails.auth.verify', array('confirmation_code' => $confirmation_code), function($message) {

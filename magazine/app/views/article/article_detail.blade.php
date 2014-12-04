@@ -43,12 +43,28 @@ margin-bottom: 9px !important;
            $('#nok').attr('disabled', 'disabled');
         }
     }
+    var toggleScreen = function(){
+        if($('.note-toolbar button').is(':disabled')){
+            $('.note-editable').attr('contenteditable', true);
+            $('.note-toolbar button').removeAttr('disabled');
+            $('#title').removeAttr('disabled');
+            $('.bootstrap-tagsinput [type=text]').removeAttr('disabled');
+            $('#abstract').removeAttr('disabled');
+        }else{
+            $('.note-editable').attr('contenteditable', false);
+            $('.note-toolbar button').attr('disabled', 'disabled');
+            $('#title').attr('disabled', 'disabled');
+            $('.bootstrap-tagsinput [type=text]').attr('disabled', 'disabled');
+            $('#abstract').attr('disabled', 'disabled');
+        }
+    }
     
     var request = function(value){
         if(!$('.summernote').code()){
             return;
         }
         toggle_buttons();
+        toggleScreen();
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -68,6 +84,7 @@ margin-bottom: 9px !important;
             },
             error: function(){
                 toggle_buttons();
+                toggleScreen();
                 $('#recommend').html('{{ Lang::get('article.error_saving') }}');
             }
         });
