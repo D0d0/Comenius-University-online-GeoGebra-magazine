@@ -26,11 +26,26 @@ class HomeController extends BaseController {
         }
 
         $quoted_query = '%' . $query . '%';
-        $tags = Tag_group::leftJoin('tags', 'tags.id_tag', '=', 'tag_groups.id')
-                ->leftJoin('articles', 'tags.id_article', '=', 'articles.id')
+        $tags = DB::table('users')
                 ->where('name', 'LIKE', $quoted_query)
+                ->leftJoin('articles', 'users.id', '=', 'articles.user_id')
                 ->where('articles.state', '=', Article::PUBLISHED)
                 ->distinct()
+                ->select('name');
+        if ($tags->count() < 10) {
+            $tags = DB::table('tag_groups')
+                    ->leftJoin('tags', 'tags.id_tag', '=', 'tag_groups.id')
+                    ->leftJoin('articles', 'tags.id_article', '=', 'articles.id')
+                    ->where('name', 'LIKE', $quoted_query)
+                    ->where('articles.state', '=', Article::PUBLISHED)
+                    ->select('name')
+                    ->distinct()
+                    ->union($tags);
+            $querySql = $tags->toSql();
+            $tags = DB::table(DB::raw("($querySql order by name asc) as name"))->mergeBindings($tags);
+        }
+        $tags = $tags
+                ->orderBy('name', 'ASC')
                 ->take(10)
                 ->lists('name');
         return Response::json(array('result' => $tags));
