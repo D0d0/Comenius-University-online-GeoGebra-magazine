@@ -191,21 +191,31 @@ class ArticleController extends BaseController {
         } catch (Exception $e) {
             
         }
-        return View::make('article.article_detail', array('article' => $article, 'articles' => $articles));
+        return View::make('article.article_detail', array(
+                    'article' => $article,
+                    'articles' => $articles
+        ));
     }
 
     function changeState() { {
             if (Request::ajax()) {
                 $input = Input::all();
                 if (!$article = Article::find($input['id'])) {
-                    return Response::json(array('result' => true));
+                    return Response::json(array(
+                                'result' => true
+                    ));
                 }
                 $article->state = $input['state'];
                 $article->save();
-                if($input['state'] == Article::SENT && $review = $article->review){
+                if ($input['state'] == Article::SENT && $review = $article->review) {
                     $review->delete();
                 }
-                return Response::json(array('result' => true));
+                if ($input['state'] == Article::PUBLISHED) {
+                    // POSLI MALIS AUTOROVI
+                }
+                return Response::json(array(
+                            'result' => true
+                ));
             }
         }
     }

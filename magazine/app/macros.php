@@ -19,7 +19,7 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
         if ($article->state == Article::SENT) {
             //odoslana bez priradeneho recenzenta
             if (!$review = $article->review) {
-                $recenzenti = User::whereIn('id', UserRole::where('rank_id', '=', User::ADMIN)->orWhere('rank_id', User::REVIEWER)->select('user_id')->get()->toArray())->get();
+                $recenzenti = User::whereIn('id', UserRole::where('rank_id', '=', User::ADMIN)->orWhere('rank_id', User::REVIEWER)->select('user_id')->get()->toArray())->orderBy('name', 'ASC')->get();
                 $options = '';
                 foreach ($recenzenti as $recenzent) {
                     $options.='<option value=' . $recenzent->id . '>' . $recenzent->name . '</option>';

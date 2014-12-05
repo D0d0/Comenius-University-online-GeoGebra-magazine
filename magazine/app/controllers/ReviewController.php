@@ -13,6 +13,7 @@ class ReviewController extends BaseController {
             $review->save();
             $article->state = $input['state'];
             $article->save();
+            // POSLI VSETKYM Z REDAKCNEJ RADY
             return Response::json(array('result' => true));
         }
     }
@@ -27,6 +28,7 @@ class ReviewController extends BaseController {
             $review->id_article = $input['id'];
             $review->reviewer_id = $input['reviewer_id'];
             $review->save();
+            // POSLI MAILIS RECENZENT TREBA NOVY VIEW
             return Response::json(array('result' => true));
         }
     }
