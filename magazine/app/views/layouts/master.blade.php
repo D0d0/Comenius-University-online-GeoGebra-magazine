@@ -10,19 +10,13 @@
         {{HTML::style('css/bootstrap.min.css')}}
         {{HTML::style('css/bootstrap-minimit.min.css')}}
         {{HTML::style('css/datepicker.min.css')}}
+        {{HTML::style('css/jquery-ui.min.css')}}
         {{HTML::script('js/jquery.min.js')}}
         {{HTML::script('js/bootstrap.min.js')}}
         {{HTML::script('js/moment.min.js')}}
         {{HTML::script('js/locales.min.js')}}
         {{HTML::script('js/datepicker.min.js')}}
-        <!--
-            jquery-ui downloaded from:
-            http://jqueryui.com/download/#!version=1.11.2&components=1111000000100010000000000000000000000
-        -->
         {{HTML::script('js/jquery-ui.min.js')}}
-        {{HTML::style('css/jquery-ui.structure.min.css')}}
-        {{HTML::style('css/jquery-ui.min.css')}}
-        {{HTML::style('css/jquery-ui.theme.min.css')}}
         @yield('js')
         <style>
             #menu{
@@ -40,8 +34,6 @@
             @yield('style')
         </style>
         <script>
-            // NICE TO HAVE:
-            // modularization of javascript files: http://requirejs.org/
             $TAGS_URL = "{{ URL::action('HomeController@tags') }}";
 
             $(document).ready(function () {
@@ -49,26 +41,22 @@
                     language: "{{ Lang::get('common.lang')}}",
                     pickTime: false
                 });
-                $('#datetimepicker').on('dp.hide', function (e) {
-                    // TODO: remove console logs after release!
-                    console.log(e);
-                });
                 $.ajaxSetup({
                     headers: {'X-CSRF-Token': $('meta[name="_token"]').attr('content')}
                 });
 
                 var $searchInput = $('#hladanie'),
-                    $form = $('#search-form');
+                        $form = $('#search-form');
 
                 $searchInput.autocomplete({
                     delay: 250,
-                    source: function(request, add) {
+                    source: function (request, add) {
                         var url = $TAGS_URL;
-                        jQuery.getJSON(url, {query: request.term}, function(data) {
+                        jQuery.getJSON(url, {query: request.term}, function (data) {
                             add(data.result);
                         });
                     },
-                    select: function(event, ui) {
+                    select: function (event, ui) {
                         $searchInput.val(ui.item.label);
                         $form.submit();
                     },
@@ -100,11 +88,11 @@
                             <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile'), [Auth::id()]) }}</li>
                         </ul>
                     </li>
-                        @if(Auth::user()->hasRank(User::ADMIN) || Auth::user()->hasRank(User::REDACTION))
-                            <li>
-                                {{ HTML::linkAction('UserController@getManagement', Lang::get('menu.user_management')) }}
-                            </li>
-                        @endif
+                    @if(Auth::user()->hasRank(User::ADMIN) || Auth::user()->hasRank(User::REDACTION))
+                    <li>
+                        {{ HTML::linkAction('UserController@getManagement', Lang::get('menu.user_management')) }}
+                    </li>
+                    @endif
                     <li>
                         {{ HTML::linkAction('LoginController@getLogout', Lang::get('menu.logout')) }}
                     </li>

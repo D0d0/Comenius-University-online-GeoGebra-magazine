@@ -1,19 +1,5 @@
 <?php
 
-
-function like($string, $escape_char = '\\') {
-    return str_replace(
-        array($escape_char, '_', '%'),
-        array($escape_char.$escape_char, $escape_char.'_', $escape_char.'%'),
-        $string
-    );
-}
-
-function wild($string) {
-    return DB::connection()->getPdo()->quote('%'.like($string).'%');
-}
-
-
 /**
  * Controller na zobrazenie domovskej stránky
  */
@@ -39,9 +25,9 @@ class HomeController extends BaseController {
             return Response::json(array('result' => $input));
         }
 
-        $quoted_query = wild($query);
+        $quoted_query = '%' . $query . '%';
         $tags = Tag_group::
-                whereRaw("name ilike " . $quoted_query)
+                where('name', 'LIKE', $quoted_query)
                 ->take(10)
                 ->lists('name');
 
@@ -63,10 +49,10 @@ class HomeController extends BaseController {
         }
 
         $date_validator = Validator::make(
-            array('datum' => $query), array('datum' => 'date_format:"d.m.Y"')
+                        array('datum' => $query), array('datum' => 'date_format:"d.m.Y"')
         );
 
-        $quoted_query = wild($query);
+        $quoted_query = '%' . $query . '%';
         $articles = Article::published();
         if ($date_validator->passes()) {
             $myDate = DateTime::createFromFormat('d.m.Y', $query);
@@ -82,15 +68,15 @@ class HomeController extends BaseController {
                     ->select('articles.*')
                     ->distinct()
                     ->where(function($q2) use ($quoted_query) {
-                        $q2->whereRaw("articles.title ilike " . $quoted_query)
+                        $q2->where('articles.title', 'LIKE', $quoted_query)
                         ->orWhere(function($q3) use ($quoted_query) {
-                            $q3->whereRaw("tag_groups.name ilike " . $quoted_query);
+                            $q3->where('tag_groups.name', 'LIKE', $quoted_query);
                         })
                         ->orWhere(function($q4) use ($quoted_query) {
-                            $q4->whereRaw("articles.text ilike " . $quoted_query);
+                            $q4->where('articles.text', 'LIKE', $quoted_query);
                         })
                         ->orWhere(function($q5) use ($quoted_query) {
-                            $q5->whereRaw("users.name ilike " . $quoted_query);
+                            $q5->where('users.name', 'LIKE', $quoted_query);
                         });
                     })
                     ->orderBy('updated_at', 'DESC');
