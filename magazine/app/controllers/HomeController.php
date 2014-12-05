@@ -26,11 +26,13 @@ class HomeController extends BaseController {
         }
 
         $quoted_query = '%' . $query . '%';
-        $tags = Tag_group::
-                where('name', 'LIKE', $quoted_query)
+        $tags = Tag_group::leftJoin('tags', 'tags.id_tag', '=', 'tag_groups.id')
+                ->leftJoin('articles', 'tags.id_article', '=', 'articles.id')
+                ->where('name', 'LIKE', $quoted_query)
+                ->where('articles.state', '=', Article::PUBLISHED)
+                ->distinct()
                 ->take(10)
                 ->lists('name');
-
         return Response::json(array('result' => $tags));
     }
 
