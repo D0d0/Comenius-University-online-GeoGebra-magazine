@@ -37,6 +37,7 @@ Route::group(array('prefix' => 'user'), function() {
     Route::get('/management', 'UserController@getManagement');
     Route::post('/changeBan', 'UserController@postChangeBan');
     Route::post('/changeRank', 'UserController@postChangeRank');
+    Route::post('/update', 'UserController@updateProfile');
 });
 
 Route::group(array('prefix' => 'article'), function() {

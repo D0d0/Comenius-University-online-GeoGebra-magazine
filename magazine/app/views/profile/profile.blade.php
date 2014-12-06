@@ -8,66 +8,103 @@
 [type=clanok]{
 padding: 9px;
 }
-
-img{
-margin-right: 9px !important;
-}
 @stop
 
-@if($canEdit)
 @section('ready_js')
-$('#profile .fa, #profile .glyphicon').parent().mouseenter(function(){
-$(this).append(' <span class="glyphicon glyphicon-pencil text-muted"></span>');
-});
-
-$('#profile .fa,#profile .glyphicon').parent().mouseleave(function(){
-$('.glyphicon-pencil', this).remove();
+$('.save').on('click', function(){
+    $('.save').attr('disabled', 'disabled').html('{{ Lang::get('article.saving') }}');
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '{{ action('UserController@updateProfile') }}',
+        data: {
+            'email' : $('#email').val(),
+            'city' : $('#city').val(),
+            'school' : $('#school').val(),
+            'date' : $('#date').val(),
+        },
+        success: function(answer){
+            if(answer['result']){
+                $('.save').removeAttr('disabled').html('{{ Lang::get('article.saved') }}');
+            }else{
+                $('.save').removeAttr('disabled').html('Chyba pri ukladaní užívateľa!');
+            }
+        },
+        error: function(){
+            $('.save').removeAttr('disabled').html('Chyba pri ukladaní užívateľa!');
+        }
+    });
+    return false;
 });
 @stop
-@endif
 
 @section('left')
 <div class="col-md-12" id="profile">
     <div class="thumbnail" type="clanok">
         <div class="row">
-            <div class="col-md-3">
-                {{ HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded img-responsive')) }}
-            </div>
-            <div class="col-md-9">
-                <p><span style="width: 14px"></span><h3>{{{ $user->name }}}</h3></p>
-                <p><span class="glyphicon glyphicon-briefcase"></span> {{{ User_group::find($user->roles()->orderBy('rank_id', 'ASC')->first()->rank_id)->description }}}</p>
-                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> {{{ $user->getFormattedBirth() }}}</p>
-                <p><i class="fa fa-home" style="width: 14px"></i> {{{ $user->city }}}</p>
-                <p><i class="fa fa-graduation-cap" style="width: 14px"></i> {{{ $user->school }}}</p>
+            <div class="col-md-12">
+                <h3>{{{ $user->name }}}</h3>
+                @if($canEdit)
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="date" class="col-md-2 control-label">Dátum narodenia</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="date" placeholder="Dátum narodenia" value="{{{ $user->getFormattedBirth() }}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="email" placeholder="Email" value="{{{ $user->email }}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="col-md-2 control-label">Mesto</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="city" placeholder="Mesto" value="{{{ $user->city }}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="school" class="col-md-2 control-label">Škola</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="school" placeholder="Škola" value="{{{ $user->school }}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-default save">Ulož</button>
+                        </div>
+                    </div>
+                </form>
+                @else
                 <div class="row">
                     <div class="col-md-6">
-                        <p><span class="glyphicon glyphicon-envelope"></span> {{{ $user->email }}}</p>
+                        <p><span class="glyphicon glyphicon-briefcase"></span> {{{ User_group::find($user->roles()->orderBy('rank_id', 'ASC')->first()->rank_id)->description }}}</p>
                     </div>
-                    @if($user->google)
-                    <div class="col-md-6">
-                        <p style="color: #DD4B39"><i class="fa fa-google-plus" style="width: 14px"></i> {{{ $user->google }}}</p>
-                    </div>
-                    @endif
-                    @if($user->facebook)
-                    <div class="col-md-6">
-                        <p style="color: #3B5998"><i class="fa fa-facebook" style="width: 14px"></i> <a href="https://www.facebook.com/jozef.duc1">{{{ $user->facebook }}}</a></p>
-                    </div>
-                    @endif
-                    @if($user->twitter)
-                    <div class="col-md-6">
-                        <p style="color: #55ACEE"><i class="fa fa-twitter" style="width: 14px"></i><i class="fa fa-at"></i>{{{ $user->twitter }}}</p>
-                    </div>
-                    @endif
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">{{{ $user->getFormattedBirth() }}}</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">{{{ $user->email }}}</span></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fa fa-home" style="width: 14px"></i> {{{ $user->city }}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fa fa-graduation-cap" style="width: 14px"></i> <span class="text">{{{ $user->school }}}</span></p>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
-        @if($user->about)
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-justify"><span class="glyphicon glyphicon-search"></span> {{{ $user->about }}}</p>
-            </div>
-        </div>
-        @endif
     </div>
 </div>
 @stop
@@ -80,8 +117,8 @@ $('.glyphicon-pencil', this).remove();
     @else 
     <h2>{{ Lang::get('article.author_articles') }}</h2>
     @foreach($articles as $article)
-        {{ link_to_action('ArticleController@detail', $article->title, [$article->id]) }}
-        <br>
+    {{ link_to_action('ArticleController@detail', $article->title, [$article->id]) }}
+    <br>
     @endforeach
     @endif
 </div>

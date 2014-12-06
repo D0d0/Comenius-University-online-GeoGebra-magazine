@@ -94,7 +94,6 @@ HTML::macro('article', function($id = null, $size = 4, $draft = false, $manageme
             <div class="thumbnail clearfix" type="clanok">
                 <div class="row">
                     <div class="col-md-12">
-                        ' . HTML::image('img/apache_pb.png', 'alt', array('class' => 'img-rounded pull-left')) . '
                         <h3>' . $link . '</h3>
                         <p class="text-muted"><span class="glyphicon glyphicon-user"></span>&nbsp;' . link_to_action('MenuController@getProfile', $article->user->name, [$article->user->id], array('class' => 'text-muted')) . '</p>
                         <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;' . $article->getFormattedUdatedAt() . '</p>

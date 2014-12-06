@@ -61,4 +61,34 @@ class UserController extends BaseController {
         ));
     }
 
+    public function updateProfile() {
+        if (Request::ajax()) {
+            $input = Input::all();
+            $rules = array(
+                'date' => 'required|date_format:"d.m.Y"',
+                'city' => 'required|min:6',
+                'school' => 'required|min:6',
+            );
+            if (Auth::user()->email != $input['email']) {
+                $rules['email'] = 'required|email|unique:users,email';
+            }
+            $validator = Validator::make($input, $rules);
+            if ($validator->passes()) {
+                $user = Auth::user();
+                $user->email = $input['email'];
+                $user->city = $input['city'];
+                $user->school = $input['school'];
+                $user->birth = $input['date'];
+                $user->save();
+                return Response::json(array(
+                            'result' => true
+                ));
+            }
+            return Response::json($validator->messages());
+        }
+        return Response::json(array(
+                    'result' => false
+        ));
+    }
+
 }

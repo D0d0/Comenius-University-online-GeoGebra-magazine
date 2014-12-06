@@ -17,9 +17,6 @@ margin-bottom: 9px !important;
 @stop
 
 @section('ready_js')
-//DOLEZITE NEMAZAT ZATIAL
-//$('iframe').attr('src', 'http://www.geogebratube.org/material/iframe/id/23587/width/'+$('[type=clanok]').innerWidth()+'/height/640/border/888888/rc/false/ai/false/sdz/true/smb/false/stb/false/stbh/true/ld/false/sri/false/at/preferhtml5');
-
 @if($article->review && $article->state == Article::SENT && $article->review->reviewer->id == Auth::id())
     var accepted = {{ Article::ACCEPTED }};
     var unapproved = {{ Article::UNAPROVED }};
@@ -135,7 +132,7 @@ margin-bottom: 9px !important;
             <input type="hidden" id="article_id" value="{{ $article->id }}">
         </div>
         @endif
-        @if(($article->review && $article->review->text != '') && ($article->state != Article::SENT && $article->review->reviewer->id == Auth::id()) || (($article->state == Article::PUBLISHED || $article->state == Article::ACCEPTED || $article->state == Article::UNAPROVED) && $article->user->id == Auth::id()))
+        @if(($article->review && $article->review->text != '') && ($article->state != Article::SENT && $article->review->reviewer->id == Auth::id()) || ($article->state == Article::PUBLISHED && $article->user->id == Auth::id()))
             <div class="thumbnail clearfix row" type="clanok">
                 <h1>{{{ Lang::get('article.review') }}}</h1>
                 <p>{{ $article->review->text }}</p>
@@ -149,9 +146,6 @@ margin-bottom: 9px !important;
 <div class="row">
     <div class="col-md-12">
         <div class="thumbnail clearfix" type="clanok">
-            <div>
-                <img src="{{URL::asset('img/apache_pb.png')}}" alt="..." class="img-rounded">
-            </div>
             <h3>{{ link_to_action('MenuController@getProfile', $article->user->name  , [$article->user_id]) }}</h3>
             <h4>{{ Lang::get('article.other_articles') }}</h4>
             <p>
