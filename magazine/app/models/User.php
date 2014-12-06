@@ -55,6 +55,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function scopeOrdered($query) {
         return $query->orderBy('name', 'ASC');
     }
+    
+    public function scopeNotBanned($query) {
+        return $query->where('ban', '=', User::NOT_BANNED);
+    }
 
     /**
      * Zistí, či užívateľ má zadanú užívateľskú rolu

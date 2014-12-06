@@ -98,8 +98,8 @@
                 @endif
                 <th class="text-center">{{ Lang::get('article.reviewer') }}</th>
                 @if(Auth::user()->hasRank(User::ADMIN))
-                    <th class="text-center">{{ Lang::get('common.ban_user') }}</th>
                     <th class="text-center">{{ Lang::get('common.unban_user') }}</th>
+                    <th class="text-center">{{ Lang::get('common.ban_user') }}</th>
                 @endif
             </thead>
             <tbody>

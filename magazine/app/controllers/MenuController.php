@@ -10,7 +10,7 @@ class MenuController extends Controller {
      * @return type
      */
     public function getOnas() {
-        $users = User::ordered()->get();
+        $users = User::ordered()->notBanned()->get();
         $admin = [];
         $redaction =[];
         $reviewers = [];
