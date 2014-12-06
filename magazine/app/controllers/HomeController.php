@@ -25,7 +25,7 @@ class HomeController extends BaseController {
             return Response::json(array('result' => $input));
         }
 
-        $quoted_query = '%' . $query . '%';
+        $quoted_query = '%' . DBHelper::strip_like($query) . '%';
         $tags = DB::table('users')
                 ->where('name', 'LIKE', $quoted_query)
                 ->leftJoin('articles', 'users.id', '=', 'articles.user_id')
@@ -69,7 +69,7 @@ class HomeController extends BaseController {
                         array('datum' => $query), array('datum' => 'date_format:"d.m.Y"')
         );
 
-        $quoted_query = '%' . $query . '%';
+        $quoted_query = '%' . DBHelper::strip_like($query) . '%';
         $articles = Article::published();
         if ($date_validator->passes()) {
             $myDate = DateTime::createFromFormat('d.m.Y', $query);
