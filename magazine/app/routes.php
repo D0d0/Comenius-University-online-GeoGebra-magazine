@@ -54,6 +54,8 @@ Route::group(array('prefix' => 'article'), function() {
 
     Route::get('/unapproved', 'ArticleController@unapproved');
 
+    Route::get('/published', 'ArticleController@published');
+
     Route::get('/reviews', 'ArticleController@forReview');
     
     Route::get('/article_management', 'ArticleController@articleManagement');

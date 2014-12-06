@@ -6,6 +6,7 @@ return array(
     'sent' => 'Odoslané',
     'accepted' => 'Schválené',
     'unapproved' => 'Neschválené',
+    'published' => 'Publikované',
     'article_management' => 'Správa článkov',
     'caption' => 'Nadpis',
     'key_words' => 'Kľúčové slová',

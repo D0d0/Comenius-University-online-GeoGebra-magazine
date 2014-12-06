@@ -6,6 +6,7 @@ return array(
     'sent' => 'Sent',
     'accepted' => 'Accepted',
     'unapproved' => 'Unapproved',
+    'published' => 'Published',
     'article_management' => 'Article management',
     'caption' => 'Caption',
     'key_words' => 'Key words',

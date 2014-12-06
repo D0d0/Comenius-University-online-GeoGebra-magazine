@@ -130,6 +130,19 @@ class ArticleController extends BaseController {
         $articles = Auth::User()->articles()->unaproved()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
+    
+    /**
+     * Slúži na zobrazenie publikovaných článkov
+     * @return type
+     */
+    public function published() {
+        if (!Auth::check()) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.acces_denied'));
+        }
+        $articles = Auth::User()->articles()->published()->orderBy('updated_at', 'DESC')->get();
+        return View::make('article.article_published', array('articles' => $articles));
+    }
 
     /**
      * Slúží na zobrazenie správy článkov
