@@ -144,6 +144,23 @@ class ArticleController extends BaseController {
         return View::make('article.article_management', array('articles' => $articles));
     }
 
+    public function forReview() {
+        if (!Auth::check() || !Auth::user()->hasRank(User::REVIEWER)) {
+            return Redirect::action('HomeController@showWelcome')
+                            ->with('warning', Lang::get('common.acces_denied'));
+        }
+        $articles = Article::
+                        leftJoin('reviews', 'articles.id', '=', 'reviews.id_article')
+                        ->where('reviews.text', '=', '')
+                        ->where('reviews.reviewer_id', '=', Auth::id())
+                        ->where('articles.state', '=', Article::SENT)
+                        ->orderBy('reviews.updated_at', 'DESC')
+                        ->select('articles.id')->get();
+        return View::make('article.article_review', array(
+                    'articles' => $articles
+        ));
+    }
+
     /**
      * Zobrazenie článku
      * @param type $id

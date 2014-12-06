@@ -32,4 +32,5 @@ return array(
     'was_not_published' => 'Article was not published',
     'geoegbra_id' => 'GeogebraTube ID',
     'review' => 'Review',
+    'for_review' => 'For review',
 );
