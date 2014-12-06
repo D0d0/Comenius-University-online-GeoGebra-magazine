@@ -118,6 +118,52 @@ HTML::macro('articleGrid', function($articles, $width = 3, $size = 4, $draft = f
     return $result . "</div>";
 });
 
+HTML::macro('profile', function($id = null, $size = 4) {
+    $user = User::find($id);
+    return '
+        <div class="col-md-' . $size . ' col-md-height col-middle">
+            <div class="thumbnail clearfix" type="clanok">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>'. link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) .'</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">'. $user->getFormattedBirth() .'</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">'. $user->email .'</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><i class="fa fa-home" style="width: 14px"></i> '. $user->city .'</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><i class="fa fa-graduation-cap" style="width: 14px"></i> <span class="text">'. $user->school .'</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+});
+
+HTML::macro('profileGrid', function($profiles, $width = 3, $size = 4) {
+    $_user = [];
+    foreach ($profiles as $profile) {
+        $_user[] = HTML::profile($profile->id, $size);
+    }
+    $result = "<div class=\"row container-md-height col-md-12\">";
+    $result .= implode("</div><div class=\"row container-md-height col-md-12\">", array_map(function($i) {
+                return implode("", $i);
+            }, array_chunk($_user, $width)));
+    return $result . "</div>";
+});
+
 
 HTML::macro('articleWithReview', function($id = null, $size = 4, $draft = false) {
     $article = Article::find($id);

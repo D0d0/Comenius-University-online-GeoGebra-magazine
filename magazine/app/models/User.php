@@ -51,6 +51,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function roles() {
         return $this->hasMany('UserRole', 'user_id', 'id');
     }
+    
+    public function scopeOrdered($query) {
+        return $query->orderBy('name', 'ASC');
+    }
 
     /**
      * Zistí, či užívateľ má zadanú užívateľskú rolu

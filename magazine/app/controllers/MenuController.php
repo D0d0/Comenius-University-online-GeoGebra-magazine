@@ -10,7 +10,29 @@ class MenuController extends Controller {
      * @return type
      */
     public function getOnas() {
-        return View::make('onas');
+        $users = User::ordered()->get();
+        $admin = [];
+        $redaction =[];
+        $reviewers = [];
+        foreach ($users as $user){
+            if($user->hasRank(User::ADMIN)){
+                $admin[] = $user;
+                continue;
+            }
+            if($user->hasRank(User::REDACTION)){
+                $redaction[] = $user;
+                continue;
+            }
+            if($user->hasRank(User::REVIEWER)){
+                $reviewers[] = $user;
+                continue;
+            }
+        }
+        return View::make('onas', array(
+                    'admin' => $admin,
+                    'redaction' => $redaction,
+                    'reviewers' => $reviewers,
+        ));
     }
 
     /**
