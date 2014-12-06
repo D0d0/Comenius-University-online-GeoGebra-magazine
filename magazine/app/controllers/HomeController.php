@@ -25,9 +25,9 @@ class HomeController extends BaseController {
             return Response::json(array('result' => $input));
         }
 
-        $quoted_query = '%' . DBHelper::strip_like($query) . '%';
+        $quoted_query = DBHelper::prepare_like($query);
         $tags = DB::table('users')
-                ->where('name', 'LIKE', $quoted_query)
+                ->whereRaw('lower(name) LIKE ' . $quoted_query)
                 ->leftJoin('articles', 'users.id', '=', 'articles.user_id')
                 ->where('articles.state', '=', Article::PUBLISHED)
                 ->distinct()
@@ -36,7 +36,7 @@ class HomeController extends BaseController {
             $tags = DB::table('tag_groups')
                     ->leftJoin('tags', 'tags.id_tag', '=', 'tag_groups.id')
                     ->leftJoin('articles', 'tags.id_article', '=', 'articles.id')
-                    ->where('name', 'LIKE', $quoted_query)
+                    ->whereRaw('lower(name) LIKE ' . $quoted_query)
                     ->where('articles.state', '=', Article::PUBLISHED)
                     ->select('name')
                     ->distinct()
@@ -69,7 +69,7 @@ class HomeController extends BaseController {
                         array('datum' => $query), array('datum' => 'date_format:"d.m.Y"')
         );
 
-        $quoted_query = '%' . DBHelper::strip_like($query) . '%';
+        $quoted_query = DBHelper::prepare_like($query);
         $articles = Article::published();
         if ($date_validator->passes()) {
             $myDate = DateTime::createFromFormat('d.m.Y', $query);
@@ -85,15 +85,15 @@ class HomeController extends BaseController {
                     ->select('articles.*')
                     ->distinct()
                     ->where(function($q2) use ($quoted_query) {
-                        $q2->where('articles.title', 'LIKE', $quoted_query)
+                        $q2->whereRaw('lower(articles.title) LIKE $quoted_query')
                         ->orWhere(function($q3) use ($quoted_query) {
-                            $q3->where('tag_groups.name', 'LIKE', $quoted_query);
+                            $q3->whereRaw('lower(tag_groups.name) LIKE ' . $quoted_query);
                         })
                         ->orWhere(function($q4) use ($quoted_query) {
-                            $q4->where('articles.text', 'LIKE', $quoted_query);
+                            $q4->whereRaw('lower(articles.text) LIKE ' . $quoted_query);
                         })
                         ->orWhere(function($q5) use ($quoted_query) {
-                            $q5->where('users.name', 'LIKE', $quoted_query);
+                            $q5->whereRaw('lower(users.name) LIKE ' . $quoted_query);
                         });
                     })
                     ->orderBy('updated_at', 'DESC');
