@@ -4,11 +4,11 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Verify Your Email Address</h2>
+        <h2>Overenie mailu</h2>
 
         <div>
-            Thanks for creating an account.
-            Please follow the link below to verify your email address
+            Ďakujeme za vytvorenie účtu.
+            Kliknutím na nasledujúci link si aktivujete svoj účet
             {{ action('RegistrationController@confirm', [$confirmation_code]) }}.<br/>
         </div>
 

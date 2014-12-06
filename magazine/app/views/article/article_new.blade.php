@@ -254,6 +254,14 @@ changeButton();
             </button>
         </div>
     </div>
+    @if(isset($article) && $article->review && $article->review->text != '')
+        <div class="col-md-11 col-md-offset-1">
+            <div class="thumbnail clearfix row" type="clanok">
+                <h1>{{{ Lang::get('article.review') }}}</h1>
+                <p>{{ $article->review->text }}</p>
+            </div>
+        </div>
+    @endif
 </form>
 <div class="modal fade" id="geogebraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

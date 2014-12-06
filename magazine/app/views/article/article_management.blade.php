@@ -52,9 +52,10 @@ margin-right: 9px !important;
                 if(answer['result']){
                     $('#' + id + ' .form-group').empty().append('<div class="col-md-4 col-md-offset-2 text-right"><strong>{{Lang::get('article.reviewer_name')}}</strong></div><div class="col-md-6"><strong>' + reviewer_name + '</strong></div>');
                 }
+                $('.save_reviewer').removeClass('disabled');
             },
             error: function(){
-            
+                $('.save_reviewer').removeClass('disabled');
             }
         });
     }
@@ -63,7 +64,7 @@ margin-right: 9px !important;
         var id = getArticleID(this);
         var reviewer_id = $(this).closest('form').find('.reviewer_id').val();
         var reviewer_name = $(this).closest('form').find('.reviewer_id :selected').text();
-        console.log(reviewer_name);
+        $(this).addClass('disabled');
         addReviewer(reviewer_id, id, reviewer_name);
     });
     

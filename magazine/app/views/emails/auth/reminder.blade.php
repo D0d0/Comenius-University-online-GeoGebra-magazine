@@ -4,10 +4,10 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Password reset</h2>
+        <h2>Resetnutie hesla</h2>
 
         <div>
-            <!-- TODO -->
+            Kliknutím na nasledujúci link si obnovíte zabudnuté heslo
             {{ action('RemindersController@getReset', [$token]) }}.<br/>
         </div>
 

@@ -13,7 +13,15 @@ class ReviewController extends BaseController {
             $review->save();
             $article->state = $input['state'];
             $article->save();
-            // POSLI VSETKYM Z REDAKCNEJ RADY
+            $users = UserRole::where('rank_id', '=', User::REDACTION);
+            foreach ($users as $user) {
+                $email = $user->user->email;
+                $name =  $user->user->name;
+                Mail::send('emails.reviewed', array('id' => $input['id']), function($message)use($email, $name) {
+                    $message->to($email, $name)
+                            ->subject('Článok bol orecenzovaný');
+                });
+            }
             return Response::json(array('result' => true));
         }
     }
@@ -28,7 +36,12 @@ class ReviewController extends BaseController {
             $review->id_article = $input['id'];
             $review->reviewer_id = $input['reviewer_id'];
             $review->save();
-            // POSLI MAILIS RECENZENT TREBA NOVY VIEW
+            $email = User::find($input['reviewer_id'])->email;
+            $name = User::find($input['reviewer_id'])->name;
+            Mail::send('emails.new_review', array('id' => $input['id']), function($message)use($email, $name) {
+                $message->to($email, $name)
+                        ->subject('Nový článok na orecenzovanie');
+            });
             return Response::json(array('result' => true));
         }
     }
