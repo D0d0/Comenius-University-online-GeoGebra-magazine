@@ -101,7 +101,19 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
-        $articles = Auth::User()->articles()->sent()->orderBy('updated_at', 'DESC')->get();
+        $articles = Auth::User()->articles()
+                ->sent()
+                ->distinct()
+                ->leftJoin('reviews', 'articles.id', '=', 'reviews.id_article')
+                ->orWhere(function($q) {
+                    $q->where('reviews.text', '<>', '')
+                    ->where(function($q2) {
+                        $q2->where('articles.state', '=', Article::UNAPROVED)
+                        ->orWhere('articles.state', '=', Article::ACCEPTED);
+                    });
+                })
+                ->orderBy('articles.updated_at', 'DESC')
+                ->select('articles.id')->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
@@ -130,7 +142,7 @@ class ArticleController extends BaseController {
         $articles = Auth::User()->articles()->unaproved()->orderBy('updated_at', 'DESC')->get();
         return View::make('article.article_unapproved', array('articles' => $articles));
     }
-    
+
     /**
      * Slúži na zobrazenie publikovaných článkov
      * @return type
