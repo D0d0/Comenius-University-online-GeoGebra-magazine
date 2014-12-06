@@ -119,11 +119,14 @@ class HomeController extends BaseController {
         if (!count($idArticles)) {
             return Redirect::action('HomeController@showWelcome');
         }
+        $query = $tag->tagDescription->name;
         $maxPages = ceil(Article::whereIn('id', $idArticles)->published()->count() / 9);
         $articles = Article::whereIn('id', $idArticles)->orderBy('updated_at', 'DESC')->published()->simplePaginate(9);
         return View::make('index', array(
                     'articles' => $articles,
-                    'maxPages' => $maxPages));
+                    'maxPages' => $maxPages,
+                    'query' => $query,
+        ));
     }
 
 }
