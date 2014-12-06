@@ -76,7 +76,7 @@ class HomeController extends BaseController {
             $iso8601date = $myDate->format('Y-m-d');
             $articles = $articles
                     ->where('updated_at', '>=', $iso8601date)
-                    ->orderBy('updated_at', 'DESC');
+                    ->orderBy('updated_at', 'ASC');
         } else {
             $articles = $articles
                     ->leftJoin('users', 'users.id', '=', 'articles.user_id')
