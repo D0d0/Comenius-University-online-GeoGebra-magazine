@@ -85,7 +85,7 @@ class HomeController extends BaseController {
                     ->select('articles.*')
                     ->distinct()
                     ->where(function($q2) use ($quoted_query) {
-                        $q2->whereRaw('lower(articles.title) LIKE $quoted_query')
+                        $q2->whereRaw('lower(articles.title) LIKE ' . $quoted_query)
                         ->orWhere(function($q3) use ($quoted_query) {
                             $q3->whereRaw('lower(tag_groups.name) LIKE ' . $quoted_query);
                         })
