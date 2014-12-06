@@ -12,7 +12,9 @@
  */
 
 App::before(function($request) {
-    //
+    if (Auth::check() && Auth::user()->isBanned()) {
+        Auth::logout();
+    }
 });
 
 
