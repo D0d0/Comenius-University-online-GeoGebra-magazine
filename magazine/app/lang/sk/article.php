@@ -35,5 +35,6 @@ return array(
     'review' => 'Recenzia',
     'for_review' => 'Na recenzovanie',
     'not_common_articles' => 'Žiadne podobné články',
+    'not_common_articles' => 'Autor nemá žiadne ďalšie články',
     'no_articles' => 'Žiadny článok na zobrazenie',
 );

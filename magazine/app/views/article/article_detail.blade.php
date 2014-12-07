@@ -153,7 +153,7 @@ margin-bottom: 9px !important;
                     {{ link_to_action('ArticleController@detail', $oneArticle->title, [$oneArticle->id]) }}
                     <br>
                 @empty
-                    {{ Lang::get('article.not_common_articles') }}
+                    {{ Lang::get('article.not_common_articles_user') }}
                 @endforelse
             <h4>{{ Lang::get('article.related_articles') }}</h4>
             <p>

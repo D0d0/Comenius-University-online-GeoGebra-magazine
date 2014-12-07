@@ -35,5 +35,6 @@ return array(
     'review' => 'Review',
     'for_review' => 'For review',
     'not_common_articles' => 'There are no common articles',
+    'not_common_articles_user' => 'User does not have another articles',
     'no_articles' => 'No article to display',
 );
