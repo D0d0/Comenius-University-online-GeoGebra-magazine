@@ -14,7 +14,7 @@ class ArticleController extends BaseController {
         if (Auth::check()) {
             if ($id) {
                 $article = Article::find($id);
-                if ($article->user_id == Auth::id() && $article->state == Article::DRAFT) {
+                if ($article && $article->user_id == Auth::id() && $article->state == Article::DRAFT) {
                     $tags = '';
                     foreach ($article->tags as $value) {
                         $tags.=$value->tagDescription->name . ',';
@@ -72,9 +72,9 @@ class ArticleController extends BaseController {
             if (!$article = Article::find($input['id'])) {
                 return Response::json(array('result' => true));
             }
-            Tag::where('id_article', '=', $input['id'])->delete();
-            Article::find($input['id'])->delete();
-            Review::where('id_article', '=', $input['id'])->delete();
+            Tag::where('id_article', '=', $article->id)->delete();
+            Review::where('id_article', '=', $article->id)->delete();
+            $article->delete();
             return Response::json(array('result' => true));
         }
     }
