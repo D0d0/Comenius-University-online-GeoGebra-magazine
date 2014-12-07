@@ -1,9 +1,9 @@
 @extends('layouts.six_three_layout')
 
 @section('js')
-{{HTML::style('css/font-awesome.min.css')}}
-{{HTML::style('css/summernote.css')}}
-{{HTML::script('js/summernote.min.js')}}
+{{HTML::extendedStyle('css/font-awesome.min.css')}}
+{{HTML::extendedStyle('css/summernote.css')}}
+{{HTML::extendedScript('js/summernote.min.js')}}
 @stop
 
 @section('style')

@@ -7,16 +7,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}">
-        {{HTML::style('css/bootstrap.min.css')}}
-        {{HTML::style('css/bootstrap-minimit.min.css')}}
-        {{HTML::style('css/datepicker.min.css')}}
-        {{HTML::style('css/jquery-ui.min.css')}}
-        {{HTML::script('js/jquery.min.js')}}
-        {{HTML::script('js/bootstrap.min.js')}}
-        {{HTML::script('js/moment.min.js')}}
-        {{HTML::script('js/locales.min.js')}}
-        {{HTML::script('js/datepicker.min.js')}}
-        {{HTML::script('js/jquery-ui.min.js')}}
+        {{HTML::extendedStyle('css/bootstrap.min.css')}}
+        {{HTML::extendedStyle('css/bootstrap-minimit.min.css')}}
+        {{HTML::extendedStyle('css/datepicker.min.css')}}
+        {{HTML::extendedStyle('css/jquery-ui.min.css')}}
+        {{HTML::extendedScript('js/jquery.min.js')}}
+        {{HTML::extendedScript('js/bootstrap.min.js')}}
+        {{HTML::extendedScript('js/moment.min.js')}}
+        {{HTML::extendedScript('js/locales.min.js')}}
+        {{HTML::extendedScript('js/datepicker.min.js')}}
+        {{HTML::extendedScript('js/jquery-ui.min.js')}}
         @yield('js')
         <style>
             #menu{

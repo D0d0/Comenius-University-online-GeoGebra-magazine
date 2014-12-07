@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('js')
-{{HTML::script('js/jquery.infinitescroll.min.js')}}
+{{HTML::extendedScript('js/jquery.infinitescroll.min.js')}}
 @stop
 
 @section('style')

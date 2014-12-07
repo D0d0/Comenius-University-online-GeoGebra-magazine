@@ -1,5 +1,15 @@
 <?php
 
+HTML::macro('extendedStyle', function($url, $attributes = array(), $secure = null) {
+    $prefix = $_ENV['ROUTES_PREFIX'] == '' ? '' : $_ENV['ROUTES_PREFIX'] . '/';
+    return HTML::style($prefix . $url, $attributes, $secure);
+});
+
+HTML::macro('extendedScript', function($url, $attributes = array(), $secure = null) {
+    $prefix = $_ENV['ROUTES_PREFIX'] == '' ? '' : $_ENV['ROUTES_PREFIX'] . '/';
+    return HTML::script($prefix . $url, $attributes, $secure);
+});
+
 HTML::macro('tags', function($id) {
     $tagsResult = '<span class="glyphicon glyphicon-tags"></span>&nbsp; ';
     foreach (Article::find($id)->tags as $value) {
@@ -125,25 +135,25 @@ HTML::macro('profile', function($id = null, $size = 4) {
             <div class="thumbnail clearfix" type="clanok">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>'. link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) .'</h3>
+                        <h3>' . link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) . '</h3>
                         <div class="row">
                             <div class="col-md-12">
-                                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">'. $user->getFormattedBirth() .'</span></p>
+                                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">' . $user->getFormattedBirth() . '</span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">'. $user->email .'</span></p>
+                                <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">' . $user->email . '</span></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p><i class="fa fa-home" style="width: 14px"></i> '. $user->city .'</p>
+                                <p><i class="fa fa-home" style="width: 14px"></i> ' . $user->city . '</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p><i class="fa fa-graduation-cap" style="width: 14px"></i> <span class="text">'. $user->school .'</span></p>
+                                <p><i class="fa fa-graduation-cap" style="width: 14px"></i> <span class="text">' . $user->school . '</span></p>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.two_one_layout')
 
 @section('js')
-{{HTML::style('css/font-awesome.min.css')}}
+{{HTML::extendedStyle('css/font-awesome.min.css')}}
 @stop
 
 @section('style')

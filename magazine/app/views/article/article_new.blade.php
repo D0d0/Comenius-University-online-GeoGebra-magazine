@@ -1,11 +1,11 @@
 @extends('article.article')
 
 @section('js')
-{{HTML::style('css/font-awesome.min.css')}}
-{{HTML::style('css/summernote.css')}}
-{{HTML::script('js/summernote.min.js')}}
-{{HTML::script('js/bootstrap-tagsinput.min.js')}}
-{{HTML::style('css/bootstrap-tagsinput.css')}}
+{{HTML::extendedStyle('css/font-awesome.min.css')}}
+{{HTML::extendedStyle('css/summernote.css')}}
+{{HTML::extendedScript('js/summernote.min.js')}}
+{{HTML::extendedScript('js/bootstrap-tagsinput.min.js')}}
+{{HTML::extendedStyle('css/bootstrap-tagsinput.css')}}
 @stop
 
 @section('ready_js')
