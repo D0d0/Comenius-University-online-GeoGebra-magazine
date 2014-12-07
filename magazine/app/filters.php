@@ -82,3 +82,8 @@ Route::filter('csrf', function() {
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
+
+App::missing(function($exception) {
+    return Redirect::action('HomeController@showWelcome')
+                    ->with('warning', Lang::get('common.acces_denied'));
+});

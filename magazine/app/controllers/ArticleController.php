@@ -102,18 +102,18 @@ class ArticleController extends BaseController {
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         $articles = Auth::User()->articles()
-                ->sent()
-                ->distinct()
-                ->leftJoin('reviews', 'articles.id', '=', 'reviews.id_article')
-                ->orWhere(function($q) {
-                    $q->where('reviews.text', '<>', '')
-                    ->where(function($q2) {
-                        $q2->where('articles.state', '=', Article::UNAPROVED)
-                        ->orWhere('articles.state', '=', Article::ACCEPTED);
-                    });
-                })
-                ->orderBy('articles.updated_at', 'DESC')
-                ->select('articles.id')->get();
+                        ->sent()
+                        ->distinct()
+                        ->leftJoin('reviews', 'articles.id', '=', 'reviews.id_article')
+                        ->orWhere(function($q) {
+                            $q->where('reviews.text', '<>', '')
+                            ->where(function($q2) {
+                                $q2->where('articles.state', '=', Article::UNAPROVED)
+                                ->orWhere('articles.state', '=', Article::ACCEPTED);
+                            });
+                        })
+                        ->orderBy('articles.updated_at', 'DESC')
+                        ->select('articles.id')->get();
         return View::make('article.article_sent', array('articles' => $articles));
     }
 
@@ -196,12 +196,12 @@ class ArticleController extends BaseController {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.article_does_not_exist'));
         }
-        /* if (Auth::check() && Auth::user()->hasRank(User::ADMIN)) {                                                              // admin vidi vsetko
-          return View::make('article.article_detail', array('article' => $article));
-          }
-          if (Auth::check() && Auth::user()->hasRank(User::REDACTION) && ($article->state != Article::DRAFT || $article->user_id == Auth::id())) {      // red. rada vidi vsetko okrem konceptov pokial niesu ich
-          return View::make('article.article_detail', array('article' => $article));
-          } */
+        if (Auth::check() && Auth::user()->hasRank(User::ADMIN)) {                                                              // admin vidi vsetko
+            return View::make('article.article_detail', array('article' => $article));
+        }
+        /*if (Auth::check() && Auth::user()->hasRank(User::REDACTION) && ($article->state != Article::DRAFT || $article->user_id == Auth::id())) {      // red. rada vidi vsetko okrem konceptov pokial niesu ich
+            return View::make('article.article_detail', array('article' => $article));
+        }*/
         $review = Review::where('id_article', '=', $id)->first();
         if ($article->state <> Article::PUBLISHED && Auth::check() && $article->user_id <> Auth::id()) {   // prihlaseny vidi iba svoje aj nepublikovane
             if ($review && (Auth::id() != $review->reviewer_id)) {                          // ak je recenzent toho clanku tak vidi tiez

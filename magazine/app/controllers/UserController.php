@@ -8,7 +8,7 @@
 class UserController extends BaseController {
 
     public function getManagement() {
-        if (!Auth::user()->hasRank(User::ADMIN) && !Auth::user()->hasRank(User::REDACTION)) {
+        if (!Auth::check() || (!Auth::user()->hasRank(User::ADMIN) && !Auth::user()->hasRank(User::REDACTION))) {
             return Redirect::action('HomeController@showWelcome')
                             ->with('warning', Lang::get('common.acces_denied'));
         }
