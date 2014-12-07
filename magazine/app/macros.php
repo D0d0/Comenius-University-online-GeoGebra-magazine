@@ -10,6 +10,11 @@ HTML::macro('extendedScript', function($url, $attributes = array(), $secure = nu
     return HTML::script($prefix . $url, $attributes, $secure);
 });
 
+HTML::macro('extendedImage', function($url, $alt = null, $attributes = array(), $secure = null) {
+    $prefix = $_ENV['ROUTES_PREFIX'] == '' ? '' : $_ENV['ROUTES_PREFIX'] . '/';
+    return HTML::image($prefix . $url, $alt, $attributes, $secure);
+});
+
 HTML::macro('tags', function($id) {
     $tagsResult = '<span class="glyphicon glyphicon-tags"></span>&nbsp; ';
     foreach (Article::find($id)->tags as $value) {
