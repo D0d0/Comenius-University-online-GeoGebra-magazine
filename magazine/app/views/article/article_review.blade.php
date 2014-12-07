@@ -16,8 +16,7 @@ margin-right: 9px !important;
 @else
 <div class="row">
     <div class="jumbotron">
-        TODO
-        Ziadny clanok na zobrazenie
+        {{ Lang::get('article.no_articles') }}
     </div>
 </div>
 @endif

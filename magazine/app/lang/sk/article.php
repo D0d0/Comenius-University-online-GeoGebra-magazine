@@ -34,4 +34,6 @@ return array(
     'geoegbra_id' => 'GeogebraTube ID',
     'review' => 'Recenzia',
     'for_review' => 'Na recenzovanie',
+    'not_common_articles' => 'Žiadne podobné články',
+    'no_articles' => 'Žiadny článok na zobrazenie',
 );

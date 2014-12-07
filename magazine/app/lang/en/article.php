@@ -34,4 +34,6 @@ return array(
     'geoegbra_id' => 'GeogebraTube ID',
     'review' => 'Review',
     'for_review' => 'For review',
+    'not_common_articles' => 'There are no common articles',
+    'no_articles' => 'No article to display',
 );

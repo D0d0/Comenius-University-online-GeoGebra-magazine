@@ -153,7 +153,7 @@ margin-bottom: 9px !important;
                     {{ link_to_action('ArticleController@detail', $oneArticle->title, [$oneArticle->id]) }}
                     <br>
                 @empty
-                    TODO: Ziadne podobne clanky
+                    {{ Lang::get('article.not_common_articles') }}
                 @endforelse
             <h4>{{ Lang::get('article.related_articles') }}</h4>
             <p>
@@ -161,7 +161,7 @@ margin-bottom: 9px !important;
                     {{ link_to_action('ArticleController@detail', $oneArticle->title, [$oneArticle->id]) }}
                     <br>
                 @empty
-                    TODO: Ziadne podobne clanky
+                    {{ Lang::get('article.not_common_articles') }}
                 @endforelse
             </p>
         </div>
