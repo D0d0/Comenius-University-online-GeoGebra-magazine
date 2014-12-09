@@ -14,7 +14,7 @@ $ sudo apt-get install ansible
 #### CLONE ####
 
 ```bash
-$ git clone --recursive https://github.com/mrkvost/deploy.git deploy
+$ git clone --recursive https://github.com/D0d0/Comenius-University-online-GeoGebra-magazine.git
 ```
 
 #### SETTINGS ####
