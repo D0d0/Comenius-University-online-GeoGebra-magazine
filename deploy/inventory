@@ -1,2 +1,2 @@
 [development]
-mydevel ansible_ssh_host=178.62.89.238
+mydevel ansible_ssh_host=FIXME # e.g. 178.33.215.45
