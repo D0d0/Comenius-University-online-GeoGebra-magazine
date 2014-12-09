@@ -81,10 +81,10 @@ require app_path() . '/macros.php';
 Event::listen('cron.collectJobs', function() {
     Cron::add('example', '* * * */2 *', function() {
         $reviews = Review::where('text', '=', '')->where('created_at', '<=', 'SYSDATE-14')->get();
-        foreach ($review as $review) {
+        foreach ($reviews as $review) {
             $user = $review->reviewer;
-            Mail::send('emails.control_account', null, function($message) use ($user) {
-                $message->to($user->mail, 'test')
+            Mail::send('emails.control_account', array(), function($message) use ($user) {
+                $message->to($user->email, 'test')
                         ->subject("Čakajúce články");
             });
         }
