@@ -25,6 +25,11 @@ $ cd deploy
 $ vim vars/sensitive.yml
 ```
 
+Specify host in file inventory:
+```bash
+$ vim inventory
+```
+
 #### RUN PLAYBOOK ####
 
 ```
