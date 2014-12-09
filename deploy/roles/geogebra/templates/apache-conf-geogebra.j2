@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+
+  DocumentRoot {{ geogebra_dir }}/main/magazine/public
+
+  <Directory "{{ geogebra_dir}}/main/magazine/public">
+    RewriteEngine On
+    Options Indexes FollowSymLinks
+    AllowOverride all
+    # DirectoryIndex index.php
+    Require all granted
+  </Directory>
+
+</VirtualHost>

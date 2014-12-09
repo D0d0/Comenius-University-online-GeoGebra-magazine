@@ -1,0 +1,115 @@
+---
+
+- name: Create db forge
+  postgresql_db: name={{ database_name }}
+                 encoding='UTF-8'
+                 lc_collate='en_US.UTF-8'
+                 lc_ctype='en_US.UTF-8'
+
+- name: Create db user forge
+  postgresql_user: name={{ database_user }}
+                   db={{ database_name }}
+                   password={{ database_password }}
+                   priv=ALL
+                   role_attr_flags=NOSUPERUSER
+                   state=present
+
+
+- name: Clone geogebra repo
+  git: dest={{ geogebra_dir }}/main
+       repo={{ geogebra_repo }}
+       accept_hostkey=true   # TODO:
+  environment:
+    GIT_AUTH: "{{ gituser }}:{{ gitpass }}"
+    GIT_ASKPASS: /usr/local/bin/git_env_askpass.py
+
+
+- name: Composer | Ensure curl is installed
+  apt: pkg=curl state=installed
+
+- name: Composer | Install Composer into cwd
+  shell: curl -sS https://getcomposer.org/installer | php
+         creates={{ composer_path }}
+  sudo: yes
+  sudo_user: root
+  tags:
+    - copmoser
+
+- name: Composer | Move Composer into globally-accessible location
+  shell: mv composer.phar {{ composer_path }}
+         creates={{ composer_path }}
+  sudo: yes
+  sudo_user: root
+  tags:
+    - copmoser
+
+- name: Composer | Update Composer to latest version
+  shell: php {{ composer_path }} self-update
+  sudo: yes
+  sudo_user: root
+  register: composer_update
+  changed_when: "'Updating to version' in composer_update.stdout"
+  tags:
+    - composer
+
+- name: Composer | Update Composer with geogebra dependencies
+  command: chdir={{ geogebra_dir }}/main/magazine composer update
+  sudo_user: apache
+  tags:
+    - composer
+
+
+- name: Apache | Add geogebra config
+  template: src=apache-conf-geogebra.j2
+            dest=/etc/apache2/sites-available/geogebra.conf
+            owner=apache
+            group=apache
+            mode=0644
+  sudo: yes
+  sudo_user: root
+
+- name: Apache | Symlink to geogebra.conf in sites-enabled
+  file: src=/etc/apache2/sites-available/geogebra.conf
+        dest=/etc/apache2/sites-enabled/geogebra.conf
+        state=link
+  sudo: yes
+  sudo_user: root
+  notify:
+    - Restart Apache2
+
+- name: Copy env config
+  template: src=env.j2
+            dest={{ geogebra_dir }}/main/magazine/.env.php
+            owner=apache
+            group=apache
+            mode=0622
+
+- name: Git | set default user
+  command: git config --global user.email "hola2@uniba.sk"
+  sudo_user: apache
+
+- name: Git | set default user
+  command: git config --global user.name "Michal Hoľa"
+  sudo_user: apache
+
+# - name: Reset tables in database
+#   shell: chdir={{ geogebra_dir }}/main/magazine
+#          echo "y" | php artisan migrate:reset
+
+- name: Create tables in database
+  shell: chdir={{ geogebra_dir }}/main/magazine
+           echo "y" | php artisan migrate
+  register: create_tables
+  notify:
+    - Restart Apache2
+- debug: var=create_tables.stdout
+  when: show_debug_info
+
+- name: Seed database tables with initial data
+  shell: chdir={{ geogebra_dir }}/main/magazine
+         echo "y" | php artisan db:seed
+  register: init_tables
+  notify:
+    - Restart Apache2
+- debug: var=init_tables.stdout
+  when: show_debug_info

@@ -1,0 +1,22 @@
+---
+
+- hosts: all
+  sudo_user: root
+  sudo: yes
+  vars_files:
+    - vars/geogebra.yml
+  roles:
+    - common
+    - phpserver
+    - postgresql
+
+- hosts: all
+  sudo: yes
+  sudo_user: apache
+  vars_files:
+    - vars/geogebra.yml
+    - vars/sensitive.yml
+  vars:
+    show_debug_info: true
+  roles:
+    - geogebra

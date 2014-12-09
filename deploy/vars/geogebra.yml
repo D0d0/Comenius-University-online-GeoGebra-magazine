@@ -1,0 +1,6 @@
+geogebra_repo: https://github.com/D0d0/Comenius-University-online-GeoGebra-magazine.git
+geogebra_dir: /srv/www/geogebra
+geogebra_routes_prefix: ''
+composer_path: /usr/local/bin/composer
+database_dialect: 'pgsql'
+locale_lang: en_US.UTF-8
