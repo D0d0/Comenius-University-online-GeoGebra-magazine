@@ -79,12 +79,15 @@ require app_path() . '/filters.php';
 require app_path() . '/macros.php';
 
 Event::listen('cron.collectJobs', function() {
-
-    Cron::add('example', '*/2 * * * *', function() {
-        Mail::send('emails.auth.verify', array('confirmation_code' => "gjkg"), function($message) {
-            $message->to('jozef.d13@gmail.com', 'test')
-                    ->subject(Lang::get('emails.verify_email'));
-        });
+    Cron::add('example', '* * * */2 *', function() {
+        $reviews = Review::where('text', '=', '')->where('created_at', '<=', 'SYSDATE-14')->get();
+        foreach ($review as $review) {
+            $user = $review->reviewer;
+            Mail::send('emails.control_account', null, function($message) use ($user) {
+                $message->to($user->mail, 'test')
+                        ->subject("Čakajúce články");
+            });
+        }
         return null;
     });
 });

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Nový článok na recnzovanie</h2>
+        <h2>Nový článok na recenzovanie</h2>
 
         <div>
             Bol Vám priradený nový článok na orecenzovanie. Pre jeho zobrazenie kliknite na link 
