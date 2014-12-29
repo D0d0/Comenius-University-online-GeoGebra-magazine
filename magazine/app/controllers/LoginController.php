@@ -3,7 +3,7 @@
 /**
  * Controller, ktorý obsluhuje užívateľa
  */
-class LoginController extends Controller {
+class LoginController extends BaseController {
 
     /**
      * Odhlási užívateľa

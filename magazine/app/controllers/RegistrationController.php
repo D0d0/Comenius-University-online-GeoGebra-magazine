@@ -3,7 +3,7 @@
 /**
  * Controller na registráciu užívateľa
  */
-class RegistrationController extends Controller {
+class RegistrationController extends BaseController {
 
     /**
      * Zobrazí registračný formulár
