@@ -79,7 +79,7 @@ require app_path() . '/filters.php';
 require app_path() . '/macros.php';
 
 Event::listen('cron.collectJobs', function() {
-    Cron::add('example', '* * * */2 *', function() {
+    Cron::add('example', '* * * * *', function() {
         $reviews = Review::where('text', '=', '')->whereRaw('created_at < now() - INTERVAL 2 WEEK')->get();
         foreach ($reviews as $review) {
             $user = $review->reviewer;
