@@ -80,7 +80,7 @@ require app_path() . '/macros.php';
 
 Event::listen('cron.collectJobs', function() {
     Cron::add('example', '* * * */2 *', function() {
-        $reviews = Review::where('text', '=', '')->where('created_at', '<=', 'SYSDATE-14')->get();
+        $reviews = Review::where('text', '=', '')->whereRaw('created_at < now() - INTERVAL 2 WEEK')->get();
         foreach ($reviews as $review) {
             $user = $review->reviewer;
             Mail::send('emails.control_account', array(), function($message) use ($user) {
