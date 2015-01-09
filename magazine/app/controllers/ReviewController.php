@@ -16,7 +16,7 @@ class ReviewController extends BaseController {
             $users = UserRole::where('rank_id', '=', User::REDACTION);
             foreach ($users as $user) {
                 $email = $user->user->email;
-                $name =  $user->user->name;
+                $name = $user->user->name;
                 Mail::send('emails.reviewed', array('id' => $input['id']), function($message)use($email, $name) {
                     $message->to($email, $name)
                             ->subject('Článok bol orecenzovaný');

@@ -3,7 +3,7 @@
 /**
  * Controller, ktorý obsluhuje menu
  */
-class MenuController extends Controller {
+class MenuController extends BaseController {
 
     /**
      * Zobrazí sekciu o nás
