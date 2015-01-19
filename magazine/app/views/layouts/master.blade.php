@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/png" href="{{ link_to(($_ENV['ROUTES_PREFIX'] == '' ? '' : $_ENV['ROUTES_PREFIX'] . '/') . 'img/logo_mini.png') }}">
+        <link rel="icon" type="image/png" href="{{ url(($_ENV['ROUTES_PREFIX'] == '' ? '' : $_ENV['ROUTES_PREFIX'] . '/') . 'img/logo_mini.png') }}">
         <meta name="_token" content="{{ csrf_token() }}">
         {{HTML::extendedStyle('css/bootstrap.min.css')}}
         {{HTML::extendedStyle('css/bootstrap-minimit.min.css')}}
