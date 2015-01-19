@@ -60,6 +60,10 @@
             .navbar{
                 margin-bottom: 0px;
             }
+            
+            #hlavicka:hover{
+                text-decoration: none;
+            }
 
             @yield('style')
         </style>
@@ -101,7 +105,8 @@
         <div class="container-fluid" style="background-color: #AFCFFF; padding: 0;">
             <div class="row" style="margin: 0;">
                 <div class="col-md-12" style="padding: 0">
-                    <a href="{{ action('HomeController@showWelcome') }}">{{ HTML::extendedImage('img/logo_geogebramag.png', '', array('style' => 'margin-top: 20px; margin-bottom: 20px')) }}</a>
+                    <a class="hidden-xs" href="{{ action('HomeController@showWelcome') }}">{{ HTML::extendedImage('img/logo_geogebramag.png', '', array('style' => 'margin-top: 20px; margin-bottom: 20px')) }}</a>
+                    <a id="hlavicka" class="visible-xs text-center" href="{{ action('HomeController@showWelcome') }}"><h1 style="color: white">Online Geogebra magazín Univerzity Komenského</h1></a>
                     <a class="hidden-xs hidden-sm" href="http://www.fmph.uniba.sk/">{{ HTML::extendedImage('img/FMFIUK_LIN.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 80px; margin-left: 80px')) }}</a>
                     <a class="hidden-xs hidden-sm" href="https://uniba.sk/">{{ HTML::extendedImage('img/SYMBOL_2UK_LINKA.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 80px')) }}</a>
                     <a class="hidden-xs hidden-sm" href="http://geogebra.org/">{{ HTML::extendedImage('img/geogebra.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 130px')) }}</a>
