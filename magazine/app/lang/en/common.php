@@ -16,6 +16,7 @@ return array(
     'remember_login' => 'Remember me',
     'send' => 'Send',
     'login' => 'Login',
+    'register' => 'Register',
     'acces_denied' => 'You do not have access to this page.',
     'logout_successful' => 'You have been logged out.',
     'login_successful' => 'You are now logged in.',

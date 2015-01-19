@@ -16,6 +16,7 @@ return array(
     'remember_login' => 'Zapamätaj prihlásenie',
     'send' => 'Pošli',
     'login' => 'Prihlás',
+    'register' => 'Registruj',
     'acces_denied' => 'Nemáte prístup na túto stránku.',
     'logout_successful' => 'Odhlásenie prebehlo úspešne.',
     'login_successful' => 'Prihlásenie prebehlo úspešne.',

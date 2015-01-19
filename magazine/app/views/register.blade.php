@@ -55,7 +55,7 @@ padding: 9px;
                 @if ($errors->has('school')) <p class="help-block" style="margin-bottom: 0px;">{{ $errors->first('school') }}</p> @endif
             </div>
         </div>
-        {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
+        {{Form::submit(Lang::get('common.register'), array('class'=>'btn btn-default'))}}
     </div>
     {{ Form::close() }}
 </div>
