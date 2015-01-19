@@ -27,13 +27,14 @@ class RegistrationController extends BaseController {
                             ->with('warning', Lang::get('common.acces_denied'));
         }
         $input = Input::only(
-                        'name', 'password', 'password_confirmation', 'email'
+                        'name', 'password', 'password_confirmation', 'email', 'school'
         );
         $rules = array(
             'name' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
-            'email' => 'required|email|unique:users,email'
+            'email' => 'required|email|unique:users,email',
+            'school' => 'required'
         );
         $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
@@ -48,6 +49,7 @@ class RegistrationController extends BaseController {
                     'email' => Input::get('email'),
                     'password' => Hash::make(Input::get('password')),
                     'rank' => User::USER,
+                    'school' => Input::get('school'),
                     'confirmation_code' => $confirmation_code
                 ))->id;
 

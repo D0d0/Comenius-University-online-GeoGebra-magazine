@@ -37,4 +37,7 @@ return array(
     'not_common_articles' => 'There are no common articles',
     'not_common_articles_user' => 'User does not have another articles',
     'no_articles' => 'No article to display',
+    'author' => 'Author: ',
+    'revise' => 'Revise',
+    'insight' => 'Insight',
 );

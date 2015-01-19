@@ -13,11 +13,19 @@ var timer;
 var saving = false;
 var send = {{ Article::SENT }};
 
+$('#insight').on('click', function(){
+    if($('#id').val()){
+        window.open('{{ action('ArticleController@detail') }}/' + $('#id').val());
+    }
+});
+
 var changeButton = function(){
     if($('#id').val()){
         $('#send').removeAttr('disabled');
+        $('#insight').removeAttr('disabled');
     }else{
         $('#send').attr('disabled', 'disabled');
+        $('#insight').attr('disabled', 'disabled');
     }
     if (saving){
         return false;
@@ -230,7 +238,7 @@ changeButton();
     <div class="form-group">
         <label for="abstrakt" class="col-md-1 control-label">{{ Lang::get('article.abstract') }}</label>
         <div class="col-md-11">
-            <input type="text" id="abstract" class="form-control" value="{{ $article->abstract or '' }}">
+            <textarea rows="5" id="abstract" class="form-control" maxlength="500">{{ $article->abstract or '' }}</textarea>
         </div>
     </div>
     <div class="form-group">
@@ -242,7 +250,7 @@ changeButton();
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-1 col-md-offset-9">
+        <div class="col-md-1 col-md-offset-8">
             <button type="button" class="btn btn-default" id="save">{{ Lang::get('article.save') }}</button>
         </div>
         <div class="col-md-1">
@@ -251,6 +259,11 @@ changeButton();
         <div class="col-md-1">
             <button type="button" class="btn btn-default" id="trash">
                 <span class="glyphicon glyphicon-trash"></span>
+            </button>
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-default" id="insight">
+                <span class="glyphicon glyphicon-zoom-in"></span>
             </button>
         </div>
     </div>

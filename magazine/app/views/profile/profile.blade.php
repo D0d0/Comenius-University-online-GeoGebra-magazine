@@ -21,7 +21,7 @@ $('.save').on('click', function(){
             'email' : $('#email').val(),
             'city' : $('#city').val(),
             'school' : $('#school').val(),
-            'date' : $('#date').val(),
+            'google' : $('#google').val(),
         },
         success: function(answer){
             if(answer['result']){
@@ -47,12 +47,6 @@ $('.save').on('click', function(){
                 @if($canEdit)
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="date" class="col-md-2 control-label">Dátum narodenia</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" id="date" placeholder="Dátum narodenia" value="{{{ $user->getFormattedBirth() }}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="email" class="col-md-2 control-label">Email</label>
                         <div class="col-md-10">
                             <input type="email" class="form-control" id="email" placeholder="Email" value="{{{ $user->email }}}">
@@ -65,9 +59,15 @@ $('.save').on('click', function(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="school" class="col-md-2 control-label">Škola</label>
+                        <label for="school" class="col-md-2 control-label">{{ Lang::get('common.school') }}</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" id="school" placeholder="Škola" value="{{{ $user->school }}}">
+                            <input type="text" class="form-control" id="school" placeholder="{{ Lang::get('common.school') }}" value="{{{ $user->school }}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="school" class="col-md-2 control-label">{{ Lang::get('common.url') }}</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="google" placeholder="{{ Lang::get('common.url') }}" value="{{{ $user->google }}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -84,24 +84,30 @@ $('.save').on('click', function(){
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">{{{ $user->getFormattedBirth() }}}</span></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
                         <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">{{{ $user->email }}}</span></p>
                     </div>
                 </div>
+                @if ($user->city)
                 <div class="row">
                     <div class="col-md-6">
                         <p><i class="fa fa-home" style="width: 14px"></i> {{{ $user->city }}}</p>
                     </div>
                 </div>
+                @endif
+                @if ($user->school)
                 <div class="row">
                     <div class="col-md-6">
                         <p><i class="fa fa-graduation-cap" style="width: 14px"></i> <span class="text">{{{ $user->school }}}</span></p>
                     </div>
                 </div>
+                @endif
+                @if ($user->google)
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><i class="fa fa-external-link" style="width: 14px"></i> <a href="{{{ $user->google }}}">{{{ $user->google }}}</a></p>
+                    </div>
+                </div>
+                @endif
                 @endif
             </div>
         </div>
@@ -112,8 +118,8 @@ $('.save').on('click', function(){
 @section('right')
 <div class="jumbotron">
     @if($articles->isEmpty())
-    <h2>Online geogebra časopis</h2>
-    <p class="text-justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et est a dui semper facilisis. Pellentesque placerat elit a nunc. Nullam tortor odio, rutrum quis, egestas ut, posuere sed, felis. Vestibulum placerat feugiat nisl. Suspendisse lacinia, odio non feugiat vestibulum, sem erat blandit metus, ac nonummy magna odio pharetra felis. Vivamus vehicula velit non metus faucibus auctor. Nam sed augue. Donec orci. Cras eget diam et dolor dapibus sollicitudin. In lacinia, tellus vitae laoreet ultrices, lectus ligula dictum dui, eget condimentum velit</p>
+    <h2>Geogebra magazín Univerzity Komenského</h2>
+    <p class="text-justify">{{ File::get('onas.txt') }}</p>
     @else 
     <h2>{{ Lang::get('article.author_articles') }}</h2>
     @foreach($articles as $article)

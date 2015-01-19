@@ -10,8 +10,8 @@ return array(
     'article_management' => 'Správa článkov',
     'caption' => 'Nadpis',
     'key_words' => 'Kľúčové slová',
-    'abstract' => 'Abstrakt',
-    'text' => 'Text',
+    'abstract' => 'Text abstraktu',
+    'text' => 'Text článku',
     'other_articles' => 'Ostatné články autora',
     'author_articles' => 'Autorove články',
     'related_articles' => 'Súvisiace články',
@@ -37,4 +37,7 @@ return array(
     'not_common_articles' => 'Žiadne podobné články',
     'not_common_articles_user' => 'Autor nemá žiadne ďalšie články',
     'no_articles' => 'Žiadny článok na zobrazenie',
+    'author' => 'Autor: ',
+    'revise' => 'Prepracovať',
+    'insight' => 'Náhľad',
 );

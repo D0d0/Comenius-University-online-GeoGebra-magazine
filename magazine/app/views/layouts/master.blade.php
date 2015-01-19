@@ -19,16 +19,46 @@
         {{HTML::extendedScript('js/jquery-ui.min.js')}}
         @yield('js')
         <style>
-            #menu{
-                text-align: center;
+            #datetimepicker .input-group-addon{
+                background-color: #428bca;
+                border: #AFCFFF;
             }
-
+            
+            .navbar .nav>li>a:hover, .navbar .nav>li>a:focus{
+                background-color: #AFCFFF;
+            }
+            
+            .navbar li {
+                margin-top: 8px;
+            }
+            
+            .navbar li:last-child{
+                margin-top: 0px;
+            }
+            
+            .navbar .dropdown-menu>li>a{
+                color: #333;
+            }
+            
             [type=clanok] h3{
                 margin-top: 0;
             }
 
             #extended_search{
                 cursor: pointer;
+            }
+            
+            .navbar .nav{
+                background-color: #00A2E8;
+            }
+            
+            .navbar .nav a, .navbar  .nav span{
+                color: white;
+                text-transform: uppercase;
+            }
+            
+            .navbar{
+                margin-bottom: 0px;
             }
 
             @yield('style')
@@ -37,6 +67,7 @@
             $TAGS_URL = "{{ URL::action('HomeController@tags') }}";
 
             $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
                 $('#datetimepicker').datetimepicker({
                     language: "{{ Lang::get('common.lang')}}",
                     pickTime: false
@@ -67,14 +98,18 @@
         </script>
     </head>
     <body>
-        <div class="container-fluid">
-            <div class="row" id="menu">
-                <div class="col-md-12">
-                    <h1>{{ HTML::linkAction('HomeController@showWelcome', 'Prvý online Geogebra časopis Univerzity Komenského') }}</h1>
+        <div class="container-fluid" style="background-color: #AFCFFF; padding: 0;">
+            <div class="row" style="margin: 0;">
+                <div class="col-md-12" style="padding: 0">
+                    <a href="{{ action('HomeController@showWelcome') }}">{{ HTML::extendedImage('img/logo_geogebramag.png') }}</a>
+                    <a class="hidden-xs hidden-sm hidden-md" href="http://www.fmph.uniba.sk/">{{ HTML::extendedImage('img/FMFIUK_LIN.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px; margin-left: 50px')) }}</a>
+                    <a class="hidden-xs hidden-sm hidden-md" href="https://uniba.sk/">{{ HTML::extendedImage('img/SYMBOL_2UK_LINKA.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px')) }}</a>
+                    <a class="hidden-xs hidden-sm hidden-md" href="http://geogebra.org/">{{ HTML::extendedImage('img/geogebra.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px')) }}</a>
                 </div>
             </div>
             <nav class="navbar">
                 <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
+                    <li><a href="{{{ action('HomeController@showWelcome') }}}"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li>{{ HTML::linkAction('MenuController@getOnas', Lang::get('menu.about_us')) }}</li>
                     <li>{{ HTML::linkAction('MenuController@getKontakt', Lang::get('menu.contact')) }}</li>
                     @if(Auth::check())
@@ -83,7 +118,7 @@
                             {{ Lang::get('menu.profil') }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>{{ HTML::linkAction('ArticleController@newArticle', Lang::get('menu.article')) }}</li>
+                            <li>{{ HTML::linkAction('ArticleController@newArticle', Lang::get('article.new_article')) }}</li>
                             <li class="divider"></li>
                             <li>{{ HTML::linkAction('MenuController@getProfile', Lang::get('menu.edit_profile'), [Auth::id()]) }}</li>
                         </ul>
@@ -104,7 +139,7 @@
                         {{ HTML::linkAction('LoginController@getLogin', Lang::get('menu.login')) }}
                     </li>
                     @endif
-                    <li class="pull-right">
+                    <li class="pull-right" style="margin-right: 15px">
                         {{ Form::open(array(
                             'action' => 'HomeController@search',
                             'method' => 'get',
@@ -112,10 +147,11 @@
                             'role' => 'search',
                             'id' => 'search-form',
                         )) }}
+                        <span id="tooltip" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Zadajte meno autora/názov článku/kľúčové slovo, vyberte si z ponúknutých možností a stlačte enter"></span>
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker">
                                 {{ Form::text( 'hladanie', isset($query) ? $query : "", array(
-                                    'id' => 'hladanie',//potom moze ist prec
+                                    'id' => 'hladanie',
                                     'class' => 'form-control',
                                     'placeholder' => Lang::get('menu.search'),
                                     'maxlength' => 30
@@ -129,6 +165,8 @@
                     </li>
                 </ul>
             </nav>
+        </div>
+        <div class="container-fluid" style="margin-top: 15px">
             @if(Session::has('error'))
             <div class="alert alert-danger" role="alert">{{Session::get('error')}}</div>
             @endif
@@ -140,5 +178,6 @@
             @endif
             @yield('content')
         </div>
+        @yield('footer')
     </body>
 </html>

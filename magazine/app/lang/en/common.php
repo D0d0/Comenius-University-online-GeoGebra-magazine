@@ -25,4 +25,6 @@ return array(
     'insert' => 'Insert',
     'ban_user' => 'Ban user',
     'unban_user' => 'Unab user',
+    'school' => 'School',
+    'url' => 'Webpage',
 );

@@ -124,9 +124,9 @@ margin-bottom: 9px !important;
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> {{ Lang::get('article.publish') }}
                 </button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" style="margin-bottom: 10px">
                 <button type="button" class="btn btn-default btn-md" id="nok">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ Lang::get('article.not_publish') }}
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {{ Lang::get('article.revise') }}
                 </button>
             </div>
             <input type="hidden" id="article_id" value="{{ $article->id }}">
@@ -146,7 +146,7 @@ margin-bottom: 9px !important;
 <div class="row">
     <div class="col-md-12">
         <div class="thumbnail clearfix" type="clanok">
-            <h3>{{ link_to_action('MenuController@getProfile', $article->user->name  , [$article->user_id]) }}</h3>
+            <h3>{{ Lang::get('article.author') . link_to_action('MenuController@getProfile', $article->user->name  , [$article->user_id]) }}</h3>
             <h4>{{ Lang::get('article.other_articles') }}</h4>
             <p>
                 @forelse($article->user->articles()->published()->where('id', '<>', $article->id)->get() as $oneArticle)

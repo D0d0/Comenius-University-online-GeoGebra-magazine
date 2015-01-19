@@ -1,0 +1,2 @@
+Toto je skúšobný text, ktorý je <span style="color: red">červený</span>.<br>
+Nový riadok

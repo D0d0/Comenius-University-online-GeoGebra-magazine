@@ -8,7 +8,7 @@ class UserTableSeeder extends Seeder {
         User_group::create(array('description' => 'redakcna rada'));
         User_group::create(array('description' => 'recenzent'));
         User_group::create(array('description' => 'uzivatel'));
-        for ($i = 0; $i < 100; $i++) {
+        /*for ($i = 0; $i < 100; $i++) {
             User::create(array(
                 'name' => $faker->lastName . ' ' . $faker->firstName,
                 'email' => $faker->email,
@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder {
                'user_id' => ($i+1),
                 'rank_id' => $faker->numberBetween(1, 4),
             ));
-        }
+        }*/
     }
 
 }

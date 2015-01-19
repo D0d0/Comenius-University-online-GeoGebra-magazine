@@ -143,11 +143,6 @@ HTML::macro('profile', function($id = null, $size = 4) {
                         <h3>' . link_to_action('MenuController@getProfile', $user->name, [$user->id], array('class' => 'text-muted')) . '</h3>
                         <div class="row">
                             <div class="col-md-12">
-                                <p><i class="fa fa-birthday-cake" style="width: 14px"></i> <span class="text">' . $user->getFormattedBirth() . '</span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <p><span class="glyphicon glyphicon-envelope"></span> <span class="text">' . $user->email . '</span></p>
                             </div>
                         </div>

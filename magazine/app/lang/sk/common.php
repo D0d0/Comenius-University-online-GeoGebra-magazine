@@ -25,4 +25,6 @@ return array(
     'insert' => 'Vložiť',
     'ban_user' => 'Zablokovať užívateľa',
     'unban_user' => 'Odblokovať užívateľa',
+    'school' => 'Škola/Pracovisko',
+    'url' => 'Stránka',
 );

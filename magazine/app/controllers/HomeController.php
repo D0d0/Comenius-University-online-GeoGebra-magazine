@@ -32,6 +32,14 @@ class HomeController extends BaseController {
                 ->where('articles.state', '=', Article::PUBLISHED)
                 ->distinct()
                 ->select('name');
+        $articles = DB::table('articles')
+                ->whereRaw('lower(title) LIKE ' . $quoted_query)
+                ->where('state', '=', Article::PUBLISHED)
+                ->selectRaw('title as name')
+                ->distinct()
+                ->union($tags);
+        $querySql = $articles->toSql();
+        $tags = DB::table(DB::raw("($querySql order by name asc) as name"))->mergeBindings($articles);
         if ($tags->count() < 10) {
             $tags = DB::table('tag_groups')
                     ->leftJoin('tags', 'tags.id_tag', '=', 'tag_groups.id')
@@ -44,6 +52,7 @@ class HomeController extends BaseController {
             $querySql = $tags->toSql();
             $tags = DB::table(DB::raw("($querySql order by name asc) as name"))->mergeBindings($tags);
         }
+
         $tags = $tags
                 ->orderBy('name', 'ASC')
                 ->take(10)

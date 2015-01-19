@@ -65,12 +65,14 @@ class UserController extends BaseController {
         if (Request::ajax()) {
             $input = Input::all();
             $rules = array(
-                'date' => 'required|date_format:"d.m.Y"',
                 'city' => 'required|min:6',
-                'school' => 'required|min:6',
+                'school' => 'required',
             );
             if (Auth::user()->email != $input['email']) {
                 $rules['email'] = 'required|email|unique:users,email';
+            }
+            if ($input['google']) {
+                $rules['google'] = 'required|url';
             }
             $validator = Validator::make($input, $rules);
             if ($validator->passes()) {
@@ -78,7 +80,9 @@ class UserController extends BaseController {
                 $user->email = $input['email'];
                 $user->city = $input['city'];
                 $user->school = $input['school'];
-                $user->birth = $input['date'];
+                if ($input['google']) {
+                    $user->google = $input['google'];
+                }
                 $user->save();
                 return Response::json(array(
                             'result' => true
