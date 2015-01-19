@@ -114,7 +114,7 @@
             </div>
             <nav class="navbar">
                 <ul class="nav nav-tabs clearfix" style="border-bottom: none;">
-                    <li><a href="{{{ action('HomeController@showWelcome') }}}"><span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="{{{ action('HomeController@showWelcome') }}}" style="padding-bottom: 10px;"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li>{{ HTML::linkAction('MenuController@getOnas', Lang::get('menu.about_us')) }}</li>
                     <li>{{ HTML::linkAction('MenuController@getKontakt', Lang::get('menu.contact')) }}</li>
                     @if(Auth::check())
