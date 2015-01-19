@@ -37,7 +37,7 @@ padding: 9px;
                 {{ HTML::linkAction('RemindersController@getRemind', Lang::get('reminders.lost_password')) }}
             </div>
         </div>
-        {{Form::submit(Lang::get('common.send'), array('class'=>'btn btn-default'))}}
+        {{Form::submit(Lang::get('common.login'), array('class'=>'btn btn-default'))}}
     </div>
     {{ Form::close() }}
 </div>

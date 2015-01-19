@@ -15,6 +15,7 @@ return array(
     'reset_password' => 'Resetni heslo',
     'remember_login' => 'Zapamätaj prihlásenie',
     'send' => 'Pošli',
+    'login' => 'Prihlás',
     'acces_denied' => 'Nemáte prístup na túto stránku.',
     'logout_successful' => 'Odhlásenie prebehlo úspešne.',
     'login_successful' => 'Prihlásenie prebehlo úspešne.',
@@ -25,6 +26,6 @@ return array(
     'insert' => 'Vložiť',
     'ban_user' => 'Zablokovať užívateľa',
     'unban_user' => 'Odblokovať užívateľa',
-    'school' => 'Škola/Pracovisko',
+    'school' => 'Škola / Pracovisko',
     'url' => 'Stránka',
 );
