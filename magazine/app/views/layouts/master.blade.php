@@ -101,10 +101,10 @@
         <div class="container-fluid" style="background-color: #AFCFFF; padding: 0;">
             <div class="row" style="margin: 0;">
                 <div class="col-md-12" style="padding: 0">
-                    <a href="{{ action('HomeController@showWelcome') }}">{{ HTML::extendedImage('img/logo_geogebramag.png') }}</a>
-                    <a class="hidden-xs hidden-sm hidden-md" href="http://www.fmph.uniba.sk/">{{ HTML::extendedImage('img/FMFIUK_LIN.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px; margin-left: 50px')) }}</a>
-                    <a class="hidden-xs hidden-sm hidden-md" href="https://uniba.sk/">{{ HTML::extendedImage('img/SYMBOL_2UK_LINKA.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px')) }}</a>
-                    <a class="hidden-xs hidden-sm hidden-md" href="http://geogebra.org/">{{ HTML::extendedImage('img/geogebra.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 72px; width: 180px')) }}</a>
+                    <a href="{{ action('HomeController@showWelcome') }}">{{ HTML::extendedImage('img/logo_geogebramag.png', '', array('style' => 'margin-top: 20px; margin-bottom: 20px')) }}</a>
+                    <a class="hidden-xs hidden-sm" href="http://www.fmph.uniba.sk/">{{ HTML::extendedImage('img/FMFIUK_LIN.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 80px; margin-left: 80px')) }}</a>
+                    <a class="hidden-xs hidden-sm" href="https://uniba.sk/">{{ HTML::extendedImage('img/SYMBOL_2UK_LINKA.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 80px')) }}</a>
+                    <a class="hidden-xs hidden-sm" href="http://geogebra.org/">{{ HTML::extendedImage('img/geogebra.png', '', array('style' => 'vertical-align: bottom; margin-bottom: 50px; width: 130px')) }}</a>
                 </div>
             </div>
             <nav class="navbar">
