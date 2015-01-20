@@ -6,7 +6,7 @@ return array(
     'port' => 587,
     'from' => array('address' => 'geogebraMag@no-reply.com', 'name' => 'Online Geogebra magazine'),
     'encryption' => 'tls',
-    'username' => 'geoberamagazine@gmail.com',
+    'username' => 'geogebramag@gmail.com',
     'password' => 'DaucusCarota',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'pretend' => false,
