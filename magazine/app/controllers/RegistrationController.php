@@ -34,7 +34,7 @@ class RegistrationController extends BaseController {
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
             'email' => 'required|email|unique:users,email',
-            'school' => 'required'
+            'school' => 'required|min:1'
         );
         $validator = Validator::make($input, $rules);
         if ($validator->fails()) {
