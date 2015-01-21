@@ -66,7 +66,7 @@ class UserController extends BaseController {
             $input = Input::all();
             $rules = array(
                 'city' => 'required|min:6',
-                'school' => 'required',
+                'school' => 'required|min:1',
             );
             if (Auth::user()->email != $input['email']) {
                 $rules['email'] = 'required|email|unique:users,email';
