@@ -16,4 +16,6 @@ php db:seed
 
 Cron
 ----
+``` shell
 php artisan cron:run
+```
